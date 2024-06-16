@@ -10,8 +10,10 @@
 </head>
 
 <body>
-    <div>
-        <h2>Roam Radience Travelers</h2>
+    <div class="col-12">
+        <center>
+            <h2>Roam Radience Travelers</h2>
+        </center>
     </div>
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
