@@ -15,7 +15,7 @@ if (
     empty($password) || empty($contact) || empty($houseNo) || empty($street1) || empty($street2)
 ) {
     echo "Please fill the required areas...!";
-} else if (strlen($fName > 20)) {
+} else if (strlen($fName) > 20) {
     echo "First name should be less than 20 characters";
 } else if (strlen($lName) > 20) {
     echo "Last Name  should be less than 20 characters";

@@ -12,7 +12,6 @@ if (empty($userName) || empty($password)) {
     $loginNumRows1 = $loginResultSet1->num_rows;
 
     if ($loginNumRows1 == 1) {
-        $loginData1 = $loginResultSet1->fetch_assoc();
         echo "traveler";
     } else {
         $loginResultSet2 = Database::search("SELECT * FROM `staff_login` WHERE `email`='" . $userName . "' AND `password`='" . $password . "'");
