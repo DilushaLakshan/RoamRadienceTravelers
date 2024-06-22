@@ -1,7 +1,7 @@
 <?php
 require 'connection.php';
 
-$userName = $_POST["userName"];
+$userName = $_POST["email"];
 $password = $_POST["password"];
 
 

@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <select name="role" id="role" class="staff-registration-input">
-                                    <option value="" selected>Select here</option>
+                                    <option value="not-selected" selected>Select here</option>
                                     <option value="owner">Owner</option>
                                     <option value="driver">Driver</option>
                                     <option value="guide">Guide</option>
@@ -81,7 +81,7 @@
                                 <label>Contact</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <input type="text" class="staff-registration-input" id="contact">
+                                <input type="mobile" class="staff-registration-input" id="contact">
                                 <div class="row mt-5">
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
                                         <button class="btn btn-outline-dark staff-registration-button">Clear</button>

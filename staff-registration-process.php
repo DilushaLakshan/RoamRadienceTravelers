@@ -13,7 +13,7 @@ if (
     empty($password) || empty($contact)
 ) {
     echo "Please fill the required areas...!";
-}else if($role == "Select here"){
+}else if($role == "not-selected"){
     echo "Select the role";
 }else if (strlen($fName) > 20) {
     echo "First name should be less than 20 characters";

@@ -98,7 +98,7 @@
                                 <label>Contact</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <input type="text" class="registration-input" id="contact">
+                                <input type="mobile" class="registration-input" id="contact">
                                 <div class="row mt-5">
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
                                         <button class="btn btn-outline-dark registration-button">Clear</button>

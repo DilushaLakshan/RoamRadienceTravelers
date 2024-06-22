@@ -1,14 +1,14 @@
 // send login details
 function sendLoginDetails() {
-    var userName = document.getElementById("userName");
+    var email = document.getElementById("email");
     var password = document.getElementById("password");
 
     var form = new FormData();
-    form.append("userName", userName.value);
+    form.append("email", email.value);
     form.append("password", password.value);
 
     var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
+    request.onreadystatechange = () => {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "traveler") {
@@ -52,7 +52,7 @@ function registerUser() {
     form.append("street2", street2.value);
 
     var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
+    request.onreadystatechange = () => {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
@@ -85,7 +85,7 @@ function registerStaff() {
     form.append("contact", contact.value);
 
     var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
+    request.onreadystatechange = () => {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             alert(text);

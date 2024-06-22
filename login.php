@@ -32,11 +32,11 @@
                                                 </center>
                                             </div>
                                             <div class="col-12 mt-3">
-                                                <label class="login-label">User Name</label>
-                                                <input class="login-input" type="text"  id="userName">
+                                                <span class="login-label">Email</span>
+                                                <input class="login-input" type="email"  id="email">
                                             </div>
                                             <div class="col-12 mt-2">
-                                                <label class="login-label">Password</label>
+                                                <span class="login-label">Password</span>
                                                 <input class="login-input" type="password" id="password">
                                             </div>
                                             <div class="col-12 mt-2">
