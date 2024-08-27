@@ -61,9 +61,8 @@
                             <div class="col-12 col-md-8 col-lg-8">
                                 <div class="row">
                                     <div class="col-12">
-                                        <a href="#" class="btn text-decoration-none">Click here to select</a>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Launch demo modal
+                                            Click here to select destinations
                                         </button>
                                     </div>
                                     <div class="col-12">
@@ -79,7 +78,7 @@
                                 <label>Number of Vehicles</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <input type="text" class="w-100" id="price">
+                                <input type="number" class="w-100" id="no-of-vehicles">
                             </div>
                         </div>
                     </div>
@@ -89,7 +88,16 @@
                                 <label>Select the Vehicles</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <input type="text" class="w-100" id="price">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vehicle-selection-model">
+                                            Click here to select vehicles
+                                        </button>
+                                    </div>
+                                    <div class="col-12">
+                                        <span id="v-id-list"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -99,25 +107,11 @@
                                 <label>Select the Hotel</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <div class="row">
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="hotel"> Hotel 1
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="hotel"> Hotel 1
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="hotel"> Hotel 1
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="hotel"> Hotel 1
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="hotel"> Hotel 1
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="hotel"> Hotel 1
-                                    </div>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hotel-selection-model">
+                                    Click here to select hotels
+                                </button>
+                                <div class="col-12">
+                                    <span id="hotel-id-list"></span>
                                 </div>
                             </div>
                         </div>
@@ -130,22 +124,22 @@
                             <div class="col-12 col-md-8 col-lg-8">
                                 <div class="row">
                                     <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration"> 1 Day
+                                        <input type="radio" name="duration" value="1 day"> 1 Day
                                     </div>
                                     <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration"> 2 Days
+                                        <input type="radio" name="duration" value="2 day"> 2 Days
                                     </div>
                                     <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration"> 5 Days
+                                        <input type="radio" name="duration" value="5 day"> 5 Days
                                     </div>
                                     <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration"> 1 Week
+                                        <input type="radio" name="duration" value="1 week"> 1 Week
                                     </div>
                                     <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration"> 2 Weeks
+                                        <input type="radio" name="duration" value="2 week"> 2 Weeks
                                     </div>
                                     <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration"> 1 Month
+                                        <input type="radio" name="duration" value="1 month"> 1 Month
                                     </div>
                                 </div>
                             </div>
@@ -160,28 +154,25 @@
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <div class="row">
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type"> Cultural
+                                            <input type="checkbox" name="type" value="cultural"> Cultural
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type"> Adventure
+                                            <input type="checkbox" name="type" value="adventure"> Adventure
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type"> Wildlife & Nature
+                                            <input type="checkbox" name="type" value="wildlife & nature"> Wildlife & Nature
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type"> Hiking
+                                            <input type="checkbox" name="type" value="hiking"> Hiking
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type"> Beach & Coastal
+                                            <input type="checkbox" name="type" value="beach & coastal"> Beach & Coastal
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type"> Photography
+                                            <input type="checkbox" name="type" value="photography"> Photography
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type"> Luxury
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type"> Photography
+                                            <input type="checkbox" name="type" value="luxury"> Luxury
                                         </div>
                                     </div>
                                 </div>
@@ -191,25 +182,25 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Total Milage</label>
+                                <label>Total Milage (KM)</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <input type="text" class="w-100">
+                                <input type="number" class="w-100" id="milage">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 mt-2">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12 col-md-4 col-lg-4">
                                 <span>Main Image:</span>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12 col-md-8 col-lg-8 mt-2">
                                 <div class="row">
                                     <div class="col-12">
-                                        <input class="form-control w-100" type="file" id="formFile" accept=".png, .jpg, .jpeg, .heic" onclick="">
+                                        <input class="form-control w-100" type="file" id="main-image" accept=".png, .jpg, .jpeg, .heic" onclick="mainImagePreview();">
                                     </div>
                                     <div class="col-12 mt-2">
-                                        <center><img alt="" id="" style="width: 300px; height: 400px; object-fit: cover;" class="img-fluid rounded-2" src="resources/images/default -image.svg"></center>
+                                        <center><img alt="" id="m-image" style="width: 300px; height: 400px; object-fit: cover;" class="img-fluid rounded-2" src="resources/images/default -image.svg"></center>
                                     </div>
                                 </div>
                             </div>
@@ -217,27 +208,27 @@
                     </div>
                     <div class="col-12 mt-2">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12 col-md-4 col-lg-4">
                                 <span>Other Images:</span>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12 col-md-8 col-lg-8 mt-2">
                                 <div class="row">
                                     <div class="col-12">
-                                        <input class="form-control w-100" type="file" id="formFile" accept=".png, .jpg, .jpeg, .heic" onclick="">
+                                        <input class="form-control w-100" type="file" id="optional-images" accept=".png, .jpg, .jpeg, .heic" onclick="optionalImagePreview();" multiple>
                                     </div>
                                     <div class="col-12 mt-2">
                                         <div class="row">
-                                            <div class="col-6 col-md-3 col-lg-3">
-                                                <center><img alt="" id="" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
+                                            <div class="col-6 col-md-3 col-lg-3 mt-2">
+                                                <center><img alt="" id="img-1" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
                                             </div>
-                                            <div class="col-6 col-md-3 col-lg-3">
-                                                <center><img alt="" id="" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
+                                            <div class="col-6 col-md-3 col-lg-3 mt-2">
+                                                <center><img alt="" id="img-2" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
                                             </div>
-                                            <div class="col-6 col-md-3 col-lg-3">
-                                                <center><img alt="" id="" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
+                                            <div class="col-6 col-md-3 col-lg-3 mt-2">
+                                                <center><img alt="" id="img-3" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
                                             </div>
-                                            <div class="col-6 col-md-3 col-lg-3">
-                                                <center><img alt="" id="" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
+                                            <div class="col-6 col-md-3 col-lg-3 mt-2">
+                                                <center><img alt="" id="img-4" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
                                             </div>
                                         </div>
                                     </div>
@@ -245,13 +236,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-3">
+                    <div class="col-12 mt-3 mb-3">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                <button class="w-100">Clear</button>
+                                <button class="btn btn-primary w-100">Clear</button>
                             </div>
                             <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                <button class="w-100">ADD</button>
+                                <button class="btn btn-primary w-100" onclick="addTourPackage();">ADD</button>
                             </div>
                         </div>
                     </div>
@@ -322,6 +313,114 @@
                         </div>
                     </div>
                     <!-- destination selecttion model -->
+
+                    <!-- vehicle selection model -->
+                    <div class="modal fade" id="vehicle-selection-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Select Vehicles</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <?php
+                                            $vehicleResultSet = Database::search("SELECT * FROM `vehicle`");
+                                            $vehicleNumRows = $vehicleResultSet->num_rows;
+                                            if ($vehicleNumRows > 0) {
+                                                for ($a = 0; $a < $vehicleNumRows; $a++) {
+                                                    $vehicleData = $vehicleResultSet->fetch_assoc();
+                                            ?>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                <input type="checkbox" name="v-id" value="<?php echo $vehicleData['id']; ?>">
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <span><?php echo $vehicleData["number"]; ?></span>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <span><?php echo $vehicleData["type"]; ?></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                <div class="col-12">
+                                                    <center>
+                                                        <span><i>No results found</i></span>
+                                                    </center>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="getVehicleIDs();">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- vehicle selection model -->
+
+                    <!-- hotel selection model -->
+                    <div class="modal fade" id="hotel-selection-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <?php
+                                            $hotelResultSet = Database::search("SELECT * FROM `hotel`");
+                                            $hotelNumRows = $hotelResultSet->num_rows;
+                                            if ($hotelNumRows > 0) {
+                                                for ($b = 0; $b < $hotelNumRows; $b++) {
+                                                    $hotelData = $hotelResultSet->fetch_assoc();
+                                            ?>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                <input type="checkbox" name="hotel" value="<?php echo $hotelData['id']; ?>">
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <span><?php echo $hotelData["name"]; ?></span>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <span><?php echo $hotelData["address"]; ?></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                <div class="col-12">
+                                                    <span><i>No results found</i></span>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="getHotelIDs();">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- hotel selection model -->
                 </div>
             </div>
         </div>

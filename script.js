@@ -191,6 +191,33 @@ function getDestinationIDs() {
     document.getElementById("desIDList").innerHTML = destValues;
 }
 
+// get vehicle ids from the model and set it to the add-tourpackages.php file
+function getVehicleIDs() {
+    var vehicleList = document.getElementsByName("v-id");
+    var selectedVehicles = [];
+
+    for (var x = 0; x < vehicleList.length; x++) {
+        if (vehicleList[x].checked) {
+            selectedVehicles.push(vehicleList[x].value);
+        }
+    }
+    document.getElementById("v-id-list").innerHTML = selectedVehicles;
+}
+
+// get hotel ids from the model and set it to the add-tourpackages.php file
+function getHotelIDs() {
+    var hotelList = document.getElementsByName("hotel");
+    var selectedHotels = [];
+
+    for (var x = 0; x < hotelList.length; x++) {
+        if (hotelList[x].checked) {
+            selectedHotels.push(hotelList[x].value);
+        }
+    }
+
+    document.getElementById("hotel-id-list").innerHTML = selectedHotels;
+}
+
 // send hotel details to addHotelProcess.php
 function addHotel() {
     var hName = document.getElementById("h-name");
@@ -245,12 +272,21 @@ function addVehicle() {
     var numOfSeats = document.getElementById("v-seats");
     var prPerKm = document.getElementById("price-km");
     var prPerDay = document.getElementById("price-day");
+    var typeList = document.getElementsByName("v-type");
+    var vType;
+
+    for (var x = 0; x < typeList.length; x++) {
+        if (typeList[x].checked) {
+            vType = typeList[x].value;
+        }
+    }
 
     const dataObject = new Object();
     dataObject.vehicleNum = vehicleNum.value;
     dataObject.numOfSeats = numOfSeats.value;
     dataObject.prPerKm = prPerKm.value;
     dataObject.prPerDay = prPerDay.value;
+    dataObject.vType = vType;
 
     var jsonText = JSON.stringify(dataObject);
 
@@ -269,5 +305,110 @@ function addVehicle() {
         }
     }
     request.open("POST", "addVehicleProcess.php", true);
+    request.send(form);
+}
+
+// diplay selected image for main image
+function mainImagePreview() {
+    var imagePath = document.getElementById("main-image");
+    var imagePathTemp = document.getElementById("m-image");
+
+    imagePath.onchange = function() {
+        var fileCount = imagePath.files.length;
+        if (fileCount == 1) {
+            var file = this.files[0];
+            var url = window.URL.createObjectURL(file);
+            imagePathTemp.src = url;
+        } else {
+            alert("You can choose only one image");
+        }
+    }
+}
+
+// display images except main image
+function optionalImagePreview() {
+    var imagePath = document.getElementById("optional-images");
+    var imageElements = [
+        document.getElementById("img-1"),
+        document.getElementById("img-2"),
+        document.getElementById("img-3"),
+        document.getElementById("img-4")
+    ];
+
+    imagePath.onchange = function() {
+        var fileCount = imagePath.files.length;
+        if (fileCount === 4) {
+            for (var x = 0; x < fileCount; x++) {
+                var file = this.files[x];
+                var url = window.URL.createObjectURL(file);
+                imageElements[x].src = url;
+            }
+        } else {
+            alert("Please choose exactly 4 images.");
+        }
+    };
+}
+
+// get and send tour package details to addTourpackageProcess.php file
+function addTourPackage() {
+    var name = document.getElementById("name");
+    var price = document.getElementById("price");
+    var description = document.getElementById("description");
+    var destinationList = document.getElementById("desIDList").innerText;
+    var nuOfVehicles = document.getElementById("no-of-vehicles");
+    var vehicleList = document.getElementById("v-id-list").innerText;
+    var hotelList = document.getElementById("hotel-id-list").innerText;
+    var durationList = document.getElementsByName("duration");
+    var duration;
+    var activityList = document.getElementsByName("type");
+    var activityType = [];
+    var milage = document.getElementById("milage");
+    var mainImage = document.getElementById("main-image");
+
+    // consider about this
+    var optionalImageElements = document.getElementById("optional-images");
+
+    for (var x = 0; x < durationList.length; x++) {
+        if (durationList[x].checked) {
+            duration = durationList[x].value;
+        }
+    }
+
+    for (var y = 0; y < activityList.length; y++) {
+        if (activityList[y].checked) {
+            activityType.push(activityList[y].value);
+        }
+    }
+
+    const dataObject = new Object();
+    dataObject.name = name.value;
+    dataObject.price = price.value;
+    dataObject.description = description.value;
+    dataObject.destinationList = destinationList;
+    dataObject.nuOfVehicles = nuOfVehicles.value;
+    dataObject.vehicleList = vehicleList;
+    dataObject.hotelList = hotelList;
+    dataObject.duration = duration;
+    dataObject.milage = milage.value;
+    dataObject.activityType = activityType;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("tourPackageData", jsonText);
+    form.append("mainImage", mainImage.files[0]);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "Success") {
+                alert("Insertion Success");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("POST", "addTourpackageProcess.php", true);
     request.send(form);
 }

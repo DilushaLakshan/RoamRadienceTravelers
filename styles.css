@@ -19,37 +19,38 @@
     
     .login-main {
         display: flex;
-        justify-content: center;
         align-items: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
         height: 100vh;
-        background: rgb(44, 186, 185);
-        background: linear-gradient(326deg, rgba(44, 186, 185, 0.09567577030812324) 0%, rgba(15, 59, 186, 0.7959558823529411) 100%);
+        background-image: url(resources/images/Artboard\ 1.png);
     }
     
     .login {
         border-radius: 15px;
         box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-        background: transparent;
-        backdrop-filter: blur(23px);
+        background-color: #3f3b3b;
+        opacity: 0.8;
     }
     
     .login-head-label {
-        color: #280f85;
+        color: rgb(252, 252, 255);
         font-size: 20px;
     }
     
     .login-label {
-        color: #280f85;
+        color: rgb(223, 224, 230);
         font-size: 16px;
     }
     
     .login-input {
         width: 100%;
         background: transparent;
-        border: 2px solid rgb(5, 15, 102);
+        border: 2px solid rgb(247, 247, 248);
         border-radius: 40px;
         font-size: 16px;
-        color: #280f85;
+        color: rgb(242, 243, 247);
         padding: 20px 45px 20px 20px;
         width: 100%;
         border-radius: 10px;
@@ -57,23 +58,21 @@
     }
     
     .login-input::placeholder {
-        color: #280f85;
+        color: rgb(244, 245, 248);
     }
     
     .login-link {
         text-decoration: none;
-        color: #280f85;
+        color: rgb(247, 247, 250);
     }
     
     .login-button {
-        width: 100%;
-        background: transparent;
         border: none;
         outline: none;
-        border: 2px solid rgb(5, 15, 102);
         border-radius: 40px;
         font-size: 16px;
-        color: #280f85;
+        color: #fdfbf8;
+        background-color: #E85C0D;
         padding: 20px 45px 20px 20px;
         width: 100%;
         border-radius: 10px;

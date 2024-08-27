@@ -64,6 +64,32 @@
                     </div>
                     <div class="col-12 mt-3">
                         <div class="row">
+                            <div class="col-12 col-md-4 col-lg-4">
+                                <label>Vehicle Type</label>
+                            </div>
+                            <div class="col-12 col-md-8 col-lg-8">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <input type="radio" name="v-type" value="car"> Car
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <input type="radio" name="v-type" value="van"> Van
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <input type="radio" name="v-type" value="bus"> Bus
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <input type="radio" name="v-type" value="suv"> SUV
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <input type="radio" name="v-type" value="jeep"> Jeep
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="row">
                             <div class="col-12 col-md-6 col-lg-6">
                                 <button class="btn btn-info w-100">Clear</button>
                             </div>

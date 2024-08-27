@@ -13,27 +13,22 @@
     <div class="container-fluid login-main">
         <div class="col-12">
             <!-- login card -->
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-4 offset-md-1 offset-lg-1">
                     <div class="card w-100 login">
                         <div class="card-body">
-                            <div class="col12">
+                            <div class="col-12">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <center>
-                                            <h3>Roam Radience Travelers</h3>
-                                        </center>
-                                    </div>
-                                    <div class="col-6">
+                                    <div class="col-12">
                                         <div class="row">
                                             <div class="col-12">
                                                 <center>
-                                                    <p class="login-head-label"><b>Login</b></p>
+                                                    <p class="login-head-label"><b>Login Here</b></p>
                                                 </center>
                                             </div>
                                             <div class="col-12 mt-3">
                                                 <span class="login-label">Email</span>
-                                                <input class="login-input" type="email"  id="email">
+                                                <input class="login-input" type="email" id="email">
                                             </div>
                                             <div class="col-12 mt-2">
                                                 <span class="login-label">Password</span>

@@ -8,6 +8,7 @@ $vehicleNum = $dataObject->vehicleNum;
 $numOfSeats = $dataObject->numOfSeats;
 $prPerKm = $dataObject->prPerKm;
 $prPerDay = $dataObject->prPerDay;
+$vType = $dataObject->vType;
 
 if (empty($vehicleNum)) {
     echo "Enter the vehicle number";
@@ -21,9 +22,11 @@ if (empty($vehicleNum)) {
     echo "Enter the price per KM";
 } else if (empty($prPerDay)) {
     echo "Enter the price per day";
+} else if(empty($vType)){
+    echo "Please select the vehicle type";
 } else {
-    Database::insertUpdateDelete("INSERT INTO `vehicle` (`number`,`no_of_seat`,`price_per_km`,`price_per_day`) 
-    VALUES ('" . $vehicleNum . "', '" . $numOfSeats . "', '" . $prPerKm . "', '" . $prPerDay . "')");
+    Database::insertUpdateDelete("INSERT INTO `vehicle` (`number`,`no_of_seat`,`price_per_km`,`price_per_day`,`type`) 
+    VALUES ('" . $vehicleNum . "', '" . $numOfSeats . "', '" . $prPerKm . "', '" . $prPerDay . "','".$vType."')");
 
     echo "Success";
 }
