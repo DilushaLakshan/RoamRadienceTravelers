@@ -1,6 +1,11 @@
 <?php
 require 'connection.php';
 
+if(!isset($_POST["tourPackageData"])){
+    echo "Tour package data is missing";
+    exit;
+}
+
 $jsonText = $_POST["tourPackageData"];
 $dataObject = json_decode($jsonText);
 
@@ -65,7 +70,7 @@ if (empty($name)) {
     }
 
     // insert data to the tour_package table
-    Database::insertUpdateDelete("INSERT INTO `tour_package` (`name`, `price`, `description`, `duration`, `total_milage`, `no_of_vehicles`) 
+    Database::insertUpdateDelete("INSERT INTO `tour_package` (`name`, `price`, `description`, `duration_id`, `total_milage`, `no_of_vehicles`) 
     VALUES ('" . $name . "', '" . $price . "', '" . $description . "', '" . $duration . "', '" . $milage . "', '" . $noOfVehicles . "')");
 
     // get lastly inserted record
@@ -78,7 +83,7 @@ if (empty($name)) {
         if (isset($_FILES["mainImage"])) {
             $path = $_FILES["mainImage"];
             $extention = $path["type"];
-            $allowedImageExtention = array("image/jpg", "image/png", "image/jpeg", "image/heic");
+            $allowedImageExtention = array("image/jpg", "image/png", "image/jpeg");
             if (in_array($extention, $allowedImageExtention)) {
                 $imageFile = $name . uniqid() . ".png";
                 move_uploaded_file($path["tmp_name"], "resources/images/" . $imageFile);

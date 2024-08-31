@@ -412,3 +412,34 @@ function addTourPackage() {
     request.open("POST", "addTourpackageProcess.php", true);
     request.send(form);
 }
+
+// tour planning module
+function sendTourPlanningDetails() {
+    var name = document.getElementById("name");
+    var tourDate = document.getElementById("date");
+    var desIDList = document.getElementById("desIDList").innerText;
+
+    var dataObject = new Object();
+    dataObject.name = name.value;
+    dataObject.tourDate = tourDate.value;
+    dataObject.desIDList = desIDList;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "Success") {
+                alert("Insertion Successful");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("POST", "tourPlanProcess.php", true);
+    request.send(form);
+}

@@ -123,24 +123,20 @@
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <div class="row">
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration" value="1 day"> 1 Day
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration" value="2 day"> 2 Days
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration" value="5 day"> 5 Days
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration" value="1 week"> 1 Week
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration" value="2 week"> 2 Weeks
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <input type="radio" name="duration" value="1 month"> 1 Month
-                                    </div>
+                                    <?php
+                                    $durationResultSet = Database::search("SELECT * FROM `duration`");
+                                    $durationNumRows = $durationResultSet->num_rows;
+                                    if ($durationNumRows > 0) {
+                                        for ($p = 0; $p < $durationNumRows; $p++) {
+                                            $durationData = $durationResultSet->fetch_assoc();
+                                    ?>
+                                            <div class="col-6 col-md-4 col-lg-4">
+                                                <input type="radio" name="duration" value="<?php echo $durationData['id']; ?>"> <?php echo $durationData["name"]; ?>
+                                            </div>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +193,7 @@
                             <div class="col-12 col-md-8 col-lg-8 mt-2">
                                 <div class="row">
                                     <div class="col-12">
-                                        <input class="form-control w-100" type="file" id="main-image" accept=".png, .jpg, .jpeg, .heic" onclick="mainImagePreview();">
+                                        <input class="form-control w-100" type="file" id="main-image" accept=".png, .jpg, .jpeg" onclick="mainImagePreview();">
                                     </div>
                                     <div class="col-12 mt-2">
                                         <center><img alt="" id="m-image" style="width: 300px; height: 400px; object-fit: cover;" class="img-fluid rounded-2" src="resources/images/default -image.svg"></center>
@@ -214,7 +210,7 @@
                             <div class="col-12 col-md-8 col-lg-8 mt-2">
                                 <div class="row">
                                     <div class="col-12">
-                                        <input class="form-control w-100" type="file" id="optional-images" accept=".png, .jpg, .jpeg, .heic" onclick="optionalImagePreview();" multiple>
+                                        <input class="form-control w-100" type="file" id="optional-images" accept=".png, .jpg, .jpeg" onclick="optionalImagePreview();" multiple>
                                     </div>
                                     <div class="col-12 mt-2">
                                         <div class="row">
@@ -315,7 +311,7 @@
                     <!-- destination selecttion model -->
 
                     <!-- vehicle selection model -->
-                    <div class="modal fade" id="vehicle-selection-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="vehicle-selection-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -370,7 +366,7 @@
                     <!-- vehicle selection model -->
 
                     <!-- hotel selection model -->
-                    <div class="modal fade" id="hotel-selection-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="hotel-selection-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
                         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">

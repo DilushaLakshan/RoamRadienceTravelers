@@ -1,6 +1,12 @@
 <?php
 require 'connection.php';
 
+// validate the data
+if(!isset($_POST["hotelData"]) || empty($_POST["hotelData"])){
+    echo "Hotel data is missing";
+    exit;
+}
+
 $jsonText = $_POST["hotelData"];
 $dataObject = json_decode($jsonText);
 
@@ -35,7 +41,7 @@ if (empty($name)) {
     echo "Enter a valid contact number";
 } else if (empty($numOfRooms)) {
     echo "Enter the number of rooms";
-} else if ($numOfRooms < 0 || $numOfRooms === 0 || $numOfRooms > 10) {
+} else if ($numOfRooms < 1 || $numOfRooms > 10) {
     echo "Enter a valid number for number of rooms";
 } else if (empty($roomNumbers)) {
     echo "Enter the numbers of rooms";

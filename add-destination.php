@@ -126,7 +126,7 @@
                             <div class="col-6">
                                 <div class="row">
                                     <div class="col-12">
-                                        <input class="form-control w-100" type="file" id="formFile" accept=".png, .jpg, .jpeg, .heic" onclick="imagePreview();">
+                                        <input class="form-control w-100" type="file" id="formFile" accept=".png, .jpg, .jpeg" onclick="imagePreview();">
                                     </div>
                                     <div class="col-12 mt-2">
                                         <center><img alt="" id="des-image" style="width: 300px; height: 400px; object-fit: cover;" class="img-fluid rounded-2" src="resources/images/default -image.svg"></center>

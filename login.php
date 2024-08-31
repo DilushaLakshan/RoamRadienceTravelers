@@ -39,7 +39,15 @@
                                             </div>
                                             <div class="col-12 mt-5">
                                                 <center>
-                                                    <button class="btn login-button" onclick="sendLoginDetails()">Login</button>
+                                                    <button class="btn login-button" onclick="sendLoginDetails();">Login</button>
+                                                </center>
+                                            </div>
+                                            <div class="col-12">
+                                                <hr>
+                                            </div>
+                                            <div class="col-12">
+                                                <center>
+                                                    <button class="btn login-button" onclick="">Sign Up</button>
                                                 </center>
                                             </div>
                                         </div>

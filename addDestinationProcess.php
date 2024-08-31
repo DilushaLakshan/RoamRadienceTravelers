@@ -1,6 +1,11 @@
 <?php
 require 'connection.php';
 
+if(!isset($_POST["otherDetails"])){
+    echo "Destination details are missing";
+    exit;
+}
+
 $name;
 $description;
 $categories = null;
@@ -40,7 +45,7 @@ if (isset($_POST["listValues"])) {
 if (isset($_FILES["path"])) {
     $path = $_FILES["path"];
     $extention = $path["type"];
-    $allowedImageExtention = array("image/jpg", "image/png", "image/jpeg", "image/heic");
+    $allowedImageExtention = array("image/jpg", "image/png", "image/jpeg");
     if (in_array($extention, $allowedImageExtention)) {
         $imageFile = $name . uniqid() . ".png";
         move_uploaded_file($path["tmp_name"], "resources/images/" . $imageFile);

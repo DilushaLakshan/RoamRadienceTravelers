@@ -1,6 +1,11 @@
 <?php
 require 'connection.php';
 
+if(!isset($_POST["vehicleData"])){
+    echo "Vehicle data is missing";
+    exit;
+}
+
 $jsonText = $_POST["vehicleData"];
 $dataObject = json_decode($jsonText);
 
