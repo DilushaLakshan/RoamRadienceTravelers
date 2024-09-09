@@ -14,7 +14,7 @@ if (empty($userName) || empty($password)) {
     if ($loginNumRows1 == 1) {
         echo "traveler";
     } else {
-        $loginResultSet2 = Database::search("SELECT * FROM `staff_login` WHERE `email`='" . $userName . "' AND `password`='" . $password . "'");
+        $loginResultSet2 = Database::search("SELECT * FROM `staff_member_new` WHERE `email`='" . $userName . "' AND `password`='" . $password . "'");
         $loginNumRows2 = $loginResultSet2->num_rows;
 
         if ($loginNumRows2 == 1) {

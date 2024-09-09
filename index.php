@@ -1,3 +1,4 @@
+<?php require 'connection.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +15,7 @@
         <div class="row">
             <?php include 'navbar.php'; ?>
             <!-- main banner -->
-            <div class="col-12 mt-3">
+            <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 mt-3">
                 <div class="card text-bg-dark banner-image-contanier">
                     <img src="resources/images/hero-image.jpg" class="card-img banner-image" alt="hero-image">
                     <div class="card-img-overlay">
@@ -25,42 +26,71 @@
                 </div>
             </div>
             <!-- main banner -->
+
+            <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 mt-2">
+                <h5>Popular destinations</h5>
+            </div>
+
             <!-- category cards -->
-            <div class="col-12">
+            <div class="col-12 col-lg-10 offset-md-1 destination-background">
                 <div class="row">
-                    <div class="col-12 col-md-4 col-lg-4 mt-3">
-                        <div class="card category-card">
-                            <img src="resources/images/login.jpg" class="card-img-top category-card-img" alt="main category">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <?php
+                    $destinationResultSet = Database::search("SELECT * FROM `destination` ORDER BY `id` DESC LIMIT 12");
+                    $destinationNumRows = $destinationResultSet->num_rows;
+                    if ($destinationNumRows > 0) {
+                        for ($x = 0; $x < $destinationNumRows; $x++) {
+                            $destinationData = $destinationResultSet->fetch_assoc();
+                    ?>
+                            <div class="col-12 col-md-4 col-lg-3 mt-3">
+                                <div class="card category-card">
+                                    <?php
+                                    $imageResultSet = Database::search("SELECT * FROM `destination_photo` WHERE `destination_id`='" . $destinationData['id'] . "' LIMIT 1");
+                                    $imageNumRows = $imageResultSet->num_rows;
+                                    if ($imageNumRows == 1) {
+                                        $imageData = $imageResultSet->fetch_assoc();
+                                    ?>
+                                        <img src="resources/images/<?php echo $imageData['src']; ?>" class="card-img-top category-card-img" alt="main category">
+
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <img src="resources/images/default -image.svg" class="card-img-top category-card-img" alt="main category">
+
+                                    <?php
+                                    }
+                                    ?>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $destinationData["name"]; ?></h5>
+                                        <a href="#" class="btn btn-primary" onclick="window.location='destination-detail.php?desID=<?php echo $destinationData['id']; ?>'">View details</a>
+                                    </div>
+                                </div>
                             </div>
+                        <?php
+                        }
+                        ?>
+                        <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 mt-3">
+                            <center>
+                                <a href="destinations.php" class="btn text-decoration-none">See more...</a>
+                            </center>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-4 mt-3">
-                        <div class="card category-card">
-                            <img src="resources/images/login.jpg" class="card-img-top category-card-img" alt="main category">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
+                    <?php
+                    } else {
+                    ?>
+                        <div class="col-12 col-md-4 col-lg-3 mt-3">
+                            <center>
+                                <span><i>No results found...</i></span>
+                            </center>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-4 mt-3">
-                        <div class="card category-card">
-                            <img src="resources/images/login.jpg" class="card-img-top category-card-img" alt="main category">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <!-- category cards -->
+
+            <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 mt-2">
+                <h5>More to explore</h5>
+            </div>
         </div>
     </div>
     <script src="bootstrap.bundle.js"></script>
