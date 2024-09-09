@@ -1,4 +1,7 @@
-<?php require 'connection.php'; ?>
+<?php
+session_start();
+require 'connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,63 +26,70 @@
                     <div class="col-12">
                         <hr>
                     </div>
-                    <div class="col-12 mt-3">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <span>Name</span>
-                                    </div>
-                                    <div class="col-12 col-md-8 col-lg-8">
-                                        <input type="text" class="w-100" id="name">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 mt-2">
-                                <div class="row">
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <span>Tour Date</span>
-                                    </div>
-                                    <div class="col-12 col-md-8 col-lg-8">
-                                        <input type="date" class="w-100" id="t-date">
+                    <?php
+                    if (isset($_SESSION["user"])) {
+                        $uID = $_SESSION["user"]->id;
+                    ?>
+                        <div class="col-12 mt-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-4 col-lg-4">
+                                            <span>Name</span>
+                                        </div>
+                                        <div class="col-12 col-md-8 col-lg-8">
+                                            <input type="text" class="w-100" id="name">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 mt-2">
-                                <div class="row">
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <span>Select destinations</span>
+                                <div class="col-12 mt-2">
+                                    <div class="row">
+                                        <div class="col-12 col-md-4 col-lg-4">
+                                            <span>Tour Date</span>
+                                        </div>
+                                        <div class="col-12 col-md-8 col-lg-8">
+                                            <input type="date" class="w-100" id="t-date">
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-8 col-lg-8">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    Click here to select destinations
-                                                </button>
-                                            </div>
-                                            <div class="col-12">
-                                                <span id="desIDList"></span>
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <div class="row">
+                                        <div class="col-12 col-md-4 col-lg-4">
+                                            <span>Select destinations</span>
+                                        </div>
+                                        <div class="col-12 col-md-8 col-lg-8">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        Click here to select destinations
+                                                    </button>
+                                                </div>
+                                                <div class="col-12">
+                                                    <span id="desIDList"></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 mt-4">
-                                <div class="row">
-                                    <div class="col-12 col-md-6 col-lg-6">
-                                        <center>
-                                            <button class="btn btn-primary w-75">Clear</button>
-                                        </center>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-6">
-                                        <center>
-                                            <button class="btn btn-primary w-75" onclick="sendTourPlanningDetails();">Save changes</button>
-                                        </center>
+                                <div class="col-12 mt-4">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <center>
+                                                <button class="btn btn-primary w-75">Clear</button>
+                                            </center>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <center>
+                                                <button class="btn btn-primary w-75" onclick="sendTourPlanningDetails();">Save changes</button>
+                                            </center>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
 

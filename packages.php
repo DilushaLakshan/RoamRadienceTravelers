@@ -1,3 +1,7 @@
+<?php
+session_start();
+require 'connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -209,152 +213,139 @@
                     <!-- package cards -->
                     <dic class="col-12 col-md-8 col-lg-8 p-md-3 p-lg-5">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="card mb-3 package-card">
-                                    <div class="row g-0">
-                                        <div class="col-md-4 p-3">
-                                            <img src="resources/images/login.jpg" class="img-fluid rounded-star package-thumnail-image" alt="...">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-12">
+                            <?php
+                            $tourPackageResultSet = Database::search("SELECT * FROM `tour_package`");
+                            $tourPackageNumRows = $tourPackageResultSet->num_rows;
+                            if ($tourPackageNumRows > 0) {
+                                for ($x = 0; $x < $tourPackageNumRows; $x++) {
+                                    $tourPackageData = $tourPackageResultSet->fetch_assoc();
+                            ?>
+                                    <div class="col-12">
+                                        <div class="card mb-3 package-card">
+                                            <div class="row g-0">
+                                                <div class="col-md-4 p-3">
+                                                    <?php
+                                                    $imageResultSet = Database::search("SELECT * FROM `package_photo` WHERE `tour_package_id`='" . $tourPackageData['id'] . "' AND `type`='main'");
+                                                    $imageNumRows = $imageResultSet->num_rows;
+                                                    if ($imageNumRows == 1) {
+                                                        $imageData = $imageResultSet->fetch_assoc();
+                                                    ?>
+                                                        <img src="resources/images/<?php echo $imageData['source']; ?>" class="img-fluid rounded-star package-thumnail-image">
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <img src="resources/images/default -image.svg" class="img-fluid rounded-star package-thumnail-image">
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-12 col-md-8 col-lg-10">
-                                                                <h5 class="card-title">Name of the tour package</h5>
+                                                            <div class="col-12">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-8 col-lg-10">
+                                                                        <h5 class="card-title"><?php echo $tourPackageData["name"]; ?></h5>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-4 col-lg-2">
+                                                                        <span>4.8 <i class="fa-solid fa-star"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                                                <?php
+                                                                // get the destination id list of the perticular tour package
+                                                                $desNamesList = [];
+                                                                $destinationResultSet = Database::search("SELECT * FROM `destination_has_tour_package` WHERE `tour_package_id`='" . $tourPackageData['id'] . "'");
+                                                                $destinationNumRows = $destinationResultSet->num_rows;
+                                                                if ($destinationNumRows > 0) {
+                                                                    for ($y = 0; $y < $destinationNumRows; $y++) {
+                                                                        $destinationData = $destinationResultSet->fetch_assoc();
+
+                                                                        // get destination details from the destination table
+                                                                        $desDetailsResultSet = Database::search("SELECT * FROM `destination` WHERE `id`='" . $destinationData['destination_id'] . "'");
+                                                                        $desDetailsNumRows = $desDetailsResultSet->num_rows;
+                                                                        if ($desDetailsNumRows > 0) {
+                                                                            for ($z = 0; $z < $desDetailsNumRows; $z++) {
+                                                                                $desDetailsData = $desDetailsResultSet->fetch_assoc();
+                                                                                array_push($desNamesList, $desDetailsData["name"]);
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                ?>
+                                                                <span>
+                                                                    Destinations :
+                                                                    <?php
+                                                                    if (!empty($desNamesList)) {
+                                                                        for ($a = 0; $a < sizeof($desNamesList); $a++) {
+                                                                            echo ($desNamesList[$a] . " , ");
+                                                                        }
+                                                                    } else {
+                                                                        echo "<i>No data</i>";
+                                                                    }
+                                                                    ?>
+                                                                </span>
+                                                                <?php
+                                                                ?>
                                                             </div>
-                                                            <div class="col-12 col-md-4 col-lg-2">
-                                                                <span>4.8 <i class="fa-solid fa-star"></i></span>
+                                                            <div class="col-12 mt-3">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-6 col-lg-6">
+                                                                        <span>
+                                                                            Duration -
+                                                                            <?php
+                                                                            // get the duration data
+                                                                            $durationResultSet = Database::search("SELECT * FROM `duration` WHERE `id`='" . $tourPackageData['duration_id'] . "'");
+                                                                            $durationNumRows = $durationResultSet->num_rows;
+                                                                            if ($durationNumRows == 1) {
+                                                                                $durationData = $durationResultSet->fetch_assoc();
+                                                                                echo $durationData["name"];
+                                                                            } else {
+                                                                                echo "<i>No data</i>";
+                                                                            }
+                                                                            ?>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-6 col-lg-6">
+                                                                        <span>Price - <?php echo $tourPackageData["price"]; ?> LKR</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                    </div>
-                                                    <div class="col-12 mt-3">
-                                                        <div class="row">
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <span>Duration - 10 days</span>
+                                                            <div class="col-12 mt-3">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <span>Operating Languages - English/ Sinhala</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <span>Price - 45000.00 LKR</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 mt-3">
-                                                        <div class="row">
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <button class="btn package-button">View Tour</button>
-                                                            </div>
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <button class="btn package-button">Book Now</button>
+                                                            <div class="col-12 mt-3">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-6 col-lg-6 mt-2">
+                                                                        <button class="btn package-button" onclick="window.location = 'packageDetails.php?pID=<?php echo $tourPackageData['id']; ?>'">View Tour</button>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-6 col-lg-6 mt-2">
+                                                                        <button class="btn package-button">Check Availability</button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                             </div>
                                         </div>
                                     </div>
+                                <?php
+                                }
+                            } else {
+                                ?>
+                                <div class="col-12">
+                                    <center>
+                                        <span><i>No results found...</i></span>
+                                    </center>
                                 </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="card mb-3 package-card">
-                                    <div class="row g-0">
-                                        <div class="col-md-4 p-3">
-                                            <img src="resources/images/login.jpg" class="img-fluid rounded-star package-thumnail-image" alt="...">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="row">
-                                                            <div class="col-12 col-md-8 col-lg-10">
-                                                                <h5 class="card-title">Name of the tour package</h5>
-                                                            </div>
-                                                            <div class="col-12 col-md-4 col-lg-2">
-                                                                <span>4.8 <i class="fa-solid fa-star"></i></span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                    </div>
-                                                    <div class="col-12 mt-3">
-                                                        <div class="row">
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <span>Duration - 10 days</span>
-                                                            </div>
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <span>Price - 45000.00 LKR</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 mt-3">
-                                                        <div class="row">
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <button class="btn package-button">View Tour</button>
-                                                            </div>
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <button class="btn package-button">Book Now</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="card mb-3 package-card">
-                                    <div class="row g-0">
-                                        <div class="col-md-4 p-3">
-                                            <img src="resources/images/login.jpg" class="img-fluid rounded-star package-thumnail-image" alt="...">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="row">
-                                                            <div class="col-12 col-md-8 col-lg-10">
-                                                                <h5 class="card-title">Name of the tour package</h5>
-                                                            </div>
-                                                            <div class="col-12 col-md-4 col-lg-2">
-                                                                <span>4.8 <i class="fa-solid fa-star"></i></span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                    </div>
-                                                    <div class="col-12 mt-3">
-                                                        <div class="row">
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <span>Duration - 10 days</span>
-                                                            </div>
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <span>Price - 45000.00 LKR</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 mt-3">
-                                                        <div class="row">
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <button class="btn package-button">View Tour</button>
-                                                            </div>
-                                                            <div class="col-12 col-md-6 col-lg-6">
-                                                                <button class="btn package-button">Book Now</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </dic>
                     <!-- package cards -->

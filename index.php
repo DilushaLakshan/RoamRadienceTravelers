@@ -1,4 +1,7 @@
-<?php require 'connection.php'; ?>
+<?php
+session_start();
+require 'connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +16,15 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <?php include 'navbar.php'; ?>
+            <?php
+            if (isset($_SESSION["user"])) {
+                $uID = $_SESSION["user"]->id;
+                include 'navbar-logged-in.php';
+            } else {
+                $uID = 0;
+                include 'navbar.php';
+            }
+            ?>
             <!-- main banner -->
             <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 mt-3">
                 <div class="card text-bg-dark banner-image-contanier">

@@ -46,6 +46,16 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
+                                <label>Header Text</label>
+                            </div>
+                            <div class="col-12 col-md-8 col-lg-8">
+                                <input type="text" class="w-100" id="h-text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="row">
+                            <div class="col-12 col-md-4 col-lg-4">
                                 <label>Description</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
@@ -172,6 +182,50 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="row">
+                            <div class="col-12 col-md-4 col-lg-4">
+                                <label>Included services</label>
+                            </div>
+                            <div class="col-12 col-md-8 col-lg-8">
+                                <div class="col-12 col-md-8 col-lg-8">
+                                    <div class="row">
+                                        <?php
+                                        $serviceResultSet = Database::search("SELECT * FROM `package_includes`");
+                                        $serviceNumRows = $serviceResultSet->num_rows;
+                                        if ($serviceNumRows > 0) {
+                                            for ($m = 0; $m < $serviceNumRows; $m++) {
+                                                $serviceData = $serviceResultSet->fetch_assoc();
+                                        ?>
+                                                <div class="col-12 col-md-6 col-lg-6">
+                                                    <input type="checkbox" name="services" value="<?php echo $serviceData['id']; ?>"> <?php echo $serviceData["name"]; ?>
+                                                </div>
+                                            <?php
+                                            }
+                                        } else {
+                                            ?>
+                                            <div class="col-12 col-md-6 col-lg-6">
+                                                <input type="checkbox" name="type" value="0"> no Data
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="row">
+                            <div class="col-12 col-md-4 col-lg-4">
+                                <label>Highlights</label><br>
+                                <span><i>(Use ',' to seperate sentences)</i></span>
+                            </div>
+                            <div class="col-12 col-md-8 col-lg-8">
+                                <textarea name="" id="highlight" rows="10" class="w-100"></textarea>
                             </div>
                         </div>
                     </div>

@@ -33,8 +33,13 @@
                     <li class="nav-item navbar-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
+                    <li class="nav-item navbar-item">
+                        <a class="nav-link" href="planTour.php">Plan a Tour</a>
+                    </li>
                     <li class="nav-item">
-                        <a href="login.php" class="btn text-decoration-none">Login</a>
+                        <a class="nav-link profile-icon" href="traveler-profile.php">
+                            <i class="fas fa-user"></i>
+                        </a>
                     </li>
                 </ul>
             </div>

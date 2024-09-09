@@ -81,6 +81,47 @@ function registerUser() {
     request.send(form);
 }
 
+// update user details
+function updateTraveler() {
+    var fName = document.getElementById("fName");
+    var lName = document.getElementById("lName");
+    var email = document.getElementById("email");
+    var password = document.getElementById("password");
+    var contact = document.getElementById("contact");
+    var homeNo = document.getElementById("hNo");
+    var street1 = document.getElementById("street1");
+    var street2 = document.getElementById("street2");
+
+    var dataObject = new Object();
+    dataObject.fName = fName.value;
+    dataObject.lName = lName.value;
+    dataObject.email = email.value;
+    dataObject.password = password.value;
+    dataObject.contact = contact.value;
+    dataObject.homeNo = homeNo.value;
+    dataObject.street1 = street1.value;
+    dataObject.street2 = street2.value;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "Success") {
+                alert("Successfully Updated");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("POST", "updateUserProcess.php", true);
+    request.send(form);
+}
+
 
 //send staff registration details
 function registerStaff() {
@@ -353,6 +394,7 @@ function optionalImagePreview() {
 function addTourPackage() {
     var name = document.getElementById("name");
     var price = document.getElementById("price");
+    var hText = document.getElementById("h-text");
     var description = document.getElementById("description");
     var destinationList = document.getElementById("desIDList").innerText;
     var nuOfVehicles = document.getElementById("no-of-vehicles");
@@ -362,6 +404,9 @@ function addTourPackage() {
     var duration;
     var activityList = document.getElementsByName("type");
     var activityType = [];
+    var serviceList = document.getElementsByName("services");
+    var highlights = document.getElementById("highlight");
+    var serviceTypes = [];
     var milage = document.getElementById("milage");
     var mainImage = document.getElementById("main-image");
 
@@ -380,9 +425,16 @@ function addTourPackage() {
         }
     }
 
+    for (var z = 0; z < serviceList.length; z++) {
+        if (serviceList[z].checked) {
+            serviceTypes.push(serviceList[z].value);
+        }
+    }
+
     const dataObject = new Object();
     dataObject.name = name.value;
     dataObject.price = price.value;
+    dataObject.hText = hText.value;
     dataObject.description = description.value;
     dataObject.destinationList = destinationList;
     dataObject.nuOfVehicles = nuOfVehicles.value;
@@ -391,6 +443,8 @@ function addTourPackage() {
     dataObject.duration = duration;
     dataObject.milage = milage.value;
     dataObject.activityType = activityType;
+    dataObject.serviceTypes = serviceTypes;
+    dataObject.highlights = highlights.value;
 
     var jsonText = JSON.stringify(dataObject);
 
@@ -416,7 +470,7 @@ function addTourPackage() {
 // tour planning module
 function sendTourPlanningDetails() {
     var name = document.getElementById("name");
-    var tourDate = document.getElementById("date");
+    var tourDate = document.getElementById("t-date");
     var desIDList = document.getElementById("desIDList").innerText;
 
     var dataObject = new Object();
