@@ -211,7 +211,7 @@ require 'connection.php';
                     <!-- filter area -->
 
                     <!-- package cards -->
-                    <dic class="col-12 col-md-8 col-lg-8 p-md-3 p-lg-5">
+                    <div class="col-12 col-md-8 col-lg-8 p-md-3 p-lg-5">
                         <div class="row">
                             <?php
                             $tourPackageResultSet = Database::search("SELECT * FROM `tour_package`");
@@ -347,7 +347,7 @@ require 'connection.php';
                             }
                             ?>
                         </div>
-                    </dic>
+                    </div>
                     <!-- package cards -->
                 </div>
             </div>

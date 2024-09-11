@@ -85,6 +85,27 @@ require 'connection.php';
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-12 mt-4">
+                                    <div class="row">
+                                        <div class="col-12 col-md-8 col-lg-8 offset-md-4 offset-lg-4">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <span><b>Packing Items</b></span>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p>Item 1</p>
+                                                    <p>Item 1</p>
+                                                    <p>Item 1</p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <center>
+                                                        <button class="btn btn-primary w-50">Add New</button>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     <?php

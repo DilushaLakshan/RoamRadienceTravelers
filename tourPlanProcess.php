@@ -36,8 +36,7 @@ if (isset($_POST["jsonText"])) {
             }
 
             // code need to insert data to self_tour_plan_has_packing_list relation
-
-
+            
             echo "Success";
         }
     }

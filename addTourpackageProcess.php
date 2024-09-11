@@ -34,7 +34,7 @@ if (empty($name)) {
     echo "Enter the package price";
 } else if (empty($headerText)) {
     echo "Enter the Header Text";
-} else if (strlen($headerText > 200)) {
+} else if (strlen($headerText) > 200) {
     echo "header Text is too long";
 } else if (empty($description)) {
     echo "Enter the details of the package";

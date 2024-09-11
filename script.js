@@ -230,6 +230,7 @@ function getDestinationIDs() {
     }
 
     document.getElementById("desIDList").innerHTML = destValues;
+    return destValues;
 }
 
 // get vehicle ids from the model and set it to the add-tourpackages.php file
@@ -464,6 +465,76 @@ function addTourPackage() {
         }
     }
     request.open("POST", "addTourpackageProcess.php", true);
+    request.send(form);
+}
+
+// send data for updating tour package
+function updateTourPackage(packageID) {
+    var packageID = packageID;
+    var name = document.getElementById("name");
+    var price = document.getElementById("price");
+    var hText = document.getElementById("h-text");
+    var description = document.getElementById("description");
+    var destinationList = document.getElementById("desIDList").innerText;
+    var durationList = document.getElementsByName("duration");
+    var duration;
+    var activityList = document.getElementsByName("type");
+    var activityType = [];
+    var serviceList = document.getElementsByName("services");
+    var highlights = document.getElementById("highlight");
+    var serviceTypes = [];
+    var milage = document.getElementById("milage");
+    var mainImage = document.getElementById("main-image");
+
+    for (var x = 0; x < durationList.length; x++) {
+        if (durationList[x].checked) {
+            duration = durationList[x].value;
+        }
+    }
+
+    for (var y = 0; y < activityList.length; y++) {
+        if (activityList[y].checked) {
+            activityType.push(activityList[y].value);
+        }
+    }
+
+    for (var z = 0; z < serviceList.length; z++) {
+        if (serviceList[z].checked) {
+            serviceTypes.push(serviceList[z].value);
+        }
+    }
+
+    const dataObject = new Object();
+    dataObject.packageID = packageID;
+    dataObject.name = name.value;
+    dataObject.price = price.value;
+    dataObject.hText = hText.value;
+    dataObject.description = description.value;
+    dataObject.destinationList = destinationList;
+    dataObject.duration = duration;
+    dataObject.milage = milage.value;
+    dataObject.activityType = activityType;
+    dataObject.serviceTypes = serviceTypes;
+    dataObject.highlights = highlights.value;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("tourPackageData", jsonText);
+    form.append("mainImage", mainImage.files[0]);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "Success") {
+                alert("Insertion Success");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("POST", "updateTourPackageProcess.php", true);
     request.send(form);
 }
 
