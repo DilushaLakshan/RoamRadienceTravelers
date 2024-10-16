@@ -1,315 +1,716 @@
-    /* navbar */
-    
-    .navbar-item {
-        margin-right: 15px;
-        border-radius: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@font-face {
+    font-family: 'Poppins-Bold';
+    src: url('resources/fonts/Poppins-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-black';
+    src: url('resources/fonts/Poppins-Black.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins-light';
+    src: url('resources/fonts/Poppins-Light.ttf');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url('resources/fonts/Montserrat-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('resources/fonts/Montserrat-Regular.ttf');
+}
+
+
+/* navbar */
+
+.navbar-item {
+    margin-right: 15px;
+    border-radius: 20px;
+}
+
+.navbar-item:hover {
+    background-color: rgb(255, 174, 25);
+    transition-duration: 0.7s;
+}
+
+.profile-icon {
+    border: 1px solid #3f3b3b;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+
+/* login card */
+
+.login-main {
+    display: flex;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    background-image: url(resources/images/Loging_image.jpg);
+}
+
+.login {
+    border: none;
+    border-radius: 15px;
+    box-shadow: rgba(14, 14, 22, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    background-color: rgba(238, 235, 235, 0.507);
+    padding: 20px;
+}
+
+.login-head-label {
+    color: #E85C0D;
+    font-size: 20px;
+}
+
+.login-label {
+    color: #E85C0D;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-input {
+    width: 100%;
+    background: transparent;
+    border: 2px solid #E85C0D;
+    border-radius: 40px;
+    font-size: 16px;
+    color: #E85C0D;
+    padding: 20px 45px 20px 20px;
+    width: 100%;
+    border-radius: 20px;
+    padding: 4px;
+}
+
+.login-input::placeholder {
+    color: rgb(244, 245, 248);
+}
+
+.login-link {
+    text-decoration: none;
+    color: #E85C0D;
+    font-weight: bold;
+}
+
+.login-button {
+    border: none;
+    outline: none;
+    font-family: 'Poppins-Bold';
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fdfbf8;
+    background-color: #ff5400;
+    padding: 20px 45px 20px 20px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 4px;
+}
+
+.login-button:hover {
+    border: none;
+    outline: none;
+    background-color: #E85C0D;
+    color: #fdfbf8;
+}
+
+
+/* user registration page */
+
+.registration-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.registration-heading {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    &:after {
+        content: '';
+        flex-grow: 1;
+        height: 2px;
+        background: #2010a8;
+        min-width: 20px;
+        margin: auto;
     }
-    
-    .navbar-item:hover {
-        background-color: rgb(255, 174, 25);
-        transition-duration: 0.7s;
+}
+
+.registration-input {
+    width: 100%;
+    background: transparent;
+    border: 2px solid rgb(5, 15, 102);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #280f85;
+    padding: 20px 45px 20px 20px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 4px;
+}
+
+.registration-button {
+    width: 100%;
+    font-family: 'Poppins-Bold', sans-serif;
+    font-weight: 500;
+    background-color: #ff5400;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.registration-button:hover {
+    background-color: #e04b00;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+
+/* user profile - traveler */
+
+.profile-buttons {
+    width: 100%;
+    font-family: 'Poppins-Bold', sans-serif;
+    font-weight: 500;
+    background-color: #ff5400;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-buttons:hover {
+    background-color: #e04b00;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+
+/* staff registration */
+
+.staff-registration-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.staff-registration-heading {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    &:after {
+        content: '';
+        flex-grow: 1;
+        height: 2px;
+        background: #2010a8;
+        min-width: 20px;
+        margin: auto;
     }
-    
-    .profile-icon {
-        border: 1px solid #3f3b3b;
-        border-radius: 50%;
-        padding: 4px;
+}
+
+.staff-registration-input {
+    width: 100%;
+    background: transparent;
+    border: 2px solid rgb(5, 15, 102);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #280f85;
+    padding: 20px 45px 20px 20px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 4px;
+}
+
+.staff-registration-button {
+    width: 100%;
+}
+
+
+/* traveler home page */
+
+.back-ground {
+    /* background-image: url(resources/images/HomePage_Background2.png); */
+}
+
+.banner-image-contanier {
+    border-radius: 15px;
+    border: none;
+}
+
+.banner-image {
+    width: 100%;
+    height: 400px;
+    border: none;
+    outline: none;
+    border-radius: 15px;
+}
+
+.banner-image-button {
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(9, 136, 196);
+    backdrop-filter: blur(20px);
+}
+
+.destination-background a {
+    color: #ff5400;
+    font-family: 'Poppins-Bold';
+    font-size: 20px;
+}
+
+.category-card {
+    font-family: 'Montserrat-Regular';
+    width: 100%;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+    overflow: hidden;
+}
+
+.category-card-img {
+    border-radius: 15px 15px 0 0;
+    height: 200px;
+    transition: transform 0.4s ease;
+}
+
+.category-card:hover .category-card-img {
+    transform: scale(1.1);
+}
+
+.card-button {
+    font-family: 'Poppins-Bold', sans-serif;
+    font-weight: 500;
+    background-color: #ff5400;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-button:hover {
+    background-color: #e04b00;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.sub-heading {
+    font-family: 'Montserrat-Bold';
+}
+
+.descriptions {
+    font-family: 'Montserrat-Regular';
+}
+
+.dis-card1 {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.dis-card2 {
+    width: 100%;
+    margin-top: 8px;
+    max-height: 250px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.dis-card2 .card-title,
+.dis-card1 .card-title {
+    color: #ff5400;
+    font-family: 'Poppins-Bold';
+}
+
+.dis-card1 .card-text,
+.dis-card2 .card-text {
+    font-family: 'Montserrat-Regular';
+}
+
+.dis-card1 .img {
+    height: 100%;
+    width: 100%;
+}
+
+.dis-card2 img {
+    width: 40px;
+    height: 40px;
+}
+
+
+/* tour packages */
+
+.package-card {
+    width: 100%;
+    border: none;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+
+.package-card h5 {
+    font-family: 'Poppins-Bold';
+}
+
+.package-card span {
+    font-family: "Montserrat-Regular";
+}
+
+.package-thumnail-image {
+    border-radius: 15px 15px 15px 15px;
+    height: 200px;
+    width: 100%;
+}
+
+.package-button {
+    width: 100%;
+    font-family: 'Poppins-Bold', sans-serif;
+    font-weight: 500;
+    border-radius: 20px;
+    background-color: #ff5400;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.package-button:hover {
+    background-color: #e04b00;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.filter-icon {
+    height: 30px;
+}
+
+.filter-heading {
+    background-color: rgb(231, 229, 229);
+    border-radius: 15px;
+    font-family: 'Montserrat-Bold';
+    padding: 15px;
+}
+
+.filter-area label {
+    font-family: 'Montserrat-Regular';
+}
+
+
+/* destination category page */
+
+
+/* package details */
+
+.p-description {
+    font-family: 'Montserrat-Regular';
+}
+
+.main-carousel-package {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.package-carousel-image {
+    border-radius: 20px;
+    width: 100%;
+    height: 400px;
+}
+
+.package-details-card {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.package-details-card .card-title {
+    font-family: 'Poppins-Bold';
+}
+
+.package-details-card a {
+    border-radius: 20px;
+    background-color: #ff5400;
+    font-family: 'Poppins-Bold';
+}
+
+.package-details-card a:hover {
+    color: #fff;
+    background-color: #ff5400;
+}
+
+.package-details-card button {
+    border-radius: 20px;
+    font-family: 'Poppins-Bold';
+    padding: 10px;
+    background-color: #ff5400;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.package-details-card input,
+textarea {
+    width: 100%;
+}
+
+.package-details-card button:hover {
+    background-color: #e04b00;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.package-include-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.main-card {
+    width: 100%;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+
+.main-card-img {
+    border-radius: 15px 15px 0 0;
+}
+
+
+/* tour planning module */
+
+.selection-button {
+    border-radius: 20px;
+    font-family: 'Poppins-Bold';
+    padding: 10px;
+    background-color: #ff5400;
+}
+
+.selection-button:hover {
+    color: #fff;
+    background-color: #ff5400;
+}
+
+
+/* package details - staff side */
+
+.card-container {
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+
+
+/* destinations page */
+
+.destination-card {
+    width: 100%;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+    overflow: hidden;
+    /* Ensures the zoomed image doesn't overflow the card */
+}
+
+.destination-card-img {
+    border-radius: 15px 15px 0 0;
+    height: 250px;
+    transition: transform 0.4s ease;
+    /* Smooth transition */
+}
+
+.destination-card:hover .destination-card-img {
+    transform: scale(1.1);
+    /* Zoom-in effect on hover */
+}
+
+
+/* destination details page */
+
+.main-image {
+    width: 100%;
+    height: 400px;
+    border-radius: 15px;
+}
+
+.comment-button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #ff5400, #ff7b33);
+    color: #fff;
+    padding: 15px 30px;
+    cursor: pointer;
+    transition: background-position 0.3s ease;
+    background-size: 200%;
+    background-position: left;
+}
+
+.comment-button:hover {
+    background-position: right;
+}
+
+.comment-area {
+    width: 100%;
+    padding: 10px;
+    font-family: "Montserrat-Regular";
+}
+
+.comment-area-button {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    font-family: 'Poppins-Bold', sans-serif;
+    background-color: #ff5400;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comment-area-button:hover {
+    background-color: #e04b00;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+
+/* staff side tour packages */
+
+.st-package-btn {
+    width: 50%;
+    border-radius: 15px;
+    border: 1px solid #0bbac7;
+    color: #0bbac7;
+}
+
+.stf-sub-heading {
+    color: #2d0ba8;
+    font-family: 'Montserrat-Bold';
+}
+
+.sbt-button {
+    width: 100%;
+    border-radius: 20px;
+    background-color: #2d0ba8;
+    color: #fff;
+    font-family: 'Poppins-Bold';
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sbt-button:hover {
+    background-color: #230880;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* scroll bar custom designs */
+
+.scrollable-area {
+    padding-right: 20px;
+    padding-bottom: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: #230880 #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #230880;
+    border-radius: 10px;
+}
+
+
+/* footer */
+
+.footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 40px 0;
+}
+
+.footer h5 {
+    font-family: 'Poppins-Bold';
+}
+
+.footer a,
+p {
+    font-family: 'Montserrat-Regular';
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.footer a:hover {
+    color: #ff5400;
+    /* Change link color on hover */
+    text-decoration: underline;
+    /* Add underline on hover */
+    transform: translateX(5px);
+    /* Add slight movement to the right */
+}
+
+.social-icons a {
+    margin-right: 15px;
+    font-size: 20px;
+    display: inline-block;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.social-icons a:hover {
+    background-color: transparent;
+    color: #343a40;
+    transform: scale(1.2);
+    border-radius: 10px;
+    border: 2px solid #ff5400;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff5400;
+}
+
+@media (max-width: 768px) {
+    .footer-logo {
+        text-align: center;
     }
-    /* login card */
-    
-    .login-main {
-        display: flex;
-        align-items: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-        background-size: cover;
-        height: 100vh;
-        background-image: url(resources/images/login\ back.jpg);
+    .footer .col-md-3 {
+        text-align: center;
+        margin-bottom: 20px;
     }
-    
-    .login {
-        border: none;
-        border-radius: 15px;
-        box-shadow: rgba(14, 14, 22, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-        background-color: rgba(238, 235, 235, 0.507);
-        padding: 20px;
-    }
-    
-    .login-head-label {
-        color: #E85C0D;
-        font-size: 20px;
-    }
-    
-    .login-label {
-        color: #E85C0D;
-        font-size: 16px;
-        font-weight: bold;
-    }
-    
-    .login-input {
-        width: 100%;
-        background: transparent;
-        border: 2px solid #E85C0D;
-        border-radius: 40px;
-        font-size: 16px;
-        color: #E85C0D;
-        padding: 20px 45px 20px 20px;
-        width: 100%;
-        border-radius: 20px;
-        padding: 4px;
-    }
-    
-    .login-input::placeholder {
-        color: rgb(244, 245, 248);
-    }
-    
-    .login-link {
-        text-decoration: none;
-        color: #E85C0D;
-        font-weight: bold;
-    }
-    
-    .login-button {
-        border: none;
-        outline: none;
-        border-radius: 40px;
-        font-size: 16px;
-        color: #fdfbf8;
-        background-color: #E85C0D;
-        padding: 20px 45px 20px 20px;
-        width: 100%;
-        border-radius: 10px;
-        padding: 4px;
-    }
-    
-    .login-button:hover {
-        border: none;
-        outline: none;
-    }
-    /* user registration page */
-    
-    .registration-main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    
-    .registration-heading {
-        display: flex;
-        align-items: flex-start;
-        text-align: left;
-        &:after {
-            content: '';
-            flex-grow: 1;
-            height: 2px;
-            background: #2010a8;
-            min-width: 20px;
-            margin: auto;
-        }
-    }
-    
-    .registration-input {
-        width: 100%;
-        background: transparent;
-        border: 2px solid rgb(5, 15, 102);
-        border-radius: 40px;
-        font-size: 16px;
-        color: #280f85;
-        padding: 20px 45px 20px 20px;
-        width: 100%;
-        border-radius: 10px;
-        padding: 4px;
-    }
-    
-    .registration-button {
-        width: 100%;
-    }
-    /* staff registration */
-    
-    .staff-registration-main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    
-    .staff-registration-heading {
-        display: flex;
-        align-items: flex-start;
-        text-align: left;
-        &:after {
-            content: '';
-            flex-grow: 1;
-            height: 2px;
-            background: #2010a8;
-            min-width: 20px;
-            margin: auto;
-        }
-    }
-    
-    .staff-registration-input {
-        width: 100%;
-        background: transparent;
-        border: 2px solid rgb(5, 15, 102);
-        border-radius: 40px;
-        font-size: 16px;
-        color: #280f85;
-        padding: 20px 45px 20px 20px;
-        width: 100%;
-        border-radius: 10px;
-        padding: 4px;
-    }
-    
-    .staff-registration-button {
-        width: 100%;
-    }
-    /* traveler home page */
-    
-    .banner-image-contanier {
-        border-radius: 15px;
-        border: none;
-    }
-    
-    .banner-image {
-        width: 100%;
-        height: 400px;
-        border: none;
-        outline: none;
-        border-radius: 15px;
-    }
-    
-    .banner-image-button {
-        border-radius: 15px;
-        border: none;
-        background-color: rgb(9, 136, 196);
-        backdrop-filter: blur(20px);
-    }
-    
-    .category-card {
-        width: 100%;
-        border-radius: 15px;
-        border: none;
-        outline: none;
-        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-    }
-    
-    .category-card-img {
-        border-radius: 15px 15px 0 0;
-        height: 200px;
-    }
-    /* tour packages */
-    
-    .package-card {
-        width: 100%;
-        border: none;
-        border-radius: 15px;
-        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-    }
-    
-    .package-thumnail-image {
-        border-radius: 15px 15px 15px 15px;
-        height: 200px;
-        width: 100%;
-    }
-    
-    .package-button {
-        width: 100%;
-        border-radius: 15px;
-        border: 1px solid #0bbac7;
-        color: #0bbac7;
-    }
-    
-    .filter-icon {
-        height: 30px;
-    }
-    
-    .filter-heading {
-        background-color: rgb(231, 229, 229);
-        border-radius: 15px;
-    }
-    /* destination category page */
-    /* package details */
-    
-    .main-carousel-package {
-        width: 100%;
-        border-radius: 20px;
-    }
-    
-    .package-carousel-image {
-        border-radius: 20px;
-        width: 100%;
-        height: 400px;
-    }
-    
-    .package-details-card {
-        width: 100%;
-        border-radius: 20px;
-    }
-    
-    .package-details-card .button {
-        border-radius: 20px;
-    }
-    
-    .package-include-icon {
-        height: 20px;
-        width: 20px;
-        margin-right: 10px;
-    }
-    
-    .main-card {
-        width: 100%;
-        border-radius: 15px;
-        border: none;
-        outline: none;
-        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-    }
-    
-    .main-card-img {
-        border-radius: 15px 15px 0 0;
-    }
-    /* package details - staff side */
-    
-    .card-container {
-        padding: 20px;
-        border-radius: 20px;
-        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-    }
-    /* destinations page */
-    
-    .destination-card {
-        width: 100%;
-        border-radius: 15px;
-        border: none;
-        outline: none;
-        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-    }
-    
-    .destination-card-img {
-        border-radius: 15px 15px 0 0;
-        height: 250px;
-    }
-    /* destination details page */
-    
-    .main-image {
-        width: 100%;
-        height: 400px;
-        border-radius: 15px;
-    }
-    
-    .comment-button {
-        border: none;
-        border-radius: 10px;
-        background-color: #0bbac7;
-        color: #fff;
-        height: 35px;
-    }
-    /* staff side tour packages */
-    
-    .st-package-btn {
-        width: 50%;
-        border-radius: 15px;
-        border: 1px solid #0bbac7;
-        color: #0bbac7;
-    }
+}

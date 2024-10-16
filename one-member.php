@@ -26,60 +26,77 @@
                         <div class="col-12 mt-2">
                             <div class="row">
                                 <div class="col-6">
-                                    <span>Name:</span>
+                                    <span class="descriptions">First Name:</span>
                                 </div>
                                 <div class="col-6">
-                                    <span><?php echo ($memberData["first_name"] . " " . $memberData["last_name"]); ?></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <div class="row">
-                                <div class="col-6">
-                                    <span>Role:</span>
-                                </div>
-                                <div class="col-6">
-                                    <span><?php echo ($memberData["role"]); ?></span>
+                                    <input type="text" id="f-name" class="staff-registration-input" value="<?php echo ($memberData["first_name"]); ?>">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 mt-2">
                             <div class="row">
                                 <div class="col-6">
-                                    <span>Email:</span>
+                                    <span class="descriptions">Last Name:</span>
                                 </div>
                                 <div class="col-6">
-                                    <span><?php echo ($memberData["email"]); ?></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <div class="row">
-                                <div class="col-6">
-                                    <span>Password:</span>
-                                </div>
-                                <div class="col-6">
-                                    <span><?php echo ($memberData["password"]); ?></span>
+                                    <input type="text" id="l-name" class="staff-registration-input" value="<?php echo ($memberData["last_name"]); ?>">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 mt-2">
                             <div class="row">
                                 <div class="col-6">
-                                    <span>Contact:</span>
+                                    <span class="descriptions">Role:</span>
                                 </div>
                                 <div class="col-6">
-                                    <span><?php echo ($memberData["contact"]); ?></span>
+                                    <div class="col-12 col-md-8 col-lg-8">
+                                        <select name="role" id="role" class="staff-registration-input descriptions">
+                                            <option value="not-selected">Select here</option>
+                                            <option value="owner" <?php if($memberData["role"] == "owner"){echo "selected";} ?>>Owner</option>
+                                            <option value="driver" <?php if($memberData["role"] == "driver"){echo "selected";} ?>>Driver</option>
+                                            <option value="guide" <?php if($memberData["role"] == "guide"){echo "selected";} ?>>Guide</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <div class="row">
+                                <div class="col-6">
+                                    <span class="descriptions">Email:</span>
+                                </div>
+                                <div class="col-6">
+                                    <input type="email" id="email" class="staff-registration-input" value="<?php echo ($memberData["email"]); ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <div class="row">
+                                <div class="col-6">
+                                    <span lass="descriptions">Password:</span>
+                                </div>
+                                <div class="col-6">
+                                    <input type="password" id="password" class="staff-registration-input" value="<?php echo ($memberData["password"]); ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <div class="row">
+                                <div class="col-6">
+                                    <span lass="descriptions">Contact:</span>
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" id="contact" class="staff-registration-input" value="<?php echo ($memberData["contact"]); ?>">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 mt-4">
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-6">
-                                    <button class="btn btn-outline-info w-100">Block User</button>
+                                    <button class="btn sbt-button">Block User</button>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-6">
-                                    <button class="btn btn-outline-info w-100">Update User</button>
+                                    <button class="btn sbt-button" onclick="updateStaffMember(<?php echo $memberID; ?>);">Update User</button>
                                 </div>
                             </div>
                         </div>

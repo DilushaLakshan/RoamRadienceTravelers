@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-12">
                         <center>
-                            <h4>Add New Hotel</h4>
+                            <h4 class="stf-sub-heading">Add New Hotel</h4>
                         </center>
                     </div>
                     <div class="col-12">
@@ -25,7 +25,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Hotel Name</label>
+                                <label class="descriptions">Hotel Name</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="text" class="w-100" id="h-name">
@@ -35,7 +35,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Address</label>
+                                <label class="descriptions">Address</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="text" class="w-100" id="h-address">
@@ -45,7 +45,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Email</label>
+                                <label class="descriptions">Email</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="email" class="w-100" id="h-email">
@@ -55,7 +55,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Contact</label>
+                                <label class="descriptions">Contact</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="text" class="w-100" id="h-contact">
@@ -65,7 +65,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>No. of Rooms</label>
+                                <label class="descriptions">No. of Rooms</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="number" class="w-100" id="h-rooms">
@@ -75,7 +75,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Rooms Numbers</label>
+                                <label class="descriptions">Rooms Numbers</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <div class="row">
@@ -99,7 +99,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Price Per. Room (LKR)</label>
+                                <label class="descriptions">Price Per. Room (LKR)</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="number" class="w-100" id="h-price">
@@ -109,10 +109,10 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                <button class="btn btn-primary w-100">Clear</button>
+                                <button class="btn sbt-button">Clear</button>
                             </div>
                             <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                <button class="btn btn-primary w-100" onclick="addHotel();">Add</button>
+                                <button class="btn sbt-button" onclick="addHotel();">Add</button>
                             </div>
                         </div>
                     </div>

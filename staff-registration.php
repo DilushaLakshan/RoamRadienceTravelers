@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-12">
                         <center>
-                            <h4>Sign Up - Staff</h4>
+                            <h4 class="stf-sub-heading">Sign Up - Staff</h4>
                         </center>
                     </div>
                     <div class="col-12">
@@ -23,7 +23,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>First Name</label>
+                                <label class="descriptions">First Name</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="text" class="staff-registration-input" id="fName">
@@ -33,7 +33,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Last Name</label>
+                                <label class="descriptions">Last Name</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="text" class="staff-registration-input" id="lName">
@@ -43,7 +43,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Email</label>
+                                <label class="descriptions">Email</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="email" class="staff-registration-input" id="email">
@@ -53,7 +53,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Password</label>
+                                <label class="descriptions">Password</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="password" class="staff-registration-input" id="password">
@@ -63,10 +63,10 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Role</label>
+                                <label class="descriptions">Role</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <select name="role" id="role" class="staff-registration-input">
+                                <select name="role" id="role" class="staff-registration-input descriptions" >
                                     <option value="not-selected" selected>Select here</option>
                                     <option value="owner">Owner</option>
                                     <option value="driver">Driver</option>
@@ -78,16 +78,16 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Contact</label>
+                                <label class="descriptions">Contact</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="mobile" class="staff-registration-input" id="contact">
                                 <div class="row mt-5">
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                        <button class="btn btn-outline-dark staff-registration-button">Clear</button>
+                                        <button class="btn sbt-button">Clear</button>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                        <button class="btn btn-outline-dark staff-registration-button" onclick="registerStaff()">Sign Up</button>
+                                        <button class="btn sbt-button" onclick="registerStaff();">Sign Up</button>
                                     </div>
                                 </div>
                             </div>

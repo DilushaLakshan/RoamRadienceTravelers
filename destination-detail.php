@@ -1,4 +1,7 @@
-<?php require 'connection.php'; ?>
+<?php
+session_start();
+require 'connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +16,15 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <?php include 'navbar.php'; ?>
+            <?php
+            if (isset($_SESSION["user"])) {
+                $uID = $_SESSION["user"]->id;
+                include 'navbar-logged-in.php';
+            } else {
+                $uID = 0;
+                include 'navbar.php';
+            }
+            ?>
 
             <!-- carousel -->
             <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 mt-3">
@@ -65,7 +76,7 @@
                 <!-- heading -->
                 <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 mt-3">
                     <center>
-                        <h4><?php echo $destinationData["name"]; ?></h4>
+                        <h4 class="sub-heading"><?php echo $destinationData["name"]; ?></h4>
                     </center>
                     <hr>
                 </div>
@@ -73,11 +84,9 @@
 
                 <!-- description -->
                 <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 mt-3">
-                    <center>
-                        <p><?php echo $destinationData["description"]; ?></p>
-                    </center>
-                    <h6>Best Time to Visit - </h6>
-                    <p>May to August</p>
+                    <p class="descriptions"><?php echo $destinationData["description"]; ?></p>
+                    <h6 class="sub-heading">Best Time to Visit - </h6>
+                    <p class="descriptions">May to August</p>
                     <hr>
                 </div>
                 <!-- description -->
@@ -87,9 +96,18 @@
 
             <!-- comments -->
             <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 mb-3">
-                <h6>Comments</h6>
+                <h6 class="sub-heading">Comments</h6>
+                <div class="collapse" id="collapseExample">
+                    <textarea class="card comment-area" name="comment" id="comment" rows="5"></textarea>
+                    <button class="comment-area-button" onclick="addDesComment(<?php echo $desID; ?>);">Save changes</button>
+                </div>
                 <center>
-                    <button class="comment-button mt-3">Add a New Comment</button>
+                    <button
+                        class="comment-button mt-3"
+                        data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
+                        onclick="addDestinationComment(<?php echo $uID; ?>);">
+                        Add a New Comment
+                    </button>
                 </center>
             </div>
             <!-- comments -->

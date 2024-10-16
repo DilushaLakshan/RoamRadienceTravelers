@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-12">
                         <center>
-                            <h4>Add New Vehicle</h4>
+                            <h4 class="stf-sub-heading">Add New Vehicle</h4>
                         </center>
                     </div>
                     <div class="col-12">
@@ -25,7 +25,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Vecicle Number</label>
+                                <label class="descriptions">Vecicle Number</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="text" class="w-100" id="v-number">
@@ -35,7 +35,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>No. of Seats</label>
+                                <label class="descriptions">No. of Seats</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="number" class="w-100" id="v-seats">
@@ -45,7 +45,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Price per KM</label>
+                                <label class="descriptions">Price per KM</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="number" class="w-100" id="price-km">
@@ -55,7 +55,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Price per day</label>
+                                <label class="descriptions">Price per day</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="number" class="w-100" id="price-day">
@@ -65,7 +65,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Vehicle Type</label>
+                                <label class="descriptions">Vehicle Type</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <div class="row">
@@ -91,10 +91,10 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6">
-                                <button class="btn btn-info w-100">Clear</button>
+                                <button class="btn sbt-button">Clear</button>
                             </div>
                             <div class="col-12 col-md-6 col-lg-6">
-                                <button class="btn btn-info w-100" onclick="addVehicle();">ADD</button>
+                                <button class="btn sbt-button" onclick="addVehicle();">ADD</button>
                             </div>
                         </div>
                     </div>

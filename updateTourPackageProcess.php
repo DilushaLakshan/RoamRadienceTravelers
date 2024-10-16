@@ -22,8 +22,17 @@ $activityType = $dataObject->activityType;
 $serviceTypes = $dataObject->serviceTypes;
 $highlights = explode(",", $dataObject->highlights);
 $imageFile = null;
-$mainImageType = null;
 $validity = "true";
+
+if (isset($_FILES["mainImage"])) {
+    $path = $_FILES["mainImage"];
+    $extention = $path["type"];
+    $allowedImageExtention = array("image/jpg", "image/png", "image/jpeg");
+    if (in_array($extention, $allowedImageExtention)) {
+        $imageFile = $name . uniqid() . ".png";
+        move_uploaded_file($path["tmp_name"], "resources/images/" . $imageFile);
+    }
+}
 
 if (empty($name)) {
     echo "Please enter a name for the package";
@@ -56,6 +65,17 @@ if (empty($name)) {
     Database::insertUpdateDelete("UPDATE `tour_package` SET `name`='" . $name . "', `price`='" . $price . "', 
     `description`='" . $description . "', `header_text`='" . $headerText . "', `total_milage`='" . $milage . "', `duration_id`='" . $duration . "' WHERE `id`='".$pID."'");
 
+    // update the main image of the tour package
+    Database::insertUpdateDelete("UPDATE `package_photo` SET `source`='".$imageFile."' WHERE `tour_package_id`='".$pID."'");
+
+    // update activity types of the package
+    Database::insertUpdateDelete("DELETE FROM `tour_package_has_activity_type` WHERE `tour_package_id`='".$pID."'");
+
+    for($m = 0; $m < sizeof($activityType); $m++){
+        Database::insertUpdateDelete("INSERT INTO `tour_package_has_activity_type` (`tour_package_id`, `activity_type_id`)
+        VALUES ('".$pID."', '".$activityType[$m]."')");
+    }
+
     // delete destinations assigned with particular tour package
     Database::insertUpdateDelete("DELETE FROM `destination_has_tour_package` WHERE `tour_package_id`='".$pID."'");
 
@@ -66,11 +86,11 @@ if (empty($name)) {
     }
 
     // delete service list assigned with tour package
-    Database::insertUpdateDelete("DELETE FROM `activity_type` WHERE `tour_package_id`='".$pID."'");
+    Database::insertUpdateDelete("DELETE FROM `package_includes_has_tour_package` WHERE `tour_package_id`='".$pID."'");
 
     // insert new service list
     for($y = 0; $y < sizeof($serviceTypes); $y++){
-        Database::insertUpdateDelete("INSERT INTO `activity_type` (`name`, `tour_package_id`) VALUES ('".$serviceTypes[$y]."', '".$pID."')");
+        Database::insertUpdateDelete("INSERT INTO `package_includes_has_tour_package` (`package_includes_id`, `tour_package_id`) VALUES ('".$serviceTypes[$y]."', '".$pID."')");
     }
 
     // delete highlights list

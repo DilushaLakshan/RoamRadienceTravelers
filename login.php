@@ -47,7 +47,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <center>
-                                                    <button class="btn login-button" onclick="">Sign Up</button>
+                                                    <button class="btn login-button" onclick="window.location='user-registration.php'">Sign Up</button>
                                                 </center>
                                             </div>
                                         </div>

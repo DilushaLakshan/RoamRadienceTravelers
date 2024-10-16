@@ -51,13 +51,12 @@ require 'connection.php';
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <div class="col-12 col-md-8 col-lg-10">
-                                                                <h5 class="card-title"><?php echo $tourPackageData["name"]; ?></h5>
+                                                                <h5 class="card-title stf-sub-heading"><?php echo $tourPackageData["name"]; ?></h5>
                                                             </div>
                                                             <div class="col-12 col-md-4 col-lg-2">
                                                                 <span>4.8 <i class="fa-solid fa-star"></i></span>
                                                             </div>
                                                         </div>
-                                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                                         <?php
                                                         // get the destination id list of the perticular tour package
                                                         $desNamesList = [];
@@ -79,7 +78,7 @@ require 'connection.php';
                                                             }
                                                         }
                                                         ?>
-                                                        <span>
+                                                        <span class="descriptions">
                                                             Destinations :
                                                             <?php
                                                             if (!empty($desNamesList)) {
@@ -97,7 +96,7 @@ require 'connection.php';
                                                     <div class="col-12 mt-3">
                                                         <div class="row">
                                                             <div class="col-12 col-md-6 col-lg-6">
-                                                                <span>
+                                                                <span class="descriptions">
                                                                     Duration -
                                                                     <?php
                                                                     // get the duration data
@@ -113,24 +112,34 @@ require 'connection.php';
                                                                 </span>
                                                             </div>
                                                             <div class="col-12 col-md-6 col-lg-6">
-                                                                <span>Price - <?php echo $tourPackageData["price"]; ?> LKR</span>
+                                                                <span class="descriptions">Price - <?php echo $tourPackageData["price"]; ?> LKR</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 mt-3">
                                                         <div class="row">
                                                             <div class="col-12">
-                                                                <span>Operating Languages - English/ Sinhala</span>
+                                                                <span class="descriptions">Operating Languages - English/ Sinhala</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 mt-3">
                                                         <div class="row">
-                                                            <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                                                <button class="btn package-button" onclick="window.location='updateTourPackage.php?pID=<?php echo $tourPackageData['id']; ?>'">Update Package</button>
+                                                            <div class="col-12">
+                                                                <span class="descriptions">Validity - <?php echo $tourPackageData["validity"]; ?></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 mt-3">
+                                                        <div class="row">
+                                                        <div class="col-12 col-md-6 col-lg-6 mt-2">
+                                                                <button class="btn sbt-button" onclick="updatePackageStatus(<?php echo $tourPackageData['id']; ?>,'true');">Enable Package</button>
                                                             </div>
                                                             <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                                                <button class="btn package-button">Desable Package</button>
+                                                                <button class="btn sbt-button" onclick="updatePackageStatus(<?php echo $tourPackageData['id']; ?>, 'false');">Desable Package</button>
+                                                            </div>
+                                                            <div class="col-12 col-md-6 col-lg-6 mt-2">
+                                                                <button class="btn sbt-button" onclick="window.location='updateTourPackage.php?pID=<?php echo $tourPackageData['id']; ?>'">Update Package</button>
                                                             </div>
                                                         </div>
                                                     </div>

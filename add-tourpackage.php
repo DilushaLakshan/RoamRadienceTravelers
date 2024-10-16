@@ -8,6 +8,7 @@
     <title>New Package</title>
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
                 <div class="row">
                     <div class="col-12">
                         <center>
-                            <h4>Add New Tour Package</h4>
+                            <h4 class="stf-sub-heading">Add New Tour Package</h4>
                         </center>
                     </div>
                     <div class="col-12">
@@ -26,7 +27,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Name of the Package</label>
+                                <label class="descriptions">Name of the Package</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="text" class="w-100" id="name">
@@ -36,17 +37,17 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Price</label>
+                                <label class="descriptions">Price</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <input type="text" class="w-100" id="price">
+                                <input type="number" class="w-100" id="price">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Header Text</label>
+                                <label class="descriptions">Header Text</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="text" class="w-100" id="h-text">
@@ -56,27 +57,27 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Description</label>
+                                <label class="descriptions">Description</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <textarea name="" id="description" rows="15" class="w-100"></textarea>
+                                <textarea name="description" id="description" rows="15" class="w-100"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Select the Destinations</label>
+                                <label class="descriptions">Select the Destinations</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <div class="row">
                                     <div class="col-12">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <button type="button" class="btn sbt-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             Click here to select destinations
                                         </button>
                                     </div>
                                     <div class="col-12">
-                                        <span id="desIDList"></span>
+                                        <span id="desIDList" class="descriptions"></span>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +86,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Number of Vehicles</label>
+                                <label class="descriptions">Number of Vehicles</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="number" class="w-100" id="no-of-vehicles">
@@ -95,17 +96,17 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Select the Vehicles</label>
+                                <label class="descriptions">Select the Vehicles</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <div class="row">
                                     <div class="col-12">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vehicle-selection-model">
+                                        <button type="button" class="btn sbt-button" data-bs-toggle="modal" data-bs-target="#vehicle-selection-model">
                                             Click here to select vehicles
                                         </button>
                                     </div>
                                     <div class="col-12">
-                                        <span id="v-id-list"></span>
+                                        <span id="v-id-list" class="descriptions"></span>
                                     </div>
                                 </div>
                             </div>
@@ -114,14 +115,14 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Select the Hotel</label>
+                                <label class="descriptions">Select the Hotel</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hotel-selection-model">
+                                <button type="button" class="btn sbt-button" data-bs-toggle="modal" data-bs-target="#hotel-selection-model">
                                     Click here to select hotels
                                 </button>
                                 <div class="col-12">
-                                    <span id="hotel-id-list"></span>
+                                    <span id="hotel-id-list" class="descriptions"></span>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +130,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Duration</label>
+                                <label class="descriptions">Duration</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <div class="row">
@@ -154,32 +155,25 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Activities Type</label>
+                                <label class="descriptions">Activities Type</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <div class="row">
-                                        <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type" value="cultural"> Cultural
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type" value="adventure"> Adventure
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type" value="wildlife & nature"> Wildlife & Nature
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type" value="hiking"> Hiking
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type" value="beach & coastal"> Beach & Coastal
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type" value="photography"> Photography
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="checkbox" name="type" value="luxury"> Luxury
-                                        </div>
+                                        <?php
+                                        $activityResultSet = Database::search("SELECT * FROM `activity_type`");
+                                        $activityNumRows = $activityResultSet->num_rows;
+                                        if ($activityNumRows > 0) {
+                                            for ($e = 0; $e < $activityNumRows; $e++) {
+                                                $activityData = $activityResultSet->fetch_assoc();
+                                        ?>
+                                                <div class="col-12 col-md-6 col-lg-6">
+                                                    <input type="checkbox" name="activity-type" value=<?php echo $activityData["id"]; ?>> <?php echo $activityData["name"]; ?>
+                                                </div>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +182,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Included services</label>
+                                <label class="descriptions">Included services</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <div class="col-12 col-md-8 col-lg-8">
@@ -221,8 +215,8 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Highlights</label><br>
-                                <span><i>(Use ',' to seperate sentences)</i></span>
+                                <label class="descriptions">Highlights</label><br>
+                                <span class="descriptions"><i>(Use ',' to seperate sentences)</i></span>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <textarea name="" id="highlight" rows="10" class="w-100"></textarea>
@@ -232,7 +226,7 @@
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <label>Total Milage (KM)</label>
+                                <label class="descriptions">Total Milage (KM)</label>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
                                 <input type="number" class="w-100" id="milage">
@@ -242,7 +236,7 @@
                     <div class="col-12 mt-2">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <span>Main Image:</span>
+                                <span class="descriptions">Main Image:</span>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8 mt-2">
                                 <div class="row">
@@ -259,7 +253,7 @@
                     <div class="col-12 mt-2">
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
-                                <span>Other Images:</span>
+                                <span class="descriptions">Other Images:</span>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8 mt-2">
                                 <div class="row">
@@ -289,10 +283,10 @@
                     <div class="col-12 mt-3 mb-3">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                <button class="btn btn-primary w-100">Clear</button>
+                                <button class="btn sbt-button">Clear</button>
                             </div>
                             <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                <button class="btn btn-primary w-100" onclick="addTourPackage();">ADD</button>
+                                <button class="btn sbt-button" onclick="addTourPackage();">ADD</button>
                             </div>
                         </div>
                     </div>
@@ -303,7 +297,7 @@
                             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Select the list of destinations</h1>
+                                        <h1 class="modal-title stf-sub-heading fs-5" id="exampleModalLabel">Select the list of destinations</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -335,7 +329,7 @@
                                                                 ?>
                                                                 <div class="card-body">
                                                                     <input type="checkbox" name="destination" value="<?php echo $destinationData['id']; ?>">
-                                                                    <h6 class="card-title"><?php echo $destinationData["name"]; ?></h6>
+                                                                    <h6 class="card-title descriptions"><?php echo $destinationData["name"]; ?></h6>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -344,7 +338,7 @@
                                                 } else {
                                                     ?>
                                                     <div class="col-12">
-                                                        <span>
+                                                        <span class="descriptions">
                                                             <i>No results found</i>
                                                         </span>
                                                     </div>
@@ -355,8 +349,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="getDestinationIDs();">Save changes</button>
+                                        <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn sbt-button" onclick="getDestinationIDs();">Save changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -369,7 +363,7 @@
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Select Vehicles</h1>
+                                    <h1 class="modal-title stf-sub-heading fs-5" id="exampleModalLabel">Select Vehicles</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -388,10 +382,10 @@
                                                                 <input type="checkbox" name="v-id" value="<?php echo $vehicleData['id']; ?>">
                                                             </div>
                                                             <div class="col-6">
-                                                                <span><?php echo $vehicleData["number"]; ?></span>
+                                                                <span class="descriptions"><?php echo $vehicleData["number"]; ?></span>
                                                             </div>
                                                             <div class="col-4">
-                                                                <span><?php echo $vehicleData["type"]; ?></span>
+                                                                <span class="descriptions"><?php echo $vehicleData["type"]; ?></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -401,7 +395,7 @@
                                                 ?>
                                                 <div class="col-12">
                                                     <center>
-                                                        <span><i>No results found</i></span>
+                                                        <span class="descriptions"><i>No results found</i></span>
                                                     </center>
                                                 </div>
                                             <?php
@@ -411,8 +405,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="getVehicleIDs();">Save changes</button>
+                                    <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn sbt-button" onclick="getVehicleIDs();">Save changes</button>
                                 </div>
                             </div>
                         </div>
@@ -424,7 +418,7 @@
                         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <h1 class="modal-title stf-sub-heading fs-5" id="exampleModalLabel">Modal title</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -443,10 +437,10 @@
                                                                 <input type="checkbox" name="hotel" value="<?php echo $hotelData['id']; ?>">
                                                             </div>
                                                             <div class="col-6">
-                                                                <span><?php echo $hotelData["name"]; ?></span>
+                                                                <span class="descriptions"><?php echo $hotelData["name"]; ?></span>
                                                             </div>
                                                             <div class="col-4">
-                                                                <span><?php echo $hotelData["address"]; ?></span>
+                                                                <span class="descriptions"><?php echo $hotelData["address"]; ?></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -455,7 +449,7 @@
                                             } else {
                                                 ?>
                                                 <div class="col-12">
-                                                    <span><i>No results found</i></span>
+                                                    <span class="descriptions"><i>No results found</i></span>
                                                 </div>
                                             <?php
                                             }
@@ -464,8 +458,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="getHotelIDs();">Save changes</button>
+                                    <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn sbt-button" onclick="getHotelIDs();">Save changes</button>
                                 </div>
                             </div>
                         </div>
@@ -478,6 +472,11 @@
 
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
+
+    <!-- replace the text area by CKEDITOR -->
+    <script>
+        CKEDITOR.replace('description');
+    </script>
 </body>
 
 </html>

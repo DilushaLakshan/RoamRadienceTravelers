@@ -41,7 +41,7 @@ if (empty($name)) {
     echo "Enter a valid contact number";
 } else if (empty($numOfRooms)) {
     echo "Enter the number of rooms";
-} else if ($numOfRooms < 1 || $numOfRooms > 10) {
+} else if ($numOfRooms < 1 || $numOfRooms > 30) {
     echo "Enter a valid number for number of rooms";
 } else if (empty($roomNumbers)) {
     echo "Enter the numbers of rooms";

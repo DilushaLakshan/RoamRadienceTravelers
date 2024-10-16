@@ -16,11 +16,20 @@ require 'connection.php';
 <body>
     <div class="container-fluid">
         <div class="row">
+            <?php
+            if (isset($_SESSION["user"])) {
+                $uID = $_SESSION["user"]->id;
+                include 'navbar-logged-in.php';
+            } else {
+                $uID = 0;
+                include 'navbar.php';
+            }
+            ?>
             <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2">
                 <div class="row">
                     <div class="col-12">
                         <center>
-                            <h4>Plan your Tour</h4>
+                            <h4 class="sub-heading">Plan your Tour</h4>
                         </center>
                     </div>
                     <div class="col-12">
@@ -35,7 +44,7 @@ require 'connection.php';
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-12 col-md-4 col-lg-4">
-                                            <span>Name</span>
+                                            <span class="descriptions">Name</span>
                                         </div>
                                         <div class="col-12 col-md-8 col-lg-8">
                                             <input type="text" class="w-100" id="name">
@@ -45,27 +54,29 @@ require 'connection.php';
                                 <div class="col-12 mt-2">
                                     <div class="row">
                                         <div class="col-12 col-md-4 col-lg-4">
-                                            <span>Tour Date</span>
+                                            <span class="descriptions">Tour Date</span>
                                         </div>
                                         <div class="col-12 col-md-8 col-lg-8">
                                             <input type="date" class="w-100" id="t-date">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 mt-2">
+                                <div class="col-12 mt-5">
                                     <div class="row">
                                         <div class="col-12 col-md-4 col-lg-4">
-                                            <span>Select destinations</span>
+                                            <span class="descriptions">Select destinations</span>
                                         </div>
                                         <div class="col-12 col-md-8 col-lg-8">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        Click here to select destinations
-                                                    </button>
+                                                    <center>
+                                                        <button type="button" class="btn selection-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            Click here to select destinations
+                                                        </button>
+                                                    </center>
                                                 </div>
-                                                <div class="col-12">
-                                                    <span id="desIDList"></span>
+                                                <div class="col-12 mt-3">
+                                                    <span class="descriptions" id="desIDList"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,12 +86,12 @@ require 'connection.php';
                                     <div class="row">
                                         <div class="col-12 col-md-6 col-lg-6">
                                             <center>
-                                                <button class="btn btn-primary w-75">Clear</button>
+                                                <button class="btn selection-button w-75">Clear</button>
                                             </center>
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
                                             <center>
-                                                <button class="btn btn-primary w-75" onclick="sendTourPlanningDetails();">Save changes</button>
+                                                <button class="btn selection-button w-75" onclick="sendTourPlanningDetails();">Save changes</button>
                                             </center>
                                         </div>
                                     </div>
@@ -90,16 +101,16 @@ require 'connection.php';
                                         <div class="col-12 col-md-8 col-lg-8 offset-md-4 offset-lg-4">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <span><b>Packing Items</b></span>
+                                                    <span class="sub-heading"><b>Packing Items</b></span>
                                                 </div>
                                                 <div class="col-12">
-                                                    <p>Item 1</p>
-                                                    <p>Item 1</p>
-                                                    <p>Item 1</p>
+                                                    <p class="descriptions">Item 1</p>
+                                                    <p class="descriptions">Item 1</p>
+                                                    <p class="descriptions">Item 1</p>
                                                 </div>
                                                 <div class="col-12">
                                                     <center>
-                                                        <button class="btn btn-primary w-50">Add New</button>
+                                                        <button class="btn selection-button w-50">Add New</button>
                                                     </center>
                                                 </div>
                                             </div>
@@ -120,7 +131,7 @@ require 'connection.php';
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Select the list of destinations</h1>
+                                <h1 class="modal-title sub-heading fs-5" id="exampleModalLabel">Select the list of destinations</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -152,7 +163,7 @@ require 'connection.php';
                                                         ?>
                                                         <div class="card-body">
                                                             <input type="checkbox" name="destination" value="<?php echo $destinationData['id']; ?>">
-                                                            <h6 class="card-title"><?php echo $destinationData["name"]; ?></h6>
+                                                            <h6 class="card-title sub-heading"><?php echo $destinationData["name"]; ?></h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -161,7 +172,7 @@ require 'connection.php';
                                         } else {
                                             ?>
                                             <div class="col-12">
-                                                <span>
+                                                <span class="descriptions">
                                                     <i>No results found</i>
                                                 </span>
                                             </div>
@@ -172,8 +183,8 @@ require 'connection.php';
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" onclick="getDestinationIDs();">Save changes</button>
+                                <button type="button" class="btn selection-button" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn selection-button" onclick="getDestinationIDs();">Save changes</button>
                             </div>
                         </div>
                     </div>

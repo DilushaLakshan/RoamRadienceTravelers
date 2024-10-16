@@ -112,10 +112,10 @@ if (empty($name)) {
             VALUES ('" . $destinationList[$m] . "', '" . $tpData['id'] . "')");
         }
 
-        // insert data to the activity_type table
+        // insert data to the tour_package_has_activity_type table
         for ($p = 0; $p < sizeof($activityType); $p++) {
-            Database::insertUpdateDelete("INSERT INTO `activity_type` (`name`, `tour_package_id`)
-            VALUES ('" . $activityType[$p] . "', '" . $tpData['id'] . "')");
+            Database::insertUpdateDelete("INSERT INTO `tour_package_has_activity_type` (`tour_package_id`, `activity_type_id`)
+            VALUES ('" . $tpData['id'] . "', '" . $activityType[$p] . "')");
         }
 
         // insert data to the vehicle_has_tour_package table

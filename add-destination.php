@@ -8,6 +8,7 @@
     <title>Add New Place</title>
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -114,7 +115,7 @@
                                 <span>About:</span>
                             </div>
                             <div class="col-6">
-                                <textarea name="about" id="des-details" rows="10" cols="" class="w-100"></textarea>
+                                <textarea name="desDetails" id="desDetails" rows="10" class="w-100"></textarea>
                             </div>
                         </div>
                     </div>
@@ -156,6 +157,11 @@
 
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
+
+    <!-- replace the text area by CKEDITOR -->
+    <script>
+        CKEDITOR.replace('desDetails');
+    </script>
 </body>
 
 </html>

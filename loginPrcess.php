@@ -18,7 +18,7 @@ if (empty($userName) || empty($password)) {
         $user = new stdClass();
         $user->id = $loginData1["id"];
         $_SESSION["user"] = $user;
-        
+
         echo "traveler";
     } else {
         $loginResultSet2 = Database::search("SELECT * FROM `staff_member_new` WHERE `email`='" . $userName . "' AND `password`='" . $password . "'");
@@ -34,6 +34,8 @@ if (empty($userName) || empty($password)) {
                 echo "driver";
             } else if ($role == "guide") {
                 echo "guide";
+            } else if ($role == "owner") {
+                echo "owner";
             } else {
                 echo "No role";
             }

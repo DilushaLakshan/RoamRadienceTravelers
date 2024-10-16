@@ -11,6 +11,7 @@ require 'connection.php';
     <title>Update Tour Package</title>
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -29,7 +30,7 @@ require 'connection.php';
                         <div class="row">
                             <div class="col-12">
                                 <center>
-                                    <h4>Update Tour Package</h4>
+                                    <h4 class="stf-sub-heading">Update Tour Package</h4>
                                 </center>
                             </div>
                             <div class="col-12">
@@ -38,7 +39,7 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Name of the Package</label>
+                                        <label class="descriptions">Name of the Package</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <input type="text" class="w-100" id="name" value="<?php echo $packageData['name']; ?>">
@@ -48,7 +49,7 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Price</label>
+                                        <label class="descriptions">Price</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <input type="text" class="w-100" id="price" value="<?php echo $packageData['price']; ?>">
@@ -58,7 +59,7 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Header Text</label>
+                                        <label class="descriptions">Header Text</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <input type="text" class="w-100" id="h-text" value="<?php echo $packageData['header_text']; ?>">
@@ -68,27 +69,27 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Description</label>
+                                        <label class="descriptions">Description</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
-                                        <textarea name="" id="description" rows="15" class="w-100"><?php echo $packageData["description"]; ?></textarea>
+                                        <textarea name="description" id="description" rows="15" class="w-100"><?php echo $packageData["description"]; ?></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Select the Destinations</label>
+                                        <label class="descriptions">Select the Destinations</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <div class="row">
                                             <div class="col-12">
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <button type="button" class="btn sbt-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                     Click here to select destinations
                                                 </button>
                                             </div>
                                             <div class="col-12">
-                                                <span id="desIDList"></span>
+                                                <span id="desIDList" class="descriptions"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -97,7 +98,7 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Number of Vehicles</label>
+                                        <label class="descriptions">Number of Vehicles</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <input type="number" class="w-100" id="no-of-vehicles" value="<?php echo $packageData['no_of_vehicles']; ?>" disabled>
@@ -107,7 +108,7 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Select the Vehicles</label>
+                                        <label class="descriptions">Select the Vehicles</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <div class="row">
@@ -126,13 +127,13 @@ require 'connection.php';
                                                         if ($vDetailsNumRows == 1) {
                                                             $vDetailsData = $vDetailsResultSet->fetch_assoc();
                                                 ?>
-                                                            <span><?php echo $vDetailsData["number"] . " - " . $vDetailsData["type"]; ?></span>
+                                                            <span class="descriptions"><?php echo $vDetailsData["number"] . " - " . $vDetailsData["type"] . " / "; ?></span>
                                                     <?php
                                                         }
                                                     }
                                                 } else {
                                                     ?>
-                                                    <span><i>No vehicles...</i></span>
+                                                    <span class="descriptions"><i>No vehicles...</i></span>
                                                 <?php
                                                 }
                                                 ?>
@@ -144,7 +145,7 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Select the Hotel</label>
+                                        <label class="descriptions">Selected Hotels</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <div class="col-12">
@@ -162,13 +163,13 @@ require 'connection.php';
                                                     if ($hDetailsNumRows == 1) {
                                                         $hDetailsData = $hDetailsResultSet->fetch_assoc();
                                             ?>
-                                                        <span><?php echo $hDetailsData["name"] . " - " . $hDetailsData["address"]; ?></span>
+                                                        <span class="descriptions"><?php echo $hDetailsData["name"] . " - " . $hDetailsData["address"] . " <br/> <br/>"; ?></span>
                                                 <?php
                                                     }
                                                 }
                                             } else {
                                                 ?>
-                                                <span><i>No hotel data...</i></span>
+                                                <span class="descriptions"><i>No hotel data...</i></span>
                                             <?php
                                             }
                                             ?>
@@ -179,7 +180,7 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Duration</label>
+                                        <label class="descriptions">Duration</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <div class="row">
@@ -209,32 +210,25 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Activities Type</label>
+                                        <label class="descriptions">Activities Type</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <div class="col-12 col-md-8 col-lg-8">
                                             <div class="row">
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <input type="checkbox" name="type" value="cultural"> Cultural
-                                                </div>
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <input type="checkbox" name="type" value="adventure"> Adventure
-                                                </div>
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <input type="checkbox" name="type" value="wildlife & nature"> Wildlife & Nature
-                                                </div>
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <input type="checkbox" name="type" value="hiking"> Hiking
-                                                </div>
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <input type="checkbox" name="type" value="beach & coastal"> Beach & Coastal
-                                                </div>
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <input type="checkbox" name="type" value="photography"> Photography
-                                                </div>
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <input type="checkbox" name="type" value="luxury"> Luxury
-                                                </div>
+                                                <?php
+                                                $activityResultSet = Database::search("SELECT * FROM `activity_type`");
+                                                $activityNumRows = $activityResultSet->num_rows;
+                                                if ($activityNumRows > 0) {
+                                                    for ($e = 0; $e < $activityNumRows; $e++) {
+                                                        $activityData = $activityResultSet->fetch_assoc();
+                                                ?>
+                                                        <div class="col-12 col-md-6 col-lg-6">
+                                                            <input type="checkbox" name="type" value=<?php echo $activityData["id"]; ?>> <?php echo $activityData["name"]; ?>
+                                                        </div>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -243,7 +237,7 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Included services</label>
+                                        <label class="descriptions">Included services</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <div class="col-12 col-md-8 col-lg-8">
@@ -276,8 +270,8 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Highlights</label><br>
-                                        <span><i>(Use ',' to seperate sentences)</i></span>
+                                        <label class="descriptions">Highlights</label><br>
+                                        <span class="descriptions"><i>(Use ',' to seperate sentences)</i></span>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <textarea name="" id="highlight" rows="10" class="w-100">
@@ -298,7 +292,7 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label>Total Milage (KM)</label>
+                                        <label class="descriptions">Total Milage (KM)</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                         <input type="number" class="w-100" id="milage" value="<?php echo $packageData['total_milage']; ?>">
@@ -308,7 +302,7 @@ require 'connection.php';
                             <div class="col-12 mt-2">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <span>Main Image:</span>
+                                        <span class="descriptions">Main Image:</span>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8 mt-2">
                                         <div class="row">
@@ -341,43 +335,13 @@ require 'connection.php';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 mt-2">
-                                <div class="row">
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <span>Other Images:</span>
-                                    </div>
-                                    <div class="col-12 col-md-8 col-lg-8 mt-2">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <input class="form-control w-100" type="file" id="optional-images" accept=".png, .jpg, .jpeg" onclick="optionalImagePreview();" multiple>
-                                            </div>
-                                            <div class="col-12 mt-2">
-                                                <div class="row">
-                                                    <div class="col-6 col-md-3 col-lg-3 mt-2">
-                                                        <center><img alt="" id="img-1" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
-                                                    </div>
-                                                    <div class="col-6 col-md-3 col-lg-3 mt-2">
-                                                        <center><img alt="" id="img-2" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
-                                                    </div>
-                                                    <div class="col-6 col-md-3 col-lg-3 mt-2">
-                                                        <center><img alt="" id="img-3" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
-                                                    </div>
-                                                    <div class="col-6 col-md-3 col-lg-3 mt-2">
-                                                        <center><img alt="" id="img-4" style="height: 150px; object-fit: cover;" class="img-fluid rounded-2 w-100" src="resources/images/default -image.svg"></center>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-12 mt-3 mb-3">
                                 <div class="row">
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                        <button class="btn btn-primary w-100">Clear</button>
+                                        <button class="btn sbt-button">Clear</button>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                        <button class="btn btn-primary w-100" onclick="updateTourPackage(<?php echo $packageID; ?>);">Save Changes</button>
+                                        <button class="btn sbt-button" onclick="updateTourPackage(<?php echo $packageID; ?>);">Save Changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -388,7 +352,7 @@ require 'connection.php';
                                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Select the list of destinations</h1>
+                                                <h1 class="modal-title stf-sub-heading fs-5" id="exampleModalLabel">Select the list of destinations</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -420,7 +384,7 @@ require 'connection.php';
                                                                         ?>
                                                                         <div class="card-body">
                                                                             <input type="checkbox" name="destination" value="<?php echo $destinationData['id']; ?>">
-                                                                            <h6 class="card-title"><?php echo $destinationData["name"]; ?></h6>
+                                                                            <h6 class="card-title descriptions"><?php echo $destinationData["name"]; ?></h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -440,8 +404,8 @@ require 'connection.php';
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" onclick="getDestinationIDs();">Save changes</button>
+                                                <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn sbt-button" onclick="getDestinationIDs();">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -461,6 +425,9 @@ require 'connection.php';
 
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
+    <script>
+        CKEDITOR.replace('description');
+    </script>
 </body>
 
 </html>
