@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'connection.php';
 
 $userName = $_POST["email"];
@@ -12,6 +13,12 @@ if (empty($userName) || empty($password)) {
     $loginNumRows1 = $loginResultSet1->num_rows;
 
     if ($loginNumRows1 == 1) {
+        $loginData1 = $loginResultSet1->fetch_assoc();
+
+        $user = new stdClass();
+        $user->id = $loginData1["id"];
+        $_SESSION["user"] = $user;
+
         echo "traveler";
     } else {
         $loginResultSet2 = Database::search("SELECT * FROM `staff_member_new` WHERE `email`='" . $userName . "' AND `password`='" . $password . "'");
@@ -27,6 +34,8 @@ if (empty($userName) || empty($password)) {
                 echo "driver";
             } else if ($role == "guide") {
                 echo "guide";
+            } else if ($role == "owner") {
+                echo "owner";
             } else {
                 echo "No role";
             }

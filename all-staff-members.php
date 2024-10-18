@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-12">
                         <center>
-                            <h4>Staff Members</h4>
+                            <h4 class="stf-sub-heading">Staff Members</h4>
                         </center>
                     </div>
                     <div class="col-12">
@@ -31,12 +31,12 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <center>
-                                            Name
+                                            <span class="stf-sub-heading">Name</span>
                                         </center>
                                     </div>
                                     <div class="col-4">
                                         <center>
-                                            Role
+                                            <span class="stf-sub-heading">Role</span>
                                         </center>
                                     </div>
                                     <div class="col-4"></div>
@@ -57,13 +57,13 @@
                                             <div class="col-12 mt-2">
                                                 <div class="row">
                                                     <div class="col-4">
-                                                        <span><?php echo ($staffData["first_name"] . " " . $staffData["last_name"]); ?></span>
+                                                        <span class="descriptions"><?php echo ($staffData["first_name"] . " " . $staffData["last_name"]); ?></span>
                                                     </div>
                                                     <div class="col-4">
-                                                        <span><?php echo ($staffData["role"]); ?></span>
+                                                        <span lass="descriptions"><?php echo ($staffData["role"]); ?></span>
                                                     </div>
                                                     <div class="col-4">
-                                                        <button class="btn btn-outline-info w-100" onclick="window.location = 'one-member.php?memberID=<?php echo $staffData['id']; ?>'">
+                                                        <button class="btn sbt-button" onclick="window.location = 'one-member.php?memberID=<?php echo $staffData['id']; ?>'">
                                                             View
                                                         </button>
                                                     </div>

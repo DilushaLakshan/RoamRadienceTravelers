@@ -1,4 +1,7 @@
-<?php require 'connection.php'; ?>
+<?php 
+session_start();
+require 'connection.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,13 +16,21 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <?php include 'navbar.php'; ?>
+            <?php
+            if (isset($_SESSION["user"])) {
+                $uID = $_SESSION["user"]->id;
+                include 'navbar-logged-in.php';
+            } else {
+                $uID = 0;
+                include 'navbar.php';
+            }
+            ?>
 
             <!-- destination cards -->
             <div class="col-12">
                 <div class="row">
                     <?php
-                    $destinationResultSet = Database::search("SELECT * FROM `destination` ORDER BY `id` DESC LIMIT 12");
+                    $destinationResultSet = Database::search("SELECT * FROM `destination` ORDER BY `id` DESC");
                     $destinationNumRows = $destinationResultSet->num_rows;
                     if ($destinationNumRows > 0) {
                         for ($x = 0; $x < $destinationNumRows; $x++) {
@@ -35,9 +46,12 @@
                                     ?>
                                         <img src="resources/images/<?php echo $imageData['src']; ?>" class="card-img-top destination-card-img" alt="main category">
                                         <div class="card-body">
-                                            <h5 class="card-title"><?php echo $destinationData["name"]; ?></h5>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            <a href="#" class="btn btn-primary" onclick="window.location='destination-detail.php?desID=<?php echo $destinationData['id']; ?>'">View details</a>
+                                            <center>
+                                                <h5 class="card-title"><?php echo $destinationData["name"]; ?></h5>
+                                            </center>
+                                            <center>
+                                                <a href="#" class="btn card-button" onclick="window.location='destination-detail.php?desID=<?php echo $destinationData['id']; ?>'">View details</a>
+                                            </center>
                                         </div>
                                     <?php
                                     } else {
