@@ -193,6 +193,26 @@ function updateStaffMember(mID) {
     request.send(form);
 }
 
+// block staff user
+function blockUnblockUser(mID, statusID) {
+    var mID = mID;
+    var statusID = statusID;
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                alert("Status updated");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("GET", "updateStaffStatus.php?mID=" + mID + "&sID=" + statusID, true);
+    request.send();
+}
+
 // set image to the preview box - add destination
 function imagePreview() {
     var imagePath = document.getElementById("formFile");
@@ -251,6 +271,10 @@ function sendDestinationDetails() {
             var text = request.responseText;
             if (text == "Success") {
                 alert("Insertion Success");
+                desName.value = "";
+                desDetails = "";
+                catValues = [];
+                listValues = [];
             } else {
                 alert(text);
             }
@@ -264,13 +288,13 @@ function sendDestinationDetails() {
 function updateDestination(desID) {
     var desID = desID;
     var name = document.getElementById("name");
-    var description = document.getElementById("description");
+    var description = CKEDITOR.instances.description.getData();
     var mainImage = document.getElementById("main-image");
 
     var dataObject = new Object();
     dataObject.desID = desID;
     dataObject.name = name.value;
-    dataObject.description = description.value;
+    dataObject.description = description;
 
     var jsonText = JSON.stringify(dataObject);
 
@@ -343,7 +367,7 @@ function addHotel() {
     var numberOfRooms = document.getElementById("h-rooms");
     var roomNumbers = document.getElementById("room-numbers");
     var typeList = document.getElementsByName("type");
-    var type;
+    var type = "a/c";
     var pricePerRoom = document.getElementById("h-price");
 
     for (var x = 0; x < typeList.length; x++) {
@@ -379,6 +403,47 @@ function addHotel() {
         }
     }
     request.open("POST", "addHotelProcess.php", true);
+    request.send(form);
+}
+
+// update hotel details
+function updateHotel(id) {
+    var hID = id;
+    var name = document.getElementById("h-name-" + hID);
+    var address = document.getElementById("h-address-" + hID);
+    var email = document.getElementById("h-email-" + hID);
+    var contact = document.getElementById("h-contact-" + hID);
+    var numberOfRooms = document.getElementById("h-rooms-" + hID);
+    var roomNumbers = document.getElementById("h-room-number-" + hID);
+    var pricePerRoom = document.getElementById("h-room-price-" + hID);
+
+    var dataObject = new Object();
+    dataObject.hID = hID;
+    dataObject.name = name.value;
+    dataObject.address = address.value;
+    dataObject.email = email.value;
+    dataObject.contact = contact.value;
+    dataObject.numberOfRooms = numberOfRooms.value;
+    // dataObject.roomNumbers = roomNumbers.value;
+    dataObject.pricePerRoom = pricePerRoom.value;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                alert("Successfully updated");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("POST", "updateHotelProcess.php", true);
     request.send(form);
 }
 
@@ -427,10 +492,10 @@ function addVehicle() {
 // update vehicle details
 function updateVehicle(vID) {
     var vID = vID;
-    var vNum = document.getElementById("v-num");
-    var noOfSeats = document.getElementById("v-seats");
-    var pricePerKm = document.getElementById("v-price-km");
-    var pricePerDay = document.getElementById("v-price-day");
+    var vNum = document.getElementById("v-num-" + vID);
+    var noOfSeats = document.getElementById("v-seats-" + vID);
+    var pricePerKm = document.getElementById("v-price-km-" + vID);
+    var pricePerDay = document.getElementById("v-price-day-" + vID);
 
     var dataObject = new Object();
     dataObject.vID = vID;
@@ -779,8 +844,9 @@ function sendBookingData(packageID) {
 }
 
 // update booking status
-function updateStatus(travelerID, statusID) {
+function updateStatus(travelerID, bookingID, statusID) {
     var travelerID = travelerID;
+    var bookingID = bookingID;
     var statusID = statusID;
 
     var availability = document.getElementById("availability").innerText;
@@ -796,7 +862,7 @@ function updateStatus(travelerID, statusID) {
                 }
             }
         }
-        request.open("GET", "updateBookingStatusProcess.php?tID=" + travelerID + "&statusID=" + statusID, true);
+        request.open("GET", "updateBookingStatusProcess.php?tID=" + travelerID + "&statusID=" + statusID + "&bID=" + bookingID, true);
         request.send();
     } else {
         alert("This package is not available for this date");

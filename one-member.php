@@ -93,9 +93,12 @@
                         <div class="col-12 mt-4">
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-6">
-                                    <button class="btn sbt-button">Block User</button>
+                                    <button class="btn sbt-button" onclick="blockUnblockUser(<?php echo $memberID; ?>, 2);">Block User</button>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-6">
+                                    <button class="btn sbt-button" onclick="blockUnblockUser(<?php echo $memberID; ?>, 1);">Unblock User</button>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6 mt-2">
                                     <button class="btn sbt-button" onclick="updateStaffMember(<?php echo $memberID; ?>);">Update User</button>
                                 </div>
                             </div>

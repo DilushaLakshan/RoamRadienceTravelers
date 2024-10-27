@@ -10,6 +10,7 @@ require 'connection.php';
     <title>Update Destnation</title>
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -50,7 +51,7 @@ require 'connection.php';
                                         <label class="descriptions">Description</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
-                                        <textarea name="" id="description" rows="15" class="w-100"><?php echo $desData["description"]; ?></textarea>
+                                        <textarea name="description" id="description" rows="10" class="w-100"><?php echo $desData["description"]; ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -112,6 +113,11 @@ require 'connection.php';
 
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
+
+    <!-- replace the text area by CKEDITOR -->
+    <script>
+        CKEDITOR.replace('description');
+    </script>
 </body>
 
 </html>

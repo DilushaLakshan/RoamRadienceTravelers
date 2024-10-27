@@ -120,7 +120,7 @@
                                                                                     <span>Vehicle Number</span>
                                                                                 </div>
                                                                                 <div class="col-6">
-                                                                                    <input type="text" id="v-num" class="w-100" value="<?php echo $vehicleData['number']; ?>">
+                                                                                    <input type="text" id="v-num-<?php echo $vehicleData['id']; ?>" class="w-100" value="<?php echo $vehicleData['number']; ?>">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -130,7 +130,7 @@
                                                                                     <span>No. of Seats</span>
                                                                                 </div>
                                                                                 <div class="col-6">
-                                                                                    <input type="number" id="v-seats" class="w-100" value="<?php echo $vehicleData['no_of_seat']; ?>">
+                                                                                    <input type="number" id="v-seats-<?php echo $vehicleData['id']; ?>" class="w-100" value="<?php echo $vehicleData['no_of_seat']; ?>">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -140,7 +140,7 @@
                                                                                     <span>Price per KM</span>
                                                                                 </div>
                                                                                 <div class="col-6">
-                                                                                    <input type="text" id="v-price-km" class="w-100" value="<?php echo $vehicleData['price_per_km']; ?>">
+                                                                                    <input type="text" id="v-price-km-<?php echo $vehicleData['id']; ?>" class="w-100" value="<?php echo $vehicleData['price_per_km']; ?>">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -150,7 +150,7 @@
                                                                                     <span>Price per day</span>
                                                                                 </div>
                                                                                 <div class="col-6">
-                                                                                    <input type="text" id="v-price-day" class="w-100" value="<?php echo $vehicleData['price_per_day']; ?>">
+                                                                                    <input type="text" id="v-price-day-<?php echo $vehicleData['id']; ?>" class="w-100" value="<?php echo $vehicleData['price_per_day']; ?>">
                                                                                 </div>
                                                                             </div>
                                                                         </div>

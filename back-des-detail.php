@@ -73,9 +73,7 @@ require 'connection.php';
 
                 <!-- description -->
                 <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 mt-3">
-                    <center>
-                        <p class="descriptions"><?php echo $destinationData["description"]; ?></p>
-                    </center>
+                    <p class="descriptions"><?php echo $destinationData["description"]; ?></p>
                     <h6 class="sub-heading">Best Time to Visit - </h6>
                     <p class="descriptions">May to August</p>
                     <hr>

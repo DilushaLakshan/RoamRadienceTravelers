@@ -16,10 +16,10 @@ if (isset($_POST["filterData"])) {
     }
 
     if (!empty($priceOrder) || !empty($durIDString)) {
-        $query = "SELECT * FROM `tour_package`";
+        $query = "SELECT * FROM `tour_package` WHERE `validity`='true'";
 
         if (!empty($durIDString)) {
-            $query .= " WHERE `duration_id` IN ($durIDString)";
+            $query .= " AND `duration_id` IN ($durIDString)";
         }
 
         if ($priceOrder == 'ASC' || $priceOrder == 'DESC') {

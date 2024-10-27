@@ -136,16 +136,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-4">
+                    <div class="col-12 mt-4 mb-4">
                         <div class="row">
                             <div class="col-6">
                                 <center>
-                                    <button class="w-50">Clear</button>
+                                    <button class="sbt-button">Clear</button>
                                 </center>
                             </div>
                             <div class="col-6">
                                 <center>
-                                    <button class="w-50" onclick="sendDestinationDetails();">Add</button>
+                                    <button class="sbt-button" onclick="sendDestinationDetails();">Add</button>
                                 </center>
                             </div>
                         </div>

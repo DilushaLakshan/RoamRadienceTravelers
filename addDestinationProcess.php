@@ -61,6 +61,7 @@ if (empty($name)) {
 } else if (strlen($description) > 5000) {
     echo "Description is too long";
 } else {
+
     // insert data to the destination table
     Database::insertUpdateDelete("INSERT INTO `destination` (`name`, `description`) VALUES ('" . $name . "', '" . $description . "')");
 

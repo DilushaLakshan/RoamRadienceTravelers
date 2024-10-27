@@ -73,7 +73,7 @@
                                                             <span class="descriptions"><?php echo $travelerData["first_name"] . " " . $travelerData["last_name"]; ?></span>
                                                         </div>
                                                         <div class="col-3">
-                                                            <span lass="descriptions"><?php echo $bookingData["date"]; ?></span>
+                                                            <span class="descriptions"><?php echo $bookingData["date"]; ?></span>
                                                         </div>
                                                         <div class="col-3">
                                                             <span class="descriptions">
@@ -163,13 +163,13 @@
                                                                     <div class="col-12 mt-4">
                                                                         <div class="row">
                                                                             <div class="col-12 col-md-3 col-lg-3 offset-md-3 offset-lg-3 mt-2">
-                                                                                <button class="btn sbt-button" onclick="updateStatus(<?php echo (int)$bookingData['traveler_id']; ?>, 2);">Confirm</button>
+                                                                                <button class="btn sbt-button" onclick="updateStatus(<?php echo (int)$bookingData['traveler_id']; ?>, <?php echo $bookingData['id']; ?>, 2);">Confirm</button>
                                                                             </div>
                                                                             <div class="col-12 col-md-3 col-lg-3 mt-2">
-                                                                                <button class="btn sbt-button" onclick="updateStatus(<?php echo (int)$bookingData['traveler_id']; ?>, 4);">Proceed to Payment</button>
+                                                                                <button class="btn sbt-button" onclick="updateStatus(<?php echo (int)$bookingData['traveler_id']; ?>, <?php echo $bookingData['id']; ?>, 4);">Proceed to Payment</button>
                                                                             </div>
                                                                             <div class="col-12 col-md-3 col-lg-3 mt-2">
-                                                                                <button class="btn sbt-button" onclick="updateStatus(<?php echo (int)$bookingData['traveler_id']; ?>, 3);">Reject</button>
+                                                                                <button class="btn sbt-button" onclick="updateStatus(<?php echo (int)$bookingData['traveler_id']; ?>, <?php echo $bookingData['id']; ?>, 3);">Reject</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>

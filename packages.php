@@ -165,7 +165,7 @@ require 'connection.php';
                             <div class="col-12 p-2">
                                 <div class="row">
                                     <?php
-                                    $tourPackageResultSet = Database::search("SELECT * FROM `tour_package`");
+                                    $tourPackageResultSet = Database::search("SELECT * FROM `tour_package` WHERE `validity`='true'");
                                     $tourPackageNumRows = $tourPackageResultSet->num_rows;
                                     if ($tourPackageNumRows > 0) {
                                         for ($x = 0; $x < $tourPackageNumRows; $x++) {

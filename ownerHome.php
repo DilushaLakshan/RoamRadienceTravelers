@@ -44,7 +44,7 @@ require 'connection.php';
                                 <button class="btn sbt-button" onclick="window.location.href='add-hotel.php'">Add New Hotel</button>
                             </div>
                             <div class="col-12 mt-2">
-                                <button class="btn sbt-button" onclick="window.location.href=''">Manage Hotels</button>
+                                <button class="btn sbt-button" onclick="window.location.href='manageHotels.php'">Manage Hotels</button>
                             </div>
                             <div class="col-12 mt-2">
                                 <button class="btn sbt-button" onclick="window.location.href='add-tourpackage.php'">Add New Tour Package</button>
