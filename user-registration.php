@@ -104,7 +104,7 @@
                                         <button class="btn registration-button">Clear</button>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                        <button class="btn registration-button" onclick="registerUser()">Sign Up</button>
+                                        <button class="btn registration-button" onclick="registerUser();">Sign Up</button>
                                     </div>
                                 </div>
                             </div>
@@ -116,6 +116,7 @@
     </div>
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">RoamRadience</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item navbar-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item navbar-item">
                         <a class="nav-link" href="destinations.php">Destinations</a>
@@ -28,13 +28,10 @@
                         <a class="nav-link" href="packages.php">Packages</a>
                     </li>
                     <li class="nav-item navbar-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Promotions</a>
                     </li>
                     <li class="nav-item navbar-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item navbar-item">
-                        <a class="nav-link" href="planTour.php">Plan a Tour</a>
+                        <a class="nav-link" href="planTour.php">Plan</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

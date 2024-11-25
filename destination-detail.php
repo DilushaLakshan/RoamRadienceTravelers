@@ -14,7 +14,7 @@ require 'connection.php';
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid main-container">
         <div class="row">
             <?php
             if (isset($_SESSION["user"])) {
@@ -40,17 +40,9 @@ require 'connection.php';
                         ?>
                             <div class="carousel-inner main-image">
                                 <div class="carousel-item active">
-                                    <img src="resources/images/<?php echo $imageData['src']; ?>" class="d-block w-100" alt="...">
+                                    <img src="resources/images/<?php echo $imageData['src']; ?>" alt="...">
                                 </div>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
                         <?php
                         } else {
                         ?>
@@ -85,8 +77,6 @@ require 'connection.php';
                 <!-- description -->
                 <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 mt-3">
                     <p class="descriptions"><?php echo $destinationData["description"]; ?></p>
-                    <h6 class="sub-heading">Best Time to Visit - </h6>
-                    <p class="descriptions">May to August</p>
                     <hr>
                 </div>
                 <!-- description -->
@@ -101,14 +91,12 @@ require 'connection.php';
                     <textarea class="card comment-area" name="comment" id="comment" rows="5"></textarea>
                     <button class="comment-area-button" onclick="addDesComment(<?php echo $desID; ?>);">Save changes</button>
                 </div>
-                <center>
-                    <button
-                        class="comment-button mt-3"
-                        data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
-                        onclick="addDestinationComment(<?php echo $uID; ?>);">
-                        Add a New Comment
-                    </button>
-                </center>
+                <button
+                    class="comment-button mt-3"
+                    data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
+                    onclick="addDestinationComment(<?php echo $uID; ?>);">
+                    Add a New Comment
+                </button>
             </div>
             <!-- comments -->
         </div>
@@ -116,6 +104,7 @@ require 'connection.php';
 
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>

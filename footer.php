@@ -12,23 +12,12 @@
     <footer class="footer mt-5">
         <div class="container">
             <div class="row text-center text-md-start">
-                <!-- Company Info -->
                 <div class="col-md-3">
                     <h5 class="footer-logo">RoamRadiance</h5>
                 </div>
 
-                <!-- Quick Links -->
-                <div class="col-md-3">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Destinations</a></li>
-                        <li><a href="#">Bookings</a></li>
-                        <li><a href="#">Special Offers</a></li>
-                    </ul>
-                </div>
+                <div class="col-md-3"></div>
 
-                <!-- Contact Info -->
                 <div class="col-md-3">
                     <h5>Contact Us</h5>
                     <p>Email: info@roamradiance.com</p>
@@ -36,7 +25,6 @@
                     <p>Address: Colombo, Sri Lanka</p>
                 </div>
 
-                <!-- Social Media -->
                 <div class="col-md-3">
                     <h5>Follow Us</h5>
                     <div class="social-icons">

@@ -200,9 +200,9 @@ require 'connection.php';
                                                     </div>
                                                     <div class="col-12 col-md-4 col-lg-4">
                                                         <center>
-                                                            <a class="btn profile-buttons" data-bs-toggle="collapse" href="#area-<?php echo $x; ?>" role="button" aria-expanded="false" aria-controls="<?php echo $x; ?>">
+                                                            <button class="btn profile-buttons" data-bs-toggle="collapse" data-bs-target="#area-<?php echo $x; ?>" aria-expanded="false" aria-controls="area-<?php echo $x; ?>">
                                                                 View Details
-                                                            </a>
+                                                            </button>
                                                         </center>
                                                     </div>
                                                     <!-- collapse content -->
@@ -319,11 +319,15 @@ require 'connection.php';
                     <!-- booking histrory -->
                 </div>
             </div>
+            <?php
+            include 'footer.php';
+            ?>
         </div>
     </div>
 
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>

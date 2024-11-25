@@ -9,7 +9,7 @@ if (isset($_POST["jsonText"])) {
     $dataObject = json_decode($jsonText);
     $name = $dataObject->name;
     $tourDate = $dataObject->tourDate;
-    $desIDList = explode(",", $dataObject->desIDList);
+    $desIDArray = $dataObject->desIDArray;
 
     if (empty($name)) {
         echo "Enter a name for your tour/ plan";
@@ -17,7 +17,7 @@ if (isset($_POST["jsonText"])) {
         echo "Name is too long";
     } else if (empty($tourDate)) {
         echo "Enter the date of your tour";
-    } else if (empty($desIDList)) {
+    } else if (empty($desIDArray)) {
         echo "Select destinations that you planning to visit";
     } else {
         // insert data to the self_tour_plan ralation
@@ -31,8 +31,8 @@ if (isset($_POST["jsonText"])) {
             $planData = $planResultSet->fetch_assoc();
 
             // insert data to self_tour_plan_has_destination relation
-            for($x = 0; $x < sizeof($desIDList); $x++){
-                Database::insertUpdateDelete("INSERT INTO `self_tour_plan_has_destination` (`self_tour_plan_id`, `destination_id`) VALUES ('".$planData['id']."', '".$desIDList[$x]."')");
+            for($x = 0; $x < sizeof($desIDArray); $x++){
+                Database::insertUpdateDelete("INSERT INTO `self_tour_plan_has_destination` (`self_tour_plan_id`, `destination_id`) VALUES ('".$planData['id']."', '".$desIDArray[$x]."')");
             }
 
             // code need to insert data to self_tour_plan_has_packing_list relation

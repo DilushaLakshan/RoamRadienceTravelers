@@ -1,3 +1,9 @@
+// popup message
+function togglePopup() {
+    document.getElementById("popup-1").classList.toggle("active");
+
+}
+
 // send login details
 function sendLoginDetails() {
     var email = document.getElementById("email");
@@ -16,13 +22,13 @@ function sendLoginDetails() {
             } else if (text == "admin") {
                 window.location = "admin-home.php";
             } else if (text == "driver") {
-                window.location = "drive-home.php";
+                window.location = "driver-home.php";
             } else if (text == "guide") {
                 window.location = "guide-home.php";
             } else if (text == "owner") {
                 window.location = "ownerHome.php";
             } else {
-                alert(text);
+                swal("", text, "error");
                 userName.value = "";
                 password.value = "";
             }
@@ -58,11 +64,9 @@ function registerUser() {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Success");
-                clearUserRegistration();
+                swal("", "Successfully Registered", "success");
             } else {
-                alert(text);
-                clearUserRegistration()
+                swal("", text, "error");
             }
         }
     }
@@ -114,9 +118,9 @@ function updateTraveler() {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "Success") {
-                alert("Successfully Updated");
+                swal("Successfully Updated", "", "success");
             } else {
-                alert(text);
+                swal(text, "", "error");
             }
         }
     }
@@ -147,7 +151,11 @@ function registerStaff() {
     request.onreadystatechange = () => {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
-            alert(text);
+            if (text == "success") {
+                swal("Registres success", "", "success");
+            } else {
+                swal(text, "", "error");
+            }
         }
     }
     request.open("POST", "staff-registration-process.php", true);
@@ -183,9 +191,9 @@ function updateStaffMember(mID) {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Successfully updated");
+                swal("Successfully updated", "", "success");
             } else {
-                alert(text);
+                swal(text, "", "error");
             }
         }
     }
@@ -203,9 +211,9 @@ function blockUnblockUser(mID, statusID) {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Status updated");
+                swal("Status updated", "", "success");
             } else {
-                alert(text);
+                swal(text, "", "error");
             }
         }
     }
@@ -922,12 +930,13 @@ function proceedToPayment(travelerID) {
 function sendTourPlanningDetails() {
     var name = document.getElementById("name");
     var tourDate = document.getElementById("t-date");
-    var desIDList = document.getElementById("desIDList").innerText;
+    var desIDList = document.getElementById("desIDList");
+    var desIDArray = desIDList.textContent.split(",").map(Number);
 
     var dataObject = new Object();
     dataObject.name = name.value;
     dataObject.tourDate = tourDate.value;
-    dataObject.desIDList = desIDList;
+    dataObject.desIDArray = desIDArray;
 
     var jsonText = JSON.stringify(dataObject);
 
@@ -946,6 +955,30 @@ function sendTourPlanningDetails() {
         }
     }
     request.open("POST", "tourPlanProcess.php", true);
+    request.send(form);
+}
+
+// arrange the packing list according to the destination list
+function setPackingList() {
+    var desIDList = document.getElementById("desIDList");
+    var desIDArray = desIDList.textContent.split(",").map(Number);
+
+    var dataObject = new Object();
+    dataObject.desIDArray = desIDArray;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            document.getElementById("p-list-item").innerHTML = text;
+        }
+    }
+    request.open("POST", "setPackingList.php", true);
     request.send(form);
 }
 
@@ -980,6 +1013,195 @@ function addDesComment(desID) {
         }
     }
     request.open("POST", "desCommentProcess.php", true);
+    request.send(form);
+}
+
+// add comment for the tour package
+function addPackageComment(packageID) {
+    var rate = document.getElementById("rating-status").innerText;
+    var description = document.getElementById("add-comment");
+    var packageID = packageID;
+
+    var form = new FormData();
+    form.append("rate", rate);
+    form.append("description", description.value);
+    form.append("packageID", packageID);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                swal("Comment added", "", "success");
+            } else if (text == "login") {
+                window.location = "login.php";
+            } else {
+                swal(text, "", "warning");
+            }
+        }
+    }
+    request.open("POST", "addPackageComment.php", true);
+    request.send(form);
+}
+
+// manage drivers with vehicles
+function manageDriverVehicle(mID) {
+    var memberID = mID;
+    var vehicleID = document.getElementById("vehicle");
+
+    var form = new FormData();
+    form.append("memberID", memberID);
+    form.append("vehicleID", vehicleID.value);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                alert("Vehicle assigned");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("POST", "driverWithVehicleProcess.php", true);
+    request.send(form);
+}
+
+// manage guides and tour packages
+function manageGuideWithPackage(memberID, selectionAreaID) {
+    var memberID = memberID;
+    var selectionAreaID = selectionAreaID;
+    var packageID = document.getElementById("package-" + selectionAreaID);
+
+    var dataObject = new Object();
+    dataObject.memberID = memberID;
+    dataObject.packageID = packageID.value;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                alert("Package assigned");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("POST", "guideWithPackProcess.php", true);
+    request.send(form);
+}
+
+// send prmotion details 
+function newPromotion() {
+    var name = document.getElementById("name");
+    var discription = CKEDITOR.instances.description.getData();
+    var discount = document.getElementById("discount");
+    var startDate = document.getElementById("s-date");
+    var endDate = document.getElementById("end-date");
+    // consider about this
+    var status = document.getElementsByName("status");
+
+
+    var dataObject = new Object();
+    dataObject.name = name.value;
+    dataObject.discription = discription;
+    dataObject.discount = discount.value;
+    dataObject.startDate = startDate.value;
+    dataObject.endDate = endDate.value;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                alert("Promotion added");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("POST", "addPromotionProcess.php", true);
+    request.send(form);
+}
+
+// update promotion details
+function upadtePromotion(proID) {
+    var proID = proID;
+    var name = document.getElementById("name");
+    var discription = CKEDITOR.instances.description.getData();
+    var discount = document.getElementById("discount");
+    var startDate = document.getElementById("s-date");
+    var endDate = document.getElementById("end-date");
+    // consider about this
+    var status = document.getElementsByName("status");
+
+
+    var dataObject = new Object();
+    dataObject.proID = proID;
+    dataObject.name = name.value;
+    dataObject.discription = discription;
+    dataObject.discount = discount.value;
+    dataObject.startDate = startDate.value;
+    dataObject.endDate = endDate.value;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                alert("Promotion updated");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("POST", "updatePromotionProcess.php", true);
+    request.send(form);
+}
+
+// update promotion validity/ status
+function upadtePromotionStatus(proID, status) {
+    var proID = proID;
+    var status = status;
+
+    var dataObject = new Object();
+    dataObject.proID = proID;
+    dataObject.status = status;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                alert("Status updated");
+            } else {
+                alert(text);
+            }
+        }
+    }
+    request.open("POST", "updatePromoStatus.php", true);
     request.send(form);
 }
 

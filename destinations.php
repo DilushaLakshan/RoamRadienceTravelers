@@ -14,7 +14,7 @@ require 'connection.php';
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid main-container">
         <div class="row">
             <?php
             if (isset($_SESSION["user"])) {

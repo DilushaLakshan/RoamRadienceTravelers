@@ -26,6 +26,11 @@ if (empty($userName) || empty($password)) {
 
         if ($loginNumRows2 == 1) {
             $loginData2 = $loginResultSet2->fetch_assoc();
+
+            $user = new stdClass();
+            $user->id = $loginData2["id"];
+            $_SESSION["user"] = $user;
+
             $role = $loginData2["role"];
 
             if ($role == "admin") {

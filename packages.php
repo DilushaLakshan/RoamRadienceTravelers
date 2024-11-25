@@ -14,7 +14,7 @@ require 'connection.php';
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid main-container">
         <div class="row">
             <?php
             if (isset($_SESSION["user"])) {
@@ -199,7 +199,20 @@ require 'connection.php';
                                                                                 <h5 class="card-title"><?php echo $tourPackageData["name"]; ?></h5>
                                                                             </div>
                                                                             <div class="col-12 col-md-4 col-lg-2">
-                                                                                <span>4.8 <i class="fa-solid fa-star"></i></span>
+                                                                                <?php
+                                                                                $feedbackResultSet = Database::search("SELECT AVG(`rate_status`) AS `rating` FROM `package_comment` WHERE `tour_package_id` = {$tourPackageData['id']} AND `rate_status` IS NOT NULL");
+                                                                                $feedbackNumRows = $feedbackResultSet->num_rows;
+                                                                                if ($feedbackNumRows == 1) {
+                                                                                    $feedbackData = $feedbackResultSet->fetch_assoc();
+                                                                                    $rating = round($feedbackData['rating'], 1);
+                                                                                } else {
+                                                                                    $rating = 0;
+                                                                                }
+                                                                                ?>
+                                                                                <span class="p-description">
+                                                                                    <b><?php echo $rating; ?></b>
+                                                                                    <i class="fa-solid fa-star star-filled"></i>
+                                                                                </span>
                                                                             </div>
                                                                         </div> <?php
                                                                                 // get the destination id list of the perticular tour package
@@ -273,7 +286,7 @@ require 'connection.php';
                                                                                 <button class="btn package-button" onclick="window.location = 'packageDetails.php?pID=<?php echo $tourPackageData['id']; ?>'">View Tour</button>
                                                                             </div>
                                                                             <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                                                                <button class="btn package-button">Check Availability</button>
+                                                                                <button class="btn package-button" onclick="window.location = 'packageDetails.php?pID=<?php echo $tourPackageData['id']; ?>'">Book Now</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -303,6 +316,7 @@ require 'connection.php';
                 </div>
             </div>
             <!-- package cards -->
+            <?php include 'footer.php'; ?>
         </div>
     </div>
 

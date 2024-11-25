@@ -21,11 +21,8 @@ require 'connection.php';
             if (isset($_SESSION["user"])) {
                 $uID = $_SESSION["user"]->id;
 
-                include 'navbar-logged-in.php';
-            } else {
-                include 'navbar.php';
+                include 'back-header.php';
             }
-
             if (isset($_GET["pID"])) {
                 $packageID = $_GET["pID"];
             ?>
@@ -172,11 +169,50 @@ require 'connection.php';
                                                                 <div class="card card-body">
                                                                     <input type="date" id="checking-date" onchange="checkPackageAvailability(<?php echo $packageID; ?>);">
                                                                     <span class="p-description mt-3"><b>Availability : <span id="available-status"></span></b></span>
-                                                                    <button
-                                                                        class="btn mt-3"
-                                                                        data-bs-toggle="collapse" data-bs-target="#booking-data" aria-expanded="false" aria-controls="booking-data">
-                                                                        Proceed
-                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 progree-container mt-3">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="me-2">5</span>
+                                                                        <div class="progress rating-progress flex-grow-1">
+                                                                            <div class="progress-bar w-75" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="me-2">4</span>
+                                                                        <div class="progress rating-progress flex-grow-1">
+                                                                            <div class="progress-bar w-100" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="me-2">3</span>
+                                                                        <div class="progress rating-progress flex-grow-1">
+                                                                            <div class="progress-bar w-25" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="me-2">2</span>
+                                                                        <div class="progress rating-progress flex-grow-1">
+                                                                            <div class="progress-bar w-50" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="me-2">1</span>
+                                                                        <div class="progress rating-progress flex-grow-1">
+                                                                            <div class="progress-bar w-25" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -235,65 +271,38 @@ require 'connection.php';
                                                     <div class="card card-body mt-2">
                                                         <div class="row">
                                                             <div class="col-12">
-                                                                <?php
-                                                                $commentResultSet = Database::search("SELECT * FROM `package_comment` WHERE `tour_package_id`='" . $packageID . "' ORDER BY `id` DESC LIMIT 4");
-                                                                $commentNumRows = $commentResultSet->num_rows;
-                                                                if ($commentNumRows > 0) {
-                                                                    for ($p = 0; $p < $commentNumRows; $p++) {
-                                                                        $commentData = $commentResultSet->fetch_assoc();
-                                                                ?>
-                                                                        <span class="p-description"><?php echo $commentData["description"]; ?></span>
-                                                                        <br>
-                                                                        <?php
-                                                                        $tResultSet = Database::search("SELECT * FROM `traveler` WHERE `id`='" . $commentData['traveler_id'] . "'");
-                                                                        $tNumRows = $tResultSet->num_rows;
-                                                                        if ($tNumRows == 1) {
-                                                                            $tData = $tResultSet->fetch_assoc();
-                                                                        ?>
-                                                                            <span class="sub-heading"><i><b><?php echo $tData["first_name"] . " " . $tData["last_name"]; ?></b></i></span><br><br>
-                                                                        <?php
-                                                                        } else {
-                                                                        ?>
-                                                                            <span>No name</span>
+                                                                <div class="overflow-auto scrollable-area" style="max-height: 80vh;">
+                                                                    <?php
+                                                                    $commentResultSet = Database::search("SELECT * FROM `package_comment` WHERE `tour_package_id`='" . $packageID . "' ORDER BY `id` DESC");
+                                                                    $commentNumRows = $commentResultSet->num_rows;
+                                                                    if ($commentNumRows > 0) {
+                                                                        for ($p = 0; $p < $commentNumRows; $p++) {
+                                                                            $commentData = $commentResultSet->fetch_assoc();
+                                                                    ?>
+                                                                            <span class="p-description"><?php echo $commentData["description"]; ?></span>
+                                                                            <br>
+                                                                            <?php
+                                                                            $tResultSet = Database::search("SELECT * FROM `traveler` WHERE `id`='" . $commentData['traveler_id'] . "'");
+                                                                            $tNumRows = $tResultSet->num_rows;
+                                                                            if ($tNumRows == 1) {
+                                                                                $tData = $tResultSet->fetch_assoc();
+                                                                            ?>
+                                                                                <span class="sub-heading"><i><b><?php echo $tData["first_name"] . " " . $tData["last_name"]; ?></b></i></span><br><br>
+                                                                            <?php
+                                                                            } else {
+                                                                            ?>
+                                                                                <span>No name</span>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
                                                                         <?php
                                                                         }
+                                                                    } else {
                                                                         ?>
+                                                                        <span class="p-description"><i>No comments available...</i></span>
                                                                     <?php
                                                                     }
-                                                                } else {
                                                                     ?>
-                                                                    <span class="p-description"><i>No comments available...</i></span>
-                                                                <?php
-                                                                }
-                                                                ?>
-                                                            </div>
-                                                            <div class="col-12 col-md-4 col-lg-4 mt-2">
-                                                                <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#new-comment" aria-expanded="false" aria-controls="new-comment">
-                                                                    <i>Add New Comment</i>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-12 mt-2">
-                                                                <div class="collapse" id="new-comment">
-                                                                    <div class="card card-body">
-                                                                        <div class="row">
-                                                                            <div class="col-12">
-                                                                                <i class="fa fa-star star-filled" data-index="0"></i>
-                                                                                <i class="fa fa-star star-filled" data-index="1"></i>
-                                                                                <i class="fa fa-star star-filled" data-index="2"></i>
-                                                                                <i class="fa fa-star star-filled" data-index="3"></i>
-                                                                                <i class="fa fa-star star-filled" data-index="4"></i>
-                                                                            </div>
-                                                                            <div class="col-12">
-                                                                                <div id="rating-status"></div>
-                                                                            </div>
-                                                                            <div class="col-12 mt-2">
-                                                                                <input type="text" class="w-100" id="add-comment">
-                                                                            </div>
-                                                                            <div class="col-12 col-md-4 col-lg-4 mt-2">
-                                                                                <button class="btn w-100" onclick="addPackageComment(<?php echo $packageID ?>);"><i>Save Changes</i></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>

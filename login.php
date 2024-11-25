@@ -57,12 +57,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12 col-md-5 col-lg-5 offset-md-1 offset-lg-1 d-flex align-items-center d-none d-md-block">
+                    <div class="welcome-text">
+                        <center>
+                            <h1>WELCOME to RoamRadience Travelers</h1>
+                        </center>
+                        <p>Break free from the ordinary and embrace the joy of seamless travel planning. With RoamRadience Travelers, the world is yours to discover—your way, your time.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>
