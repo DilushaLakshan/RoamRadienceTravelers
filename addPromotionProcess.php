@@ -10,7 +10,18 @@ if (isset($_POST["jsonText"])) {
     $discount = $dataObject->discount;
     $startDate = $dataObject->startDate;
     $endDate = $dataObject->endDate;
+    $imageFile = null;
     $status = "no";
+
+    if (isset($_FILES["imagePath"])) {
+        $path = $_FILES["imagePath"];
+        $extention = $path["type"];
+        $allowedImageExtention = array("image/jpg", "image/png", "image/jpeg");
+        if (in_array($extention, $allowedImageExtention)) {
+            $imageFile = $name . uniqid() . ".png";
+            move_uploaded_file($path["tmp_name"], "resources/images/" . $imageFile);
+        }
+    }
 
     date_default_timezone_set('Asia/Colombo');
     $currentDate = date('Y-m-d H:i:s');
@@ -33,9 +44,13 @@ if (isset($_POST["jsonText"])) {
         echo "Select the end date";
     } else if ($endDate < $currentDate || $endDate <= $startDate) {
         echo "Select the correct ending date";
+    } else if (empty($imageFile)) {
+        echo "Select an image";
+    } else if (strlen($imageFile) > 10000) {
+        echo "Selected image source is too long";
     } else {
-        Database::insertUpdateDelete("INSERT INTO `promotion` (`header_text`, `details`, `discount`, `starting_date`, `end_date`, `status`)
-        VALUES ('" . $name . "', '" . $disciption . "', '" . $discount . "', '" . $startDate . "', '" . $endDate . "', '" . $status . "')");
+        Database::insertUpdateDelete("INSERT INTO `promotion` (`header_text`, `details`, `discount`, `starting_date`, `end_date`, `status`, `image_src`)
+        VALUES ('" . $name . "', '" . $disciption . "', '" . $discount . "', '" . $startDate . "', '" . $endDate . "', '" . $status . "', '".$imageFile."')");
 
         echo "success";
     }

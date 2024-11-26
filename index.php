@@ -179,7 +179,17 @@ require 'connection.php';
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-12 col-md-4 col-lg-4">
-                                                    <img src="resources/images/ Jetavanaramaya66c61e61ef655.png" alt="">
+                                                    <?php
+                                                    if (empty($promotionData["image_src"])) {
+                                                    ?>
+                                                        <img src="resources/images/ Jetavanaramaya66c61e61ef655.png" alt="">
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <img src="resources/images/<?php echo $promotionData['image_src']; ?>" alt="">
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                                 <div class="col-12 col-md-8 col-lg-8">
                                                     <div class="row">

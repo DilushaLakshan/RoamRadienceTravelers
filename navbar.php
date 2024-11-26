@@ -28,7 +28,7 @@
                         <a class="nav-link" href="packages.php">Packages</a>
                     </li>
                     <li class="nav-item navbar-item">
-                        <a class="nav-link" href="#">Promotions</a>
+                        <a class="nav-link" href="promotions.php">Promotions</a>
                     </li>
                     <li class="nav-item">
                         <a href="login.php" class="btn text-decoration-none">Login</a>

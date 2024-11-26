@@ -1105,6 +1105,7 @@ function newPromotion() {
     var discount = document.getElementById("discount");
     var startDate = document.getElementById("s-date");
     var endDate = document.getElementById("end-date");
+    var image = document.getElementById("formFile").files[0];
     // consider about this
     var status = document.getElementsByName("status");
 
@@ -1120,15 +1121,16 @@ function newPromotion() {
 
     var form = new FormData();
     form.append("jsonText", jsonText);
+    form.append("imagePath", image)
 
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Promotion added");
+                swal("", "Promotion added", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -1144,6 +1146,7 @@ function upadtePromotion(proID) {
     var discount = document.getElementById("discount");
     var startDate = document.getElementById("s-date");
     var endDate = document.getElementById("end-date");
+    var image = document.getElementById("formFile").files[0];
     // consider about this
     var status = document.getElementsByName("status");
 
@@ -1160,20 +1163,33 @@ function upadtePromotion(proID) {
 
     var form = new FormData();
     form.append("jsonText", jsonText);
+    form.append("imagePath", image)
 
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Promotion updated");
+                swal("", "Promotion updated", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
     request.open("POST", "updatePromotionProcess.php", true);
     request.send(form);
+}
+
+// assign promotions with tour packages
+function getPackageList() {
+    var packageIdList = document.getElementsByName("selection");
+    var selectedPackageList = [];
+
+    for (var x = 0; x < packageIdList.length; x++) {
+        if (packageIdList[x].checked) {
+            selectedPackageList.push(packageIdList[x].value);
+        }
+    }
 }
 
 // update promotion validity/ status
@@ -1195,9 +1211,9 @@ function upadtePromotionStatus(proID, status) {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Status updated");
+                swal("", "Status updated", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
