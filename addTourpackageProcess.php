@@ -1,7 +1,7 @@
 <?php
 require 'connection.php';
 
-if(!isset($_POST["tourPackageData"])){
+if (!isset($_POST["tourPackageData"])) {
     echo "Tour package data is missing";
     exit;
 }
@@ -11,6 +11,7 @@ $dataObject = json_decode($jsonText);
 
 $name = $dataObject->name;
 $price = $dataObject->price;
+$headerText = $dataObject->hText;
 $description = $dataObject->description;
 $destinationList = explode(",", $dataObject->destinationList);
 $noOfVehicles = $dataObject->nuOfVehicles;
@@ -19,8 +20,11 @@ $hotelList = explode(",", $dataObject->hotelList);
 $duration = $dataObject->duration;
 $milage = $dataObject->milage;
 $activityType = $dataObject->activityType;
+$serviceTypes = $dataObject->serviceTypes;
+$highlights = explode(",", $dataObject->highlights);
 $imageFile = null;
 $mainImageType = null;
+$validity = "true";
 
 if (empty($name)) {
     echo "Please enter a name for the package";
@@ -28,6 +32,10 @@ if (empty($name)) {
     echo "Name is too long";
 } else if (empty($price)) {
     echo "Enter the package price";
+} else if (empty($headerText)) {
+    echo "Enter the Header Text";
+} else if (strlen($headerText) > 200) {
+    echo "header Text is too long";
 } else if (empty($description)) {
     echo "Enter the details of the package";
 } else if (strlen($description) > 10000) {
@@ -48,6 +56,10 @@ if (empty($name)) {
     echo "Please enter the milage of the tour";
 } else if (empty($activityType)) {
     echo "Select the activity type(s)";
+} else if (empty($serviceTypes)) {
+    echo "Select the services provide for the tour package";
+} else if (empty($highlights)) {
+    echo "Enter the package highlights";
 } else {
     // get vehicle results from the vehicle table according to the vehicle id
     for ($x = 0; $x < sizeof($vehicleList); $x++) {
@@ -60,7 +72,7 @@ if (empty($name)) {
             $vtResultSet = Database::search("SELECT * FROM `vehicle_has_tour_package` WHERE `vehicle_id`='" . $vehicleList[$x] . "'");
             $vtNumRows = $vtResultSet->num_rows;
             if ($vtNumRows > 0) {
-                echo $vehicleData["number"] . "has already assigned with some package";
+                echo $vehicleData["number"] . " has already assigned with some package";
                 exit();
             }
         } else {
@@ -70,8 +82,8 @@ if (empty($name)) {
     }
 
     // insert data to the tour_package table
-    Database::insertUpdateDelete("INSERT INTO `tour_package` (`name`, `price`, `description`, `duration_id`, `total_milage`, `no_of_vehicles`) 
-    VALUES ('" . $name . "', '" . $price . "', '" . $description . "', '" . $duration . "', '" . $milage . "', '" . $noOfVehicles . "')");
+    Database::insertUpdateDelete("INSERT INTO `tour_package` (`name`, `price`, `header_text`, `description`, `duration_id`, `total_milage`, `no_of_vehicles`, `validity`) 
+    VALUES ('" . $name . "', '" . $price . "', '" . $headerText . "', '" . $description . "', '" . $duration . "', '" . $milage . "', '" . $noOfVehicles . "', '" . $validity . "')");
 
     // get lastly inserted record
     $tpResultSet = Database::search("SELECT * FROM `tour_package` ORDER BY `id` DESC LIMIT 1");
@@ -100,10 +112,10 @@ if (empty($name)) {
             VALUES ('" . $destinationList[$m] . "', '" . $tpData['id'] . "')");
         }
 
-        // insert data to the activity_type table
+        // insert data to the tour_package_has_activity_type table
         for ($p = 0; $p < sizeof($activityType); $p++) {
-            Database::insertUpdateDelete("INSERT INTO `activity_type` (`name`, `tour_package_id`)
-            VALUES ('" . $activityType[$p] . "', '" . $tpData['id'] . "')");
+            Database::insertUpdateDelete("INSERT INTO `tour_package_has_activity_type` (`tour_package_id`, `activity_type_id`)
+            VALUES ('" . $tpData['id'] . "', '" . $activityType[$p] . "')");
         }
 
         // insert data to the vehicle_has_tour_package table
@@ -118,6 +130,18 @@ if (empty($name)) {
             VALUES ('" . $hotelList[$z] . "', '" . $tpData['id'] . "')");
         }
 
+        // insert data to the package_includes_has_tour_package table
+        for ($e = 0; $e < sizeof($serviceTypes); $e++) {
+            Database::insertUpdateDelete("INSERT INTO `package_includes_has_tour_package` (`package_includes_id`, `tour_package_id`) 
+            VALUES ('" . $serviceTypes[$e] . "', '" . $tpData['id'] . "')");
+        }
+
+        // insert data to the package_highlights table
+        for ($f = 0; $f < sizeof($highlights); $f++) {
+            Database::insertUpdateDelete("INSERT INTO `package_highlights` (`description`, `tour_package_id`) 
+            VALUES ('" . $highlights[$f] . "', '" . $tpData['id'] . "')");
+        }
+
         // insert data to the expence table - get vehicle data
         for ($a = 0; $a < sizeof($vehicleList); $a++) {
             $vehicleResultSet2 = Database::search("SELECT * FROM `vehicle` WHERE `id`='" . $vehicleList[$a] . "'");
@@ -126,29 +150,29 @@ if (empty($name)) {
                 $vehicleData2 = $vehicleResultSet2->fetch_assoc();
 
                 switch ($duration) {
-                    case "1 day":
+                    case "1":
                         $durationNum = 1;
                         break;
-                    case "2 day":
+                    case "2":
                         $durationNum = 2;
                         break;
-                    case "5 day":
+                    case "3":
                         $durationNum = 5;
                         break;
-                    case "1 week":
+                    case "4":
                         $durationNum = 7;
                         break;
-                    case "2 week":
+                    case "5":
                         $durationNum = 14;
                         break;
-                    case "1 month":
+                    case "6":
                         $durationNum = 30;
                         break;
                     default:
                         $durationNum = 2;
                 }
                 $vehicleExpenses = ($vehicleData2["price_per_km"] * $milage) + ($vehicleData2["price_per_day"] * $durationNum);
-                $otherExpenses = 5000;
+                $otherExpenses = 50000;
 
                 // insert data to the expence table - get hotel data
                 for ($b = 0; $b < sizeof($hotelList); $b++) {

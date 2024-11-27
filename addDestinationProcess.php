@@ -61,6 +61,7 @@ if (empty($name)) {
 } else if (strlen($description) > 5000) {
     echo "Description is too long";
 } else {
+
     // insert data to the destination table
     Database::insertUpdateDelete("INSERT INTO `destination` (`name`, `description`) VALUES ('" . $name . "', '" . $description . "')");
 
@@ -80,6 +81,13 @@ if (empty($name)) {
 
         Database::insertUpdateDelete("INSERT INTO `destination_photo` (`src`, `destination_id`) VALUES ('" . $imageFile . "', '" . $desData['id'] . "')");
 
+        // insert data to the destination_has_packing_list relation
+        for($p = 0; $p < sizeof($itemList); $p++){
+            Database::insertUpdateDelete("INSERT INTO `destination_has_packing_list` (`destination_id`, `packing_list_id`) 
+            VALUES ('".$desData['id']."', '".$itemList[$p]."')");
+        }
+
         echo "Success";
     }
 }
+?>

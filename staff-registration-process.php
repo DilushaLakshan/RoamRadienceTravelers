@@ -7,6 +7,7 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 $contact = $_POST["contact"];
 $role = $_POST["role"];
+$accssStatusID = 1;
 
 if (
     empty($fName) || empty($lName) || empty($email) ||
@@ -32,7 +33,7 @@ if (
 } else{
 
     //insert data to the staff_member_new relation
-    Database::insertUpdateDelete("INSERT INTO `staff_member_new` (`first_name`,`last_name`,`email`,`password`,`role`,`contact`) VALUES ('".$fName."','".$lName."','".$email."','".$password."','".$role."','".$contact."')");
-    echo "Success";
+    Database::insertUpdateDelete("INSERT INTO `staff_member_new` (`first_name`,`last_name`,`email`,`password`,`role`,`contact`, `access_status_id`) VALUES ('".$fName."','".$lName."','".$email."','".$password."','".$role."','".$contact."', '".$accssStatusID."')");
+    echo "success";
 }
 ?>

@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-12">
                         <center>
-                            <h4>Sign Up - Traveler</h4>
+                            <h4 class="sub-heading">Sign Up - Traveler</h4>
                         </center>
                     </div>
                     <div class="col-12">
@@ -101,10 +101,10 @@
                                 <input type="mobile" class="registration-input" id="contact">
                                 <div class="row mt-5">
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                        <button class="btn btn-outline-dark registration-button">Clear</button>
+                                        <button class="btn registration-button">Clear</button>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                        <button class="btn btn-outline-dark registration-button" onclick="registerUser()">Sign Up</button>
+                                        <button class="btn registration-button" onclick="registerUser();">Sign Up</button>
                                     </div>
                                 </div>
                             </div>
@@ -116,6 +116,7 @@
     </div>
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>

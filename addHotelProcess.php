@@ -37,11 +37,11 @@ if (empty($name)) {
     echo "Enter the contact number";
 } else if (strlen($contact) != 10) {
     echo "Contact number must have 10 characters";
-} else if (!preg_match("/07[0,1,2,4,5,6,7,8][0-9]/", $contact)) {
+} else if (!preg_match("/^(07[0-8]|01[0-9]|03[0-9])[0-9]{7}$/", $contact)) {
     echo "Enter a valid contact number";
 } else if (empty($numOfRooms)) {
     echo "Enter the number of rooms";
-} else if ($numOfRooms < 1 || $numOfRooms > 10) {
+} else if ($numOfRooms < 1 || $numOfRooms > 30) {
     echo "Enter a valid number for number of rooms";
 } else if (empty($roomNumbers)) {
     echo "Enter the numbers of rooms";
