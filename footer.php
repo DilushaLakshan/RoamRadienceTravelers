@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row text-center text-md-start">
                 <div class="col-md-3">
-                    <h5 class="footer-logo">RoamRadiance</h5>
+                    <img src="resources/images/roamRadience-footer-logo.png" alt="">
                 </div>
 
                 <div class="col-md-3"></div>

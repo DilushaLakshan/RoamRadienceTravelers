@@ -18,10 +18,10 @@ require 'connection.php';
     if (isset($_SESSION["user"])) {
         $uID = $_SESSION["user"]->id;
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
                 <?php include 'back-header.php'; ?>
-                <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-3">
+                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 hotel-list-container">
                     <div class="row">
                         <div class="col-12">
                             <center>
@@ -39,17 +39,17 @@ require 'connection.php';
                                     <div class="row">
                                         <div class="col-3">
                                             <center>
-                                                <span class="stf-sub-heading">Hotel Name</span>
+                                                <h6 class="stf-sub-heading">Hotel Name</h6>
                                             </center>
                                         </div>
                                         <div class="col-3">
                                             <center>
-                                                <span class="stf-sub-heading">Address</span>
+                                                <h6 class="stf-sub-heading">Address</h6>
                                             </center>
                                         </div>
                                         <div class="col-3">
                                             <center>
-                                                <span class="stf-sub-heading">Contact</span>
+                                                <h6 class="stf-sub-heading">Contact</h6>
                                             </center>
                                         </div>
                                         <div class="col-3"></div>
@@ -69,11 +69,17 @@ require 'connection.php';
                                         ?>
                                                 <div class="col-12 mt-2">
                                                     <div class="row">
-                                                        <div class="col-3"><?php echo  $hotelData["name"]; ?></div>
-                                                        <div class="col-3"><?php echo  $hotelData["address"]; ?></div>
-                                                        <div class="col-3"><?php echo  $hotelData["contact"]; ?></div>
                                                         <div class="col-3">
-                                                            <button class="btn sbt-button" data-bs-toggle="collapse" data-bs-target="#collapse-<?php echo  $x; ?>" aria-expanded="false" aria-controls="collapse-<?php echo  $x; ?>">View</button>
+                                                            <span><?php echo  $hotelData["name"]; ?></span>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <span><?php echo  $hotelData["address"]; ?></span>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <span><?php echo  $hotelData["contact"]; ?></span>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <button class="btn" data-bs-toggle="collapse" data-bs-target="#collapse-<?php echo  $x; ?>" aria-expanded="false" aria-controls="collapse-<?php echo  $x; ?>">View</button>
                                                         </div>
                                                         <div class="col-12 mt-2">
                                                             <div class="collapse" id="collapse-<?php echo  $x; ?>">
@@ -91,11 +97,11 @@ require 'connection.php';
                                                                                         <span><?php echo $hotelData["no_of_room"]; ?></span>
                                                                                     </div>
                                                                                     <div class="col-4">
-                                                                                        <span>Pr. per Room</span><br>
+                                                                                        <span>Price per Room:</span><br>
                                                                                         <span><?php echo $hotelData["price"]; ?></span>
                                                                                     </div>
                                                                                     <div class="col-4 mt-2">
-                                                                                        <span>Room Numbers</span><br>
+                                                                                        <span>Room Numbers:</span><br>
                                                                                         <?php
                                                                                         $roomResultSet = Database::search("SELECT * FROM `hotel_room` WHERE `hotel_id`='" . $hotelData['id'] . "'");
                                                                                         $roomNumRows = $roomResultSet->num_rows;
@@ -115,7 +121,7 @@ require 'connection.php';
                                                                                     </div>
                                                                                     <div class="col-12 mt-4">
                                                                                         <div class="col-12 col-md-3 col-lg-3 offset-md-9 offset-lg-9 mt-2">
-                                                                                            <button class="btn sbt-button" data-bs-toggle="collapse" data-bs-target="#input-area-<?php echo $x; ?>" aria-expanded="false" aria-controls="input-area-<?php echo $x; ?>">Update</button>
+                                                                                            <button class="btn" data-bs-toggle="collapse" data-bs-target="#input-area-<?php echo $x; ?>" aria-expanded="false" aria-controls="input-area-<?php echo $x; ?>">Update</button>
                                                                                         </div>
                                                                                     </div>
 
@@ -126,7 +132,7 @@ require 'connection.php';
                                                                                                 <div class="col-12 mt-2">
                                                                                                     <div class="row">
                                                                                                         <div class="col-6">
-                                                                                                            <span>Hotel Name</span>
+                                                                                                            <h6 class="stf-sub-heading">Hotel Name</h6>
                                                                                                         </div>
                                                                                                         <div class="col-6">
                                                                                                             <input type="text" id="h-name-<?php echo $hotelData['id']; ?>" class="w-100" value="<?php echo $hotelData["name"]; ?>">
@@ -136,7 +142,7 @@ require 'connection.php';
                                                                                                 <div class="col-12 mt-2">
                                                                                                     <div class="row">
                                                                                                         <div class="col-6">
-                                                                                                            <span>Address</span>
+                                                                                                            <h6 class="stf-sub-heading">Address</h6>
                                                                                                         </div>
                                                                                                         <div class="col-6">
                                                                                                             <input type="text" id="h-address-<?php echo $hotelData['id']; ?>" class="w-100" value="<?php echo $hotelData["address"]; ?>">
@@ -146,7 +152,7 @@ require 'connection.php';
                                                                                                 <div class="col-12 mt-2">
                                                                                                     <div class="row">
                                                                                                         <div class="col-6">
-                                                                                                            <span>Email</span>
+                                                                                                            <h6 class="stf-sub-heading">Email</h6>
                                                                                                         </div>
                                                                                                         <div class="col-6">
                                                                                                             <input type="email" id="h-email-<?php echo $hotelData['id']; ?>" class="w-100" value="<?php echo $hotelData["email"]; ?>">
@@ -156,27 +162,27 @@ require 'connection.php';
                                                                                                 <div class="col-12 mt-2">
                                                                                                     <div class="row">
                                                                                                         <div class="col-6">
-                                                                                                            <span>Contact</span>
+                                                                                                            <h6 class="stf-sub-heading">Contact</h6>
                                                                                                         </div>
                                                                                                         <div class="col-6">
-                                                                                                            <input type="text" id="h-contact-<?php echo $hotelData['id']; ?>" class="w-100" value="<?php echo $hotelData["contact"]; ?>" pattern="">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-12 mt-2">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-6">
-                                                                                                            <span>No.of Rooms</span>
-                                                                                                        </div>
-                                                                                                        <div class="col-6">
-                                                                                                            <input type="number" id="h-rooms-<?php echo $hotelData['id']; ?>" class="w-100" value="<?php echo $hotelData["no_of_room"]; ?>" pattern="">
+                                                                                                            <input type="text" id="h-contact-<?php echo $hotelData['id']; ?>" class="w-100" value="<?php echo $hotelData["contact"]; ?>">
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="col-12 mt-2">
                                                                                                     <div class="row">
                                                                                                         <div class="col-6">
-                                                                                                            <span>Price/Room</span>
+                                                                                                            <h6 class="stf-sub-heading">No. of Rooms</h6>
+                                                                                                        </div>
+                                                                                                        <div class="col-6">
+                                                                                                            <input type="number" id="h-rooms-<?php echo $hotelData['id']; ?>" class="w-100" value="<?php echo $hotelData["no_of_room"]; ?>">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-12 mt-2">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-6">
+                                                                                                            <h6 class="stf-sub-heading">Price per Room</h6>
                                                                                                         </div>
                                                                                                         <div class="col-6">
                                                                                                             <input type="number" id="h-room-price-<?php echo $hotelData['id']; ?>" class="w-100" value="<?php echo $hotelData["price"]; ?>">
@@ -186,7 +192,7 @@ require 'connection.php';
                                                                                                 <div class="col-12 mt-2">
                                                                                                     <div class="row">
                                                                                                         <div class="col-6">
-                                                                                                            <span>Room Numbers</span>
+                                                                                                            <h6 class="stf-sub-heading">Room Numbers</h6>
                                                                                                         </div>
                                                                                                         <div class="col-6">
                                                                                                             <textarea name="" id="h-room-number-<?php echo $hotelData['id']; ?>"></textarea>
@@ -195,7 +201,7 @@ require 'connection.php';
                                                                                                 </div>
                                                                                                 <div class="col-12 mt-4">
                                                                                                     <div class="col-12 col-md-3 col-lg-3 offset-md-9 offset-lg-9 mt-2">
-                                                                                                        <button class="btn sbt-button" onclick="updateHotel(<?php echo $hotelData['id']; ?>);">Save Changes</button>
+                                                                                                        <button class="btn" onclick="updateHotel(<?php echo $hotelData['id']; ?>);">Save Changes</button>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -211,23 +217,23 @@ require 'connection.php';
                                                         </div>
                                                     </div>
                                                 </div>
-                                    </div>
-                                <?php
+                                            <?php
                                             }
                                         } else {
-                                ?>
-                                <div class="col-12 mt-2">
-                                    <span><i>No results available...</i></span>
-                                </div>
-                            <?php
+                                            ?>
+                                            <div class="col-12 mt-2">
+                                                <span><i>No results available...</i></span>
+                                            </div>
+                                        <?php
                                         }
-                            ?>
+                                        ?>
+                                    </div>
                                 </div>
+                                <!-- details -->
                             </div>
-                            <!-- details -->
                         </div>
+                        <!-- members main -->
                     </div>
-                    <!-- members main -->
                 </div>
                 <?php include 'back-footer.php'; ?>
             </div>
@@ -240,5 +246,6 @@ require 'connection.php';
     <script src="script.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
+
 
 </html>

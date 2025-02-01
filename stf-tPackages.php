@@ -19,11 +19,11 @@ require 'connection.php';
     if (isset($_SESSION["user"])) {
         $uID = $_SESSION["user"]->id;
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
                 <?php include 'back-header.php'; ?>
                 <!-- package cards -->
-                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 mt-4 mb-3 card-container">
+                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 mt-3 mb-3 back-pkg-container">
                     <div class="row">
                         <?php
                         $tourPackageResultSet = Database::search("SELECT * FROM `tour_package`");
@@ -97,8 +97,8 @@ require 'connection.php';
                                                                 }
                                                             }
                                                             ?>
-                                                            <span class="descriptions">
-                                                                Destinations :
+                                                            <p class="feat-name">
+                                                                <b>Destinations :</b>
                                                                 <?php
                                                                 if (!empty($desNamesList)) {
                                                                     for ($a = 0; $a < sizeof($desNamesList); $a++) {
@@ -108,15 +108,15 @@ require 'connection.php';
                                                                     echo "<i>No data</i>";
                                                                 }
                                                                 ?>
-                                                            </span>
+                                                            </p>
                                                             <?php
                                                             ?>
                                                         </div>
                                                         <div class="col-12 mt-3">
                                                             <div class="row">
                                                                 <div class="col-12 col-md-6 col-lg-6">
-                                                                    <span class="descriptions">
-                                                                        Duration -
+                                                                    <p class="feat-name">
+                                                                        <b>Duration -</b>
                                                                         <?php
                                                                         // get the duration data
                                                                         $durationResultSet = Database::search("SELECT * FROM `duration` WHERE `id`='" . $tourPackageData['duration_id'] . "'");
@@ -128,40 +128,40 @@ require 'connection.php';
                                                                             echo "<i>No data</i>";
                                                                         }
                                                                         ?>
-                                                                    </span>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="col-12 col-md-6 col-lg-6">
-                                                                    <span class="descriptions">Price - <?php echo $tourPackageData["price"]; ?> LKR</span>
+                                                                    <p class="feat-name"><b>Price - </b> <?php echo $tourPackageData["price"]; ?> LKR</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 mt-3">
                                                             <div class="row">
                                                                 <div class="col-12">
-                                                                    <span class="descriptions">Operating Languages - English/ Sinhala</span>
+                                                                    <p class="feat-name"><b>Operating Languages - </b> English/ Sinhala</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 mt-3">
                                                             <div class="row">
                                                                 <div class="col-12">
-                                                                    <span class="descriptions">Validity - <?php echo $tourPackageData["validity"]; ?></span>
+                                                                    <p class="feat-name"><b>Validity - </b> <?php echo $tourPackageData["validity"]; ?></p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 mt-3">
                                                             <div class="row">
                                                                 <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                                                    <button class="btn sbt-button" onclick="updatePackageStatus(<?php echo $tourPackageData['id']; ?>,'true');">Enable Package</button>
+                                                                    <button class="btn" onclick="updatePackageStatus(<?php echo $tourPackageData['id']; ?>,'true');">Enable Package</button>
                                                                 </div>
                                                                 <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                                                    <button class="btn sbt-button" onclick="updatePackageStatus(<?php echo $tourPackageData['id']; ?>, 'false');">Desable Package</button>
+                                                                    <button class="btn" onclick="updatePackageStatus(<?php echo $tourPackageData['id']; ?>, 'false');">Disable Package</button>
                                                                 </div>
                                                                 <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                                                    <button class="btn sbt-button" onclick="window.location='updateTourPackage.php?pID=<?php echo $tourPackageData['id']; ?>'">Update Package</button>
+                                                                    <button class="btn" onclick="window.location='updateTourPackage.php?pID=<?php echo $tourPackageData['id']; ?>'">Update Package</button>
                                                                 </div>
                                                                 <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                                                    <button class="btn sbt-button" onclick="window.location='package-details-staff.php?pID=<?php echo $tourPackageData['id']; ?>'">View Details</button>
+                                                                    <button class="btn" onclick="window.location='package-details-staff.php?pID=<?php echo $tourPackageData['id']; ?>'">View Details</button>
                                                                 </div>
                                                             </div>
                                                         </div>

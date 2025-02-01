@@ -18,11 +18,11 @@ require 'connection.php';
     if (isset($_SESSION["user"])) {
         $uID = $_SESSION["user"]->id;
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
                 <?php include 'back-header.php'; ?>
                 <!-- destination cards -->
-                <div class="col-12 mt-2 mb-3">
+                <div class="col-12 mt-2 mb-3 p-lg-4 p-md-2 back-des-list">
                     <div class="row">
                         <?php
                         $destinationResultSet = Database::search("SELECT * FROM `destination` ORDER BY `id` DESC");
@@ -31,7 +31,7 @@ require 'connection.php';
                             for ($x = 0; $x < $destinationNumRows; $x++) {
                                 $destinationData = $destinationResultSet->fetch_assoc();
                         ?>
-                                <div class="col-12 col-md-4 col-lg-3 mt-3">
+                                <div class="col-6 col-md-4 col-lg-3 mt-3">
                                     <div class="card destination-card">
                                         <?php
                                         $imageResultSet = Database::search("SELECT * FROM `destination_photo` WHERE `destination_id`='" . $destinationData['id'] . "' LIMIT 1");
@@ -45,8 +45,8 @@ require 'connection.php';
                                                     <h5 class="card-title"><?php echo $destinationData["name"]; ?></h5>
                                                 </center>
                                                 <center>
-                                                    <a href="#" class="btn sbt-button" onclick="window.location='back-des-detail.php?desID=<?php echo $destinationData['id']; ?>'">View details</a>
-                                                    <a href="#" class="btn sbt-button mt-2" onclick="window.location='update-destination.php?desID=<?php echo $destinationData['id']; ?>'">Update details</a>
+                                                    <a href="#" class="btn" onclick="window.location='back-des-detail.php?desID=<?php echo $destinationData['id']; ?>'">View details</a>
+                                                    <a href="#" class="btn mt-2" onclick="window.location='update-destination.php?desID=<?php echo $destinationData['id']; ?>'">Update details</a>
                                                 </center>
                                             </div>
                                         <?php

@@ -18,14 +18,25 @@ require 'connection.php';
     if (isset($_SESSION["user"])) {
         $uID = $_SESSION["user"]->id;
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
-                <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2">
+                <?php include 'back-header.php'; ?>
+                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 assigned-vehicle-list-container">
                     <div class="row">
-                        <div class="col-12 mt-4">
-                            <center>
-                                <h4 class="stf-sub-heading">Vehicles</h4>
-                            </center>
+                        <div class="col-12">
+                            <div class="row align-items-center">
+                                <!-- Heading -->
+                                <div class="col-md-8 text-md-start text-center mt-2 mt-md-0">
+                                    <h4 class="stf-sub-heading">Vehicles</h4>
+                                </div>
+                                <!-- Button -->
+                                <div class="col-md-4 text-md-end text-center mt-2 mt-md-0">
+                                    <a href="driver-home.php" class="d-inline-flex align-items-center hover-move">
+                                        <img src="resources/icons/back-arrow.svg" alt="" class="me-2 arrow-icon">
+                                        Back to Home
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12">
                             <hr>
@@ -69,46 +80,33 @@ require 'connection.php';
                                                     <div class="col-12 mt-2">
                                                         <div class="row">
                                                             <div class="col-4">
-                                                                <span class="descriptions"><?php echo $vehicleData["type"]; ?></span>
+                                                                <p><?php echo $vehicleData["type"]; ?></p>
                                                             </div>
                                                             <div class="col-4">
-                                                                <span class="descriptions"><?php echo $vehicleData["number"]; ?></span>
+                                                                <p><?php echo $vehicleData["number"]; ?></p>
                                                             </div>
                                                             <div class="col-4">
-                                                                <button class="sbt-button" data-bs-toggle="collapse" data-bs-target="#dv-area-<?php echo $x; ?>" aria-expanded="false" aria-controls="dv-area-<?php echo $x; ?>">View</button>
+                                                                <button data-bs-toggle="collapse" data-bs-target="#dv-area-<?php echo $x; ?>" aria-expanded="false" aria-controls="dv-area-<?php echo $x; ?>">View</button>
                                                             </div>
                                                             <div class="col-12 mt-2">
                                                                 <div class="collapse" id="dv-area-<?php echo $x; ?>">
                                                                     <div class="card card-body">
                                                                         <div class="row">
                                                                             <div class="col-12">
-                                                                                <span class="descriptions"><b>Booking dates</b></span><br>
+                                                                                <span><b>Booking dates</b></span><br>
                                                                                 <?php
-                                                                                $vehiclePackageResultSet = Database::search("SELECT * FROM `vehicle_has_tour_package` WHERE `vehicle_id`='" . $vehicleData['id'] . "'");
-                                                                                $vehiclePackageNumRows = $vehiclePackageResultSet->num_rows;
-                                                                                if ($vehiclePackageNumRows > 0) {
-                                                                                    for ($y = 0; $y < $vehiclePackageNumRows; $y++) {
-                                                                                        $vehiclePackageData = $vehiclePackageResultSet->fetch_assoc();
-
-                                                                                        $statusID = 2;
-                                                                                        $bookingResultSet = Database::search("SELECT * FROM `booking` WHERE `tour_package_id`='" . $vehiclePackageData['tour_package_id'] . "' AND `status_id`='" . $statusID . "'");
-                                                                                        $bookingNumRows = $bookingResultSet->num_rows;
-                                                                                        if ($bookingNumRows > 0) {
-                                                                                            for ($z = 0; $z < $bookingNumRows; $z++) {
-                                                                                                $bookingData = $bookingResultSet->fetch_assoc();
+                                                                                $bookingResultSet = Database::search("SELECT * FROM `booking` WHERE `vehicle_id`='" . $vehicleData['id'] . "'");
+                                                                                $bookingNumRows = $bookingResultSet->num_rows;
+                                                                                if ($bookingNumRows > 0) {
+                                                                                    for ($a = 0; $a < $bookingNumRows; $a++) {
+                                                                                        $bookingData = $bookingResultSet->fetch_assoc();
                                                                                 ?>
-                                                                                                <span class="descriptions"><?php echo $bookingData["date"]; ?></span>
-                                                                                            <?php
-                                                                                            }
-                                                                                        } else {
-                                                                                            ?>
-                                                                                            <span class="descriptions">No bookings available</span>
+                                                                                        <p><?php echo $bookingData["date"]; ?></p>
                                                                                     <?php
-                                                                                        }
                                                                                     }
                                                                                 } else {
                                                                                     ?>
-                                                                                    <span class="descriptions">Vehicle has not been assigned with package</span>
+                                                                                    <p><i>No bookings available...</i></p>
                                                                                 <?php
                                                                                 }
                                                                                 ?>
@@ -126,7 +124,7 @@ require 'connection.php';
                                             ?>
                                             <div class="col-12 mt-2">
                                                 <center>
-                                                    <span class="descriptions"><i>No vehicles assigned...</i></span>
+                                                    <span><i>No vehicles assigned...</i></span>
                                                 </center>
                                             </div>
                                         <?php
@@ -140,6 +138,7 @@ require 'connection.php';
                         <!-- members main-->
                     </div>
                 </div>
+                <?php include 'back-footer.php'; ?>
             </div>
         </div>
     <?php

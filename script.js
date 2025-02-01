@@ -4,6 +4,474 @@ function togglePopup() {
 
 }
 
+// forgot password - display email-section
+function forgotPassword() {
+    document.getElementById("login-section").classList.add("d-none");
+
+    document.getElementById("email-section").classList.remove("d-none");
+}
+
+// check email for forgot password
+function checkEmail() {
+    var email = document.getElementById("email-2");
+
+    var form = new FormData();
+    form.append("email", email.value);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                document.getElementById("email-section").classList.add("d-none");
+
+                document.getElementById("otp-section").classList.remove("d-none");
+            } else {
+                swal("", text, "error");
+            }
+        }
+    }
+    request.open("POST", "checkEmail.php", true);
+    request.send(form);
+}
+
+// validate email - forgot password
+function validateOTP() {
+    const email = document.getElementById("email-2");
+    var otp = document.getElementById("otp-number");
+
+    var form = new FormData();
+    form.append("email", email.value);
+    form.append("otp", otp.value);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                document.getElementById("otp-section").classList.add("d-none");
+
+                document.getElementById("reset-password-section").classList.remove("d-none");
+            } else {
+                swal("", text, "error");
+            }
+        }
+    }
+    request.open("POST", "validateOtpProcess.php", true);
+    request.send(form);
+}
+
+// forgot password - reset password
+function resetPassword() {
+    const email = document.getElementById("email-2");
+    const passwordNew = document.getElementById("password-1");
+    const confirmPassword = document.getElementById("password-2");
+
+    var form = new FormData();
+    form.append("email", email.value);
+    form.append("newPassword", passwordNew.value);
+    form.append("confirmPassword", confirmPassword.value);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                swal("", "Password updated successfully", "success").then(() => {
+                    setTimeout(() => {
+                        window.location.href = "login.php";
+                    }, 2000);
+                });
+            } else {
+                swal("", text, "error").then(() => {
+                    setTimeout(() => {
+                        window.location.href = "login.php";
+                    }, 2000);
+                });
+            }
+        }
+    }
+    request.open("POST", "resetPasswordProcess.php", true);
+    request.send(form);
+}
+
+// apply destination filter
+function applyDestinationFilter() {
+    var destinationCategoryList = document.getElementsByName("category");
+    var selectedCategoryList = [];
+
+    for (var x = 0; x < destinationCategoryList.length; x++) {
+        if (destinationCategoryList[x].checked) {
+            selectedCategoryList.push(destinationCategoryList[x].value);
+        }
+    }
+
+    var dataObject = new Object();
+    dataObject.selectedCategoryList = selectedCategoryList;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            document.getElementById("destination-area").innerHTML = request.responseText;
+        }
+    };
+    request.open("POST", "destinationFilterProcess.php", true);
+    request.send(form);
+}
+
+// payment process
+function makePayment(packageId, bookingId) {
+    var packageId = packageId;
+    var bookingId = bookingId;
+
+    var dataObject = new Object();
+    dataObject.packageId = packageId;
+    dataObject.bookingId = bookingId;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var response = request.responseText;
+
+            var responseObject = JSON.parse(response);
+
+            // Define PayHere callbacks
+            payhere.onCompleted = function onCompleted(orderId) {
+                console.log("Payment completed. OrderID:", orderId);
+                // Handle successful payment logic here
+            };
+
+            payhere.onDismissed = function onDismissed() {
+                console.log("Payment dismissed");
+            };
+
+            payhere.onError = function onError(error) {
+                console.error("Error:", error);
+            };
+
+            console.log(responseObject);
+
+            // Start payment with response data from PHP
+            payhere.startPayment(responseObject);
+        }
+    }
+    request.open("POST", "paymentProcess.php", true);
+    request.send(form);
+}
+
+// send inquiry
+function sendInquiry() {
+    var message = document.getElementById("inquiry-message");
+
+    var form = new FormData();
+    form.append("message", message.value);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                swal("", "Message sent", "success");
+            } else {
+                swal("", text, "warning");
+            }
+        } else {
+            swal("", "Invalid request", "warning");
+        }
+    };
+    request.open("POST", "sendInquiryProcess.php", true);
+    request.send(form);
+}
+
+// Save special discount for booking
+function setSpecDiscount(bookingId) {
+    var bookingId = bookingId;
+
+    var specDiscount = document.getElementById("spec-dis-" + bookingId);
+
+    var form = new FormData();
+    form.append("bookingId", bookingId);
+    form.append("specDiscount", specDiscount.value);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                swal("", "Discount saved", "success");
+            } else {
+                swal("", text, "error");
+            }
+        }
+    }
+    request.open("POST", "saveSpecDiscountProcess.php", true);
+    request.send(form);
+}
+
+// check notifications
+function checkRealTimeNotification() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var count = parseInt(request.responseText, 10); // Ensure count is treated as an integer
+
+            var notificationButton = document.getElementById("notificationButton");
+            if (count > 0) {
+                notificationButton.classList.add("notification-active");
+            } else {
+                notificationButton.classList.remove("notification-active");
+            }
+
+        }
+    }
+    request.open("POST", "checkNotificationProcess.php", true);
+    request.send();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    checkRealTimeNotification(); // Initial check on page load
+    setInterval(checkRealTimeNotification, 1000);
+});
+
+
+// fetch the calander
+function displayCalendar(uID) {
+    var calendarEl = document.getElementById("booking-calendar");
+
+    if (!calendarEl) {
+        console.error("Element with ID 'booking-calendar' not found.");
+        return;
+    }
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', // Set the initial calendar view
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,dayGridWeek,dayGridDay',
+        },
+        events: function(fetchInfo, successCallback, failureCallback) {
+            var form = new FormData();
+            form.append("uID", uID);
+
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        try {
+                            var events = JSON.parse(request.responseText);
+                            console.log(events);
+                            successCallback(events);
+                        } catch (error) {
+                            console.error("Error parsing response:", error);
+                            failureCallback("Error processing events");
+                        }
+                    } else {
+                        console.error("Failed to fetch events:", request.statusText);
+                        failureCallback("Failed to load events");
+                    }
+                }
+            };
+            request.open("POST", "fetchBookingDates.php", true);
+            request.send(form);
+        },
+        eventColor: '#18a09b', // Apply dark green theme for events
+        eventClick: function(info) {
+            // Alert booking details when an event is clicked
+            alert(`Booking Date: ${info.event.start.toDateString()}`);
+        },
+    });
+
+    // Render the calendar
+    calendar.render();
+}
+
+// display booking dates - guide
+function viewBookingDateCalGuide() {
+    var calendarEl = document.getElementById("booking-calendar");
+
+    if (!calendarEl) {
+        console.error("Element with ID 'booking-calendar' not found.");
+        return;
+    }
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', // Set the initial calendar view
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,dayGridWeek,dayGridDay',
+        },
+        events: function(fetchInfo, successCallback, failureCallback) {
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        try {
+                            var events = JSON.parse(request.responseText);
+                            console.log(events);
+                            successCallback(events);
+                        } catch (error) {
+                            console.error("Error parsing response:", error);
+                            failureCallback("Error processing events");
+                        }
+                    } else {
+                        console.error("Failed to fetch events:", request.statusText);
+                        failureCallback("Failed to load events");
+                    }
+                }
+            };
+            request.open("POST", "booking-date-guide.php", true);
+            request.send();
+        },
+        eventColor: '#18a09b', // Apply dark green theme for events
+        eventClick: function(info) {
+            // Alert booking details when an event is clicked
+            alert(`Booking Date: ${info.event.start.toDateString()}`);
+        },
+    });
+
+    // Render the calendar
+    calendar.render();
+}
+
+// display booking dates - driver
+function viewBookingDateCalDriver() {
+    var calendarEl = document.getElementById("booking-calendar");
+
+    if (!calendarEl) {
+        console.error("Element with ID 'booking-calendar' not found.");
+        return;
+    }
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', // Set the initial calendar view
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,dayGridWeek,dayGridDay',
+        },
+        events: function(fetchInfo, successCallback, failureCallback) {
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        try {
+                            var events = JSON.parse(request.responseText);
+                            console.log(events);
+                            successCallback(events);
+                        } catch (error) {
+                            console.error("Error parsing response:", error);
+                            failureCallback("Error processing events");
+                        }
+                    } else {
+                        console.error("Failed to fetch events:", request.statusText);
+                        failureCallback("Failed to load events");
+                    }
+                }
+            };
+            request.open("POST", "booking-date-driver.php", true);
+            request.send();
+        },
+        eventColor: '#18a09b', // Apply dark green theme for events
+        eventClick: function(info) {
+            // Alert booking details when an event is clicked
+            alert(`Booking Date: ${info.event.start.toDateString()}`);
+        },
+    });
+
+    // Render the calendar
+    calendar.render();
+}
+
+
+// send inquiry reply
+function sendInqReply(inqId) {
+    var inqId = inqId;
+    var replyMessage = document.getElementById("inq-reply-" + inqId);
+
+    var form = new FormData();
+    form.append("inqId", inqId);
+    form.append("replyMessage", replyMessage.value);
+
+    var request = new XMLHttpRequest();
+
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+
+            if (text == "success") {
+                swal("", "Replied", "success").then(() => {
+                    location.reload();
+                });
+            } else {
+                swal("", text, "error");
+            }
+        }
+    }
+
+    request.open("POST", "inqReplyProcess.php", true);
+    request.send(form);
+}
+
+// AOS initialization
+document.addEventListener("DOMContentLoaded", () => {
+    AOS.init({
+        duration: 800, // Animation duration in milliseconds
+        easing: 'ease-out', // Easing function
+        once: true // Animation only happens once when scrolled into view
+    });
+});
+
+// toggle the destination comment
+function toggleComment(link) {
+    const shortComment = link.previousElementSibling.previousElementSibling;
+    const fullComment = link.previousElementSibling;
+
+    if (fullComment.classList.contains('d-none')) {
+        shortComment.classList.add('d-none');
+        fullComment.classList.remove('d-none');
+        link.textContent = "Read Less";
+    } else {
+        shortComment.classList.remove('d-none');
+        fullComment.classList.add('d-none');
+        link.textContent = "Read More";
+    }
+}
+
+// add new category
+function addCategory() {
+    var categoryName = document.getElementById("new-catg");
+
+    var form = new FormData();
+    form.append("categoryName", categoryName.value);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                swal("", "Category added", "success");
+            } else {
+                swal("", text, "error");
+            }
+        }
+    }
+    request.open("POST", "addCategoryProcess.php", true);
+    request.send(form);
+}
+
+
 // send login details
 function sendLoginDetails() {
     var email = document.getElementById("email");
@@ -64,7 +532,9 @@ function registerUser() {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                swal("", "Successfully Registered", "success");
+                swal("", "Successfully Registered", "success").then(() => {
+                    window.location = 'login.php';
+                });
             } else {
                 swal("", text, "error");
             }
@@ -252,19 +722,19 @@ function sendDestinationDetails() {
         }
     }
 
-    var packingList = document.getElementsByName("packingList[]");
-    var listValues = [];
-    for (var j = 0, m = packingList.length; j < m; j++) {
-        if (packingList[j].checked) {
-            listValues.push(packingList[j].value);
-        }
-    }
+    // var packingList = document.getElementsByName("packingList[]");
+    // var listValues = [];
+    // for (var j = 0, m = packingList.length; j < m; j++) {
+    //     if (packingList[j].checked) {
+    //         listValues.push(packingList[j].value);
+    //     }
+    // }
 
     const obj = new Object();
     obj.name = desName.value;
     obj.details = desDetails;
     obj.catValues = catValues;
-    obj.listValues = listValues;
+    // obj.listValues = listValues;
 
     var jsonText = JSON.stringify(obj);
 
@@ -277,18 +747,54 @@ function sendDestinationDetails() {
     request.onreadystatechange = () => {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
-            if (text == "Success") {
-                alert("Insertion Success");
+            if (text == "success") {
+                swal("", "Insertion Success", "success");
                 desName.value = "";
                 desDetails = "";
                 catValues = [];
                 listValues = [];
             } else {
-                alert(text);
+                swal("", text, "error")
             }
         }
     }
     request.open("POST", "addDestinationProcess.php", true);
+    request.send(form);
+}
+
+// check session object
+function validateSessionObject(uID) {
+    if (uID == 0) {
+        window.location = "login.php";
+    } else {
+        let modal = new bootstrap.Modal(document.getElementById('client-rvw-model'));
+        modal.show();
+    }
+}
+
+
+// submit client review
+function submitClientRvw() {
+    var country = document.getElementById("country");
+    var message = document.getElementById("review-msg");
+
+    var form = new FormData();
+    form.append("country", country.value);
+    form.append("message", message.value);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            if (request.responseText == "success") {
+                swal("", "Thanks for sharing your experience...", "success").then(() => {
+                    location.reload();
+                });
+            } else {
+                swal("", request.responseText, "error");
+            }
+        }
+    }
+    request.open("POST", "submitReview.php", true);
     request.send(form);
 }
 
@@ -404,9 +910,9 @@ function addHotel() {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "Success") {
-                alert("Insertion Success");
+                swal("", "Insertion success", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -445,9 +951,9 @@ function updateHotel(id) {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Successfully updated");
+                swal("", "Successfully updated", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -487,9 +993,9 @@ function addVehicle() {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "Success") {
-                alert("Insertion Success");
+                swal("", "Insertion success", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -522,9 +1028,9 @@ function updateVehicle(vID) {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Updated successful");
+                swal("", "Updated successfully", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -580,8 +1086,6 @@ function addTourPackage() {
     var hText = document.getElementById("h-text");
     var description = CKEDITOR.instances.description.getData();
     var destinationList = document.getElementById("desIDList").innerText;
-    var nuOfVehicles = document.getElementById("no-of-vehicles");
-    var vehicleList = document.getElementById("v-id-list").innerText;
     var hotelList = document.getElementById("hotel-id-list").innerText;
     var durationList = document.getElementsByName("duration");
     var duration;
@@ -620,8 +1124,6 @@ function addTourPackage() {
     dataObject.hText = hText.value;
     dataObject.description = description;
     dataObject.destinationList = destinationList;
-    dataObject.nuOfVehicles = nuOfVehicles.value;
-    dataObject.vehicleList = vehicleList;
     dataObject.hotelList = hotelList;
     dataObject.duration = duration;
     dataObject.milage = milage.value;
@@ -640,9 +1142,9 @@ function addTourPackage() {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "Success") {
-                alert("Insertion Success");
+                swal("", "Insertion Success", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -760,9 +1262,9 @@ function updateTourPackage(packageID) {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "Success") {
-                alert("Successfully updated");
+                swal("", "Successfully updated", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -780,9 +1282,9 @@ function updatePackageStatus(pID, status) {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Status updated");
+                swal("", "Status updated", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -791,12 +1293,12 @@ function updatePackageStatus(pID, status) {
 }
 
 // check the tour package availability from the client-side
-function checkPackageAvailability(packageID) {
-    var packageID = packageID;
+function checkPackageAvailability() {
+    var noOfMembers = document.getElementById("booking-members");
     var date = document.getElementById("checking-date");
 
     var form = new FormData();
-    form.append("packageID", packageID)
+    form.append("noOfMembers", noOfMembers.value);
     form.append("date", date.value);
 
     var request = new XMLHttpRequest();
@@ -836,18 +1338,20 @@ function sendBookingData(packageID) {
             if (request.readyState == 4 && request.status == 200) {
                 var text = request.responseText;
                 if (text == "success") {
-                    alert("Your Booking is now pending for confirmation");
+                    swal("", "Your Booking is now pending for confirmation to make Payment", "success").then(() => {
+                        window.location = 'traveler-profile.php';
+                    });
                 } else {
-                    alert(text);
+                    swal("", text, "error");
                 }
             }
         }
         request.open("POST", "bookingProcess.php", true);
         request.send(form);
     } else if ("No") {
-        alert("Thing package is not avalable on " + date.value);
+        swal("", "Thing package is not avalable on " + date.value, "warning");
     } else {
-        alert("Check the availability first");
+        swal("", "Check the availability first", "warning");
     }
 }
 
@@ -864,9 +1368,9 @@ function updateStatus(travelerID, bookingID, statusID) {
             if (request.readyState == 4 && request.status == 200) {
                 var text = request.responseText;
                 if (text == "success") {
-                    alert("Status Updated");
+                    swal("", "Status Updates", "success");
                 } else {
-                    alert(text);
+                    swal("", text, "error");
                 }
             }
         }
@@ -1005,10 +1509,10 @@ function addDesComment(desID) {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Comment added");
+                swal("", "Comment added", "success");
                 comment.value = "";
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -1045,9 +1549,9 @@ function addPackageComment(packageID) {
 }
 
 // manage drivers with vehicles
-function manageDriverVehicle(mID) {
+function manageDriverVehicle(mID, secId) {
     var memberID = mID;
-    var vehicleID = document.getElementById("vehicle");
+    var vehicleID = document.getElementById("vehicle-sec-" + secId + "-" + mID);
 
     var form = new FormData();
     form.append("memberID", memberID);
@@ -1058,9 +1562,9 @@ function manageDriverVehicle(mID) {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Vehicle assigned");
+                swal("", "Vehicle assign success", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -1088,9 +1592,9 @@ function manageGuideWithPackage(memberID, selectionAreaID) {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                alert("Package assigned");
+                swal("", "Package assigned", "success");
             } else {
-                alert(text);
+                swal("", text, "error");
             }
         }
     }
@@ -1128,7 +1632,9 @@ function newPromotion() {
         if (request.readyState == 4 && request.status == 200) {
             var text = request.responseText;
             if (text == "success") {
-                swal("", "Promotion added", "success");
+                swal("", "Promotion added", "success").then(() => {
+                    window.location = 'add-promotion.php';
+                });
             } else {
                 swal("", text, "error");
             }
@@ -1182,6 +1688,7 @@ function upadtePromotion(proID) {
 
 // assign promotions with tour packages
 function getPackageList() {
+    var promoId = document.getElementById("promo-id").innerText;
     var packageIdList = document.getElementsByName("selection");
     var selectedPackageList = [];
 
@@ -1190,6 +1697,43 @@ function getPackageList() {
             selectedPackageList.push(packageIdList[x].value);
         }
     }
+
+    if (selectedPackageList.length > 0) {
+        document.getElementById("selectedIdList-" + promoId).innerHTML = selectedPackageList.join(", ");
+    } else {
+        swal("", "Select packages", "warning");
+    }
+}
+
+// assign promotions with tour packages - database intercation
+function assignPackagePromo(promoID) {
+    var promoID = promoID;
+    var packageIdList = document.getElementById("selectedIdList-" + promoID).innerText;
+
+    var packageIds = packageIdList.split(", ").map(id => id.trim());
+
+    var dataObject = new Object();
+    dataObject.promoID = promoID;
+    dataObject.packageIds = packageIds;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                swal("", "Assigned success", "success");
+            } else {
+                swal("", text, "error");
+            }
+        }
+    };
+    request.open("POST", "assignPromoPackage.php", true);
+    request.send(form);
 }
 
 // update promotion validity/ status
@@ -1221,37 +1765,171 @@ function upadtePromotionStatus(proID, status) {
     request.send(form);
 }
 
+// assign one vehicle for one booking
+function setVehicleBooking(bookingId) {
+    var bookingId = bookingId;
+    var vehicleList = document.getElementsByName("available-vehicle");
+    var assignedVehicleId;
+
+    for (var x = 0; x < vehicleList.length; x++) {
+        if (vehicleList[x].checked) {
+            assignedVehicleId = vehicleList[x].value;
+        }
+    }
+
+    var dataObject = new Object();
+    dataObject.bookingId = bookingId;
+    dataObject.assignedVehicleId = assignedVehicleId;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            var text = request.responseText;
+            if (text == "success") {
+                swal("", "Assigned success", "success");
+            } else {
+                swal("", text, "error");
+            }
+        } else {
+            swal("", "Something went wrong...", "error");
+        }
+    }
+    request.open("POST", "setVehicleProcess.php", true);
+    request.send(form);
+}
+
+// image preview 
+function previewImage() {
+    // Get elements
+    const previewIcon = document.querySelector('.preview-icon');
+    const modal = document.getElementById('imagePreviewModal');
+    const modalImage = document.getElementById('previewImage');
+    const largeImage = document.getElementById('large-image');
+    const closeModal = document.querySelector('.close');
+
+    // Open modal with the large image
+    previewIcon.addEventListener('click', () => {
+        modal.style.display = 'block';
+        modalImage.src = largeImage.src;
+    });
+
+    // Close modal
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the image
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+// set the large image by small images
+function setImage(smImageId) {
+    var smImageSrc = document.getElementById(smImageId).src;
+    document.getElementById("large-image").src = smImageSrc;
+}
+
+// generate full report
+function generateFullReport() {
+    var startDate = document.getElementById("full-report-st-date");
+    var endDate = document.getElementById("full-report-ed-date");
+
+    // Check if the elements exist and have values
+    if (!startDate || !endDate || !startDate.value || !endDate.value) {
+        swal("", "Please select both start and end dates.", "warning");
+        return;
+    }
+
+    var form = new FormData();
+    form.append("startDate", startDate.value);
+    form.append("endDate", endDate.value);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
+                // Parse the JSON data
+                var response = JSON.parse(request.responseText);
+
+                if (response.html) {
+                    document.getElementById("full-report-section").innerHTML = response.html;
+                }
+
+                if (response.chartData && response.chartData.packageNameList && response.chartData.packageBookingCountList) {
+                    // call for displaying bar chart
+                    displayHardcodedChartForFullReport(
+                        response.chartData.packageNameList,
+                        response.chartData.packageBookingCountList
+                    );
+
+                } else {
+                    console.error("Invalid data structure in response - Bar Chart.");
+                }
+
+                if (response.groupedChartData.months && response.groupedChartData.incomeData && response.groupedChartData.expenseData) {
+                    // call for displaying grouped bar chart
+                    displayGroupedBarChartForFullReport(
+                        response.groupedChartData.months,
+                        response.groupedChartData.incomeData,
+                        response.groupedChartData.expenseData
+                    );
+                }
+            } else {
+                swal("", "Failed to generate the report. Please try again.", "error");
+            }
+        }
+    };
+    request.open("POST", "generateFulReportProcess.php", true);
+    request.send(form);
+}
+
+// export html content to a PDF file
+async function exportToPdf() {
+    const element = document.getElementById('full-report-section');
+    html2pdf().from(element).save('full-report-RomaRadience.pdf');
+
+    swal("", "Downloaded", "success");
+}
+
 // visual bar charts
-// bar chart
-function displayHardcodedChart() {
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'bar',
+
+// bar chart for full report
+function displayHardcodedChartForFullReport(packageNameList, packageBookingCountList) {
+    const canvas = document.getElementById("full-report-myChart");
+    const ctx = canvas.getContext("2d");
+    canvas.height = 100;
+
+    const barChart = new Chart(ctx, {
+        type: "bar",
         data: {
-            labels: ['Package A', 'Package B', 'Package C', 'Package D', 'Package E', 'Package F'],
+            labels: packageNameList,
             datasets: [{
-                label: 'Demanding Tour Packages',
-                data: [500, 1000, 197, 800, 500, 200], // Hardcoded values
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                label: "Booking count",
+                data: packageBookingCountList,
+                backgroundColor: 'rgba(14, 151, 172, 0.4)',
+                borderColor: 'rgb(9, 78, 88)',
                 borderWidth: 1
             }]
         },
         options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Package Booking Counts'
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true
@@ -1259,63 +1937,379 @@ function displayHardcodedChart() {
             }
         }
     });
+}
+
+// grouped bar chart for full report
+function displayGroupedBarChartForFullReport(months, incomeData, expenseData) {
+    const ctx = document.getElementById('full-report-groupChart').getContext('2d');
+    const groupedBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: months, // Dynamically set months from the response
+            datasets: [{
+                    label: 'Profit (in USD)',
+                    data: incomeData.map((income, index) => income - expenseData[index]), // Calculate profit dynamically
+                    backgroundColor: 'rgba(14, 151, 172, 0.4)',
+                    borderColor: 'rgb(9, 78, 88)',
+                    borderWidth: 1,
+                },
+                {
+                    label: 'Expenses (in USD)',
+                    data: expenseData, // Set expenses from the response
+                    backgroundColor: 'rgba(8, 91, 104, 0.43)',
+                    borderColor: 'rgb(2, 24, 27)',
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Amount (in USD)',
+                    },
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Months',
+                    },
+                },
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: $${context.raw.toLocaleString()}`;
+                        },
+                    },
+                },
+            },
+        },
+    });
+}
+
+
+// bar chart for reports
+function barChartForReporting() {
+    const canvas = document.getElementById('myChart');
+    const ctx = canvas.getContext('2d');
+
+    canvas.height = 100;
+
+    // get the real data from the database
+    var dataObject = new Object();
+    dataObject.fromDate = "";
+    dataObject.toDate = "";
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+
+            try {
+                const convertedObject = JSON.parse(request.responseText);
+
+                const pieChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: convertedObject.packageNameList,
+                        datasets: [{
+                            label: 'Booking count',
+                            data: convertedObject.packageBookingCountList,
+                            backgroundColor: 'rgba(14, 151, 172, 0.4)',
+                            borderColor: 'rgb(9, 78, 88)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error("Error parsing server response:", e.message);
+            }
+        }
+    };
+    request.open("POST", "fetch-Realdata-bar-Process.php", true);
+    request.send(form);
+}
+
+// bar chart
+function displayHardcodedChart() {
+    const canvas = document.getElementById('myChart');
+    const ctx = canvas.getContext('2d');
+
+    canvas.height = 500;
+
+    // get the real data from the database
+    var dataObject = new Object();
+    dataObject.fromDate = "";
+    dataObject.toDate = "";
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+
+            try {
+                const convertedObject = JSON.parse(request.responseText);
+
+                const pieChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: convertedObject.packageNameList,
+                        datasets: [{
+                            label: 'Booking count',
+                            data: convertedObject.packageBookingCountList,
+                            backgroundColor: 'rgba(14, 151, 172, 0.4)',
+                            borderColor: 'rgb(9, 78, 88)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error("Error parsing server response:", e.message);
+            }
+        }
+    };
+    request.open("POST", "fetch-Realdata-bar-Process.php", true);
+    request.send(form);
 }
 
 // line chart
 function displayLineChart() {
-    const ctx = document.getElementById('lineChart').getContext('2d');
-    const lineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octomber', 'November', 'December'],
-            datasets: [{
-                label: 'Monthly Customers',
-                data: [200, 150, 140, 300, 500, 200, 100, 400, 350, 400, 380, 400], // Hardcoded values for line chart
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 2,
-                fill: true // Set to true to fill the area under the line
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+    var dateFrom = document.getElementById("date-from");
+    var dateTo = document.getElementById("date-to");
+    const canvas = document.getElementById('lineChart');
+    const ctx = canvas.getContext('2d');
+
+    // Set the canvas size to 0 (hidden state) initially
+    canvas.style.width = "800px";
+    canvas.style.height = "400px";
+
+    var dataObject = new Object();
+    dataObject.dateFrom = dateFrom.value;
+    dataObject.dateTo = dateTo.value;
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            try {
+                // Parse the server's JSON response
+                var response = JSON.parse(request.responseText);
+
+                // Validate response data
+                if (response.error) {
+                    console.error(response.error);
+                    swal("", response.error, "warning");
+                    return;
                 }
+
+                const monthNames = [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+
+                const monthYearLabels = response.monthList.map(item => {
+                    const [year, month] = item.split('-'); // Assume format is "YYYY-MM"
+                    return `${monthNames[parseInt(month, 10) - 1]} ${year}`; // Convert month and add year
+                });
+
+                // Dynamically set canvas size (e.g., 800px by 400px)
+                canvas.width = 800;
+                canvas.height = 400;
+
+                const lineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: monthYearLabels, // Use "Month Year" labels
+                        datasets: [{
+                            label: 'Monthly Customers',
+                            data: response.monthlyBookingCountList, // Use booking counts
+                            backgroundColor: 'rgba(14, 151, 172, 0.4)',
+                            borderColor: 'rgb(9, 78, 88)',
+                            borderWidth: 2,
+                            fill: true // Fill the area under the line
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error("Error processing response: ", e.message);
             }
         }
-    });
+    }
+    request.open("POST", "salesTrackingProcess.php", true);
+    request.send(form);
 }
 
-// profit diaplying bar chart
+
+// income and expences bar chart
 function displayGroupedBarChart() {
-    const ctx = document.getElementById('groupedBarChart').getContext('2d');
-    const groupedBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octomber', 'November', 'December'],
-            datasets: [{
-                    label: 'Profit (in USD)',
-                    data: [8000, 12000, 4000, 7000, 3000, 5000], // Hardcoded values for profit
-                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Expenses (in USD)',
-                    data: [4000, 7000, 2000, 3000, 1000, 2000], // Hardcoded values for expenses
-                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+    const canvas = document.getElementById('groupedBarChart');
+    const ctx = canvas.getContext('2d');
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+            // Parse the response data
+            const responseData = JSON.parse(request.responseText);
+
+            // Validate the response data structure
+            if (responseData && responseData.monthList && responseData.incomeList && responseData.expenseList) {
+                // Create the chart
+                const groupedBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: responseData.monthList, // Dynamic month labels from the response
+                        datasets: [{
+                                label: 'Income (in LKR)',
+                                data: responseData.incomeList, // Income data
+                                backgroundColor: 'rgba(14, 151, 172, 0.4)',
+                                borderColor: 'rgb(9, 78, 88)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Expenses (in LKR)',
+                                data: responseData.expenseList, // Expense data
+                                backgroundColor: 'rgba(8, 91, 104, 0.43)',
+                                borderColor: 'rgb(2, 24, 27)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Amount (in USD)'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Months'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        }
+                    }
+                });
+            } else {
+                console.error('Invalid data structure received:', responseData);
             }
         }
-    });
+    };
+
+    // Send GET request to fetch data
+    request.open("GET", "fetchExpenceIncomeData.php", true);
+    request.send();
+}
+
+
+
+// display pie chart
+function displayPieChart() {
+    var fromDate;
+    var toDate;
+    const canvas = document.getElementById('pie-chart');
+    const ctx = canvas.getContext('2d');
+
+    canvas.height = 300;
+
+    // get the real data from the database
+    var dataObject = new Object();
+    dataObject.fromDate = "";
+    dataObject.toDate = "";
+
+    var jsonText = JSON.stringify(dataObject);
+
+    var form = new FormData();
+    form.append("jsonText", jsonText);
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+
+            try {
+                const convertedObject = JSON.parse(request.responseText);
+
+                const pieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: convertedObject.packageNameList,
+                        datasets: [{
+                            label: 'Booking Count',
+                            data: convertedObject.packageBookingCountList,
+                            backgroundColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)',
+                                '#605EA1',
+                                '#CA7373',
+                                '#CC2B52',
+                            ],
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                    }
+                });
+            } catch (e) {
+                console.error("Error parsing server response:", e.message);
+            }
+        }
+    };
+    request.open("POST", "fetch-Realdata-Pie-Process.php", true);
+    request.send(form);
 }

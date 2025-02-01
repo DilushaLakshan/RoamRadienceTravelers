@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'connection.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,10 +18,10 @@ session_start();
     if (isset($_SESSION["user"])) {
         $uID = $_SESSION["user"]->id;
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
                 <?php include 'back-header.php'; ?>
-                <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-3">
+                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 mt-3 mb-3 hotel-detail-form">
                     <div class="row">
                         <div class="col-12">
                             <center>
@@ -33,7 +34,7 @@ session_start();
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Hotel Name</label>
+                                    <label class="att-name">Hotel Name</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="text" class="w-100" id="h-name">
@@ -43,7 +44,7 @@ session_start();
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Address</label>
+                                    <label class="att-name">Address</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="text" class="w-100" id="h-address">
@@ -53,7 +54,7 @@ session_start();
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Email</label>
+                                    <label class="att-name">Email</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="email" class="w-100" id="h-email">
@@ -63,7 +64,7 @@ session_start();
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Contact</label>
+                                    <label class="att-name">Contact</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="text" class="w-100" id="h-contact">
@@ -73,7 +74,7 @@ session_start();
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">No. of Rooms</label>
+                                    <label class="att-name">No. of Rooms</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="number" class="w-100" id="h-rooms">
@@ -83,7 +84,7 @@ session_start();
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Rooms Numbers</label>
+                                    <label class="att-name">Rooms Numbers</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <div class="row">
@@ -107,7 +108,7 @@ session_start();
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Price Per. Room (LKR)</label>
+                                    <label class="att-name">Price Per. Room (LKR)</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="number" class="w-100" id="h-price">
@@ -117,10 +118,10 @@ session_start();
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                    <button class="btn sbt-button">Clear</button>
+                                    <button class="btn">Clear</button>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                    <button class="btn sbt-button" onclick="addHotel();">Add</button>
+                                    <button class="btn" onclick="addHotel();">Add</button>
                                 </div>
                             </div>
                         </div>

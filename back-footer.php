@@ -10,10 +10,10 @@
 
 <body>
     <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start">
+    <footer class="text-center text-lg-start footer-main-content">
         <div class="container p-4">
-            <div class="text-center bg-light">
-                <small>© 2024 Company Name. All rights reserved.</small>
+            <div class="text-center">
+                <small>© 2024 RoamRadience. All rights reserved.</small>
             </div>
     </footer>
 

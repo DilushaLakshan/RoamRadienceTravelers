@@ -19,7 +19,7 @@ require 'connection.php';
     if (isset($_SESSION["user"])) {
         $uID = $_SESSION["user"]->id;
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
                 <?php
                 include 'back-header.php';
@@ -32,7 +32,7 @@ require 'connection.php';
                     if ($desNumRows == 1) {
                         $desData = $desResultSet->fetch_assoc();
                 ?>
-                        <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-3">
+                        <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-3 upd-des-main">
                             <div class="row">
                                 <div class="col-12">
                                     <center>
@@ -45,7 +45,7 @@ require 'connection.php';
                                 <div class="col-12 mt-3">
                                     <div class="row">
                                         <div class="col-12 col-md-4 col-lg-4">
-                                            <label class="descriptions">Destination Name</label>
+                                            <label class="attribute-name">Destination Name</label>
                                         </div>
                                         <div class="col-12 col-md-8 col-lg-8">
                                             <input type="text" class="w-100" id="name" value="<?php echo $desData["name"]; ?>">
@@ -55,7 +55,7 @@ require 'connection.php';
                                 <div class="col-12 mt-3">
                                     <div class="row">
                                         <div class="col-12 col-md-4 col-lg-4">
-                                            <label class="descriptions">Description</label>
+                                            <label class="attribute-name">Description</label>
                                         </div>
                                         <div class="col-12 col-md-8 col-lg-8">
                                             <textarea name="description" id="description" rows="10" class="w-100"><?php echo $desData["description"]; ?></textarea>
@@ -65,7 +65,7 @@ require 'connection.php';
                                 <div class="col-12 mt-2">
                                     <div class="row">
                                         <div class="col-12 col-md-4 col-lg-4">
-                                            <span class="descriptions">Main Image:</span>
+                                            <span class="attribute-name">Main Image:</span>
                                         </div>
                                         <div class="col-12 col-md-8 col-lg-8 mt-2">
                                             <div class="row">
@@ -99,13 +99,13 @@ require 'connection.php';
                                 <div class="col-12 mt-3 mb-3">
                                     <div class="row">
                                         <div class="col-6 col-md-2 col-lg-2 offset-6 offset-md-10 offset-lg-10 mt-3">
-                                            <a href="ownerHome.php" class="descriptions">back to home</a>
+                                            <a href="ownerHome.php">back to home</a>
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                            <button class="btn sbt-button">Clear</button>
+                                            <button class="btn">Clear</button>
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                            <button class="btn sbt-button" onclick="updateDestination(<?php echo $desID; ?>);">Save Changes</button>
+                                            <button class="btn" onclick="updateDestination(<?php echo $desID; ?>);">Save Changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -123,6 +123,7 @@ require 'connection.php';
     }
     ?>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
 
@@ -130,7 +131,6 @@ require 'connection.php';
     <script>
         CKEDITOR.replace('description');
     </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>

@@ -17,12 +17,12 @@ require 'connection.php';
     <?php
     if (isset($_SESSION["user"]) && isset($_GET["proID"])) {
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
                 <div class="container-fluid">
                     <div class="row">
                         <?php include 'back-header.php'; ?>
-                        <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-5">
+                        <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 mt-2 mb-5 update-promotion-form-container">
                             <div class="row">
                                 <div class="col-12">
                                     <center>
@@ -55,7 +55,7 @@ require 'connection.php';
                                                 <label class="descriptions">Description</label>
                                             </div>
                                             <div class="col-12 col-md-8 col-lg-8">
-                                                <textarea name="description" id="description" rows="10" class="w-100"><?php echo $promotionData["header_text"]; ?></textarea>
+                                                <textarea name="description" id="description" rows="10" class="w-100"><?php echo $promotionData["details"]; ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -138,10 +138,10 @@ require 'connection.php';
                                     <div class="col-12 mt-3">
                                         <div class="row">
                                             <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                                <button class="btn sbt-button">Clear</button>
+                                                <button class="btn">Clear</button>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                                <button class="btn sbt-button" onclick="upadtePromotion(<?php echo $proID; ?>);">Save changes</button>
+                                                <button class="btn" onclick="upadtePromotion(<?php echo $proID; ?>);">Save changes</button>
                                             </div>
                                         </div>
                                     </div>

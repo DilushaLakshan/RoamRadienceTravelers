@@ -27,13 +27,12 @@ require 'connection.php';
             ?>
 
             <!-- main banner -->
-            <div class="col-12 mt-3">
-                <div class="card text-bg-dark banner-image-contanier">
-                    <img src="resources/images/hero-image.jpg" class="card-img banner-image" alt="...">
-                    <div class="card-img-overlay">
-                        <h3 class="card-title">Free up your mind</h3>
-                        <p class="card-text">Let's travel</p>
-                        <button class="btn banner-image-button">Explore Journeys</button>
+            <div class="col-12 col-md-10 col-lg-10 offset-md-2 offset-lg-2 mt-3 mb-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="promo-banner-image-contanier">
+                            <img src="resources/images/package-c.jpg" alt="hero-image">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,33 +120,6 @@ require 'connection.php';
                                     </div>
                                     <div class="col-12">
                                         <div class="row">
-                                            <?php
-                                            $activityResultSet = Database::search("SELECT * FROM `activity_type`");
-                                            $activityNumRows = $activityResultSet->num_rows;
-                                            if ($activityNumRows > 0) {
-                                                for ($e = 0; $e < $activityNumRows; $e++) {
-                                                    $activityData = $activityResultSet->fetch_assoc();
-                                            ?>
-                                                    <div class="col-12 mt-2">
-                                                        <div class="row">
-                                                            <div class="col-2">
-                                                                <input type="checkbox" name="activity-type" value=<?php echo $activityData["id"]; ?>>
-                                                            </div>
-                                                            <div class="col-10">
-                                                                <label><?php echo $activityData["name"]; ?></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                <?php
-                                                }
-                                            } else {
-                                                ?>
-                                                <div class="col-12 mt-2">
-                                                    <span><i>No data</i></span>
-                                                </div>
-                                            <?php
-                                            }
-                                            ?>
                                             <div class="col-12 mt-3 p-5">
                                                 <button class="btn package-button" onclick="appplyFilters();">Apply Filters</button>
                                             </div>
@@ -235,8 +207,8 @@ require 'connection.php';
                                                                                     }
                                                                                 }
                                                                                 ?>
-                                                                        <span>
-                                                                            Destinations :
+                                                                        <p>
+                                                                            <b>Destinations :</b>
                                                                             <?php
                                                                             if (!empty($desNamesList)) {
                                                                                 for ($a = 0; $a < sizeof($desNamesList); $a++) {
@@ -246,15 +218,15 @@ require 'connection.php';
                                                                                 echo "<i>No data</i>";
                                                                             }
                                                                             ?>
-                                                                        </span>
+                                                                        </p>
                                                                         <?php
                                                                         ?>
                                                                     </div>
                                                                     <div class="col-12 mt-3">
                                                                         <div class="row">
                                                                             <div class="col-12 col-md-6 col-lg-6">
-                                                                                <span>
-                                                                                    Duration -
+                                                                                <p>
+                                                                                    <b>Duration : </b>
                                                                                     <?php
                                                                                     // get the duration data
                                                                                     $durationResultSet = Database::search("SELECT * FROM `duration` WHERE `id`='" . $tourPackageData['duration_id'] . "'");
@@ -266,19 +238,25 @@ require 'connection.php';
                                                                                         echo "<i>No data</i>";
                                                                                     }
                                                                                     ?>
-                                                                                </span>
+                                                                                </p>
                                                                             </div>
                                                                             <div class="col-12 col-md-6 col-lg-6">
-                                                                                <span>Price - <?php echo $tourPackageData["price"]; ?> LKR</span>
+                                                                                <p><b>Price : </b> <?php echo $tourPackageData["price"]; ?> LKR</p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-12 mt-3">
                                                                         <div class="row">
                                                                             <div class="col-12">
-                                                                                <span>Operating Languages - English/ Sinhala</span>
+                                                                                <p><b>Operating Languages : </b> - English/ Sinhala</p>
                                                                             </div>
                                                                         </div>
+                                                                    </div>
+                                                                    <div class="col-12 mt-1 text-end">
+                                                                        <img class="package-icon" src="resources/icons/bedroom.svg" alt="">
+                                                                        <img class="package-icon ms-2" src="resources/icons/fork-kinfe.svg" alt="">
+                                                                        <img class="package-icon ms-2" src="resources/icons/transport.svg" alt="">
+                                                                        <img class="package-icon ms-2" src="resources/icons/support.svg" alt="">
                                                                     </div>
                                                                     <div class="col-12 mt-3">
                                                                         <div class="row">

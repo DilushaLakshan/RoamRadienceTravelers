@@ -18,10 +18,10 @@ require 'connection.php';
     if (isset($_SESSION["user"])) {
         $uID = $_SESSION["user"]->id;
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
                 <?php include 'back-header.php'; ?>
-                <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-3">
+                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 mt-2 mb-3 stf-member-list">
                     <div class="row">
                         <div class="col-12">
                             <center>
@@ -54,33 +54,34 @@ require 'connection.php';
 
                                 <!-- details -->
                                 <div class="col-12">
-                                    <div class="row">
-                                        <?php
-                                        $staffResultSet = Database::search("SELECT * FROM `staff_member_new`");
-                                        $staffNumRows = $staffResultSet->num_rows;
-                                        if ($staffNumRows > 0) {
-                                            for ($x = 0; $x < $staffNumRows; $x++) {
-                                                $staffData = $staffResultSet->fetch_assoc();
-                                        ?>
-                                                <div class="col-12 mt-2">
-                                                    <div class="row">
+                                    <div class="scrollable-section">
+                                        <div class="row">
+                                            <?php
+                                            $staffResultSet = Database::search("SELECT * FROM `staff_member_new`");
+                                            $staffNumRows = $staffResultSet->num_rows;
+
+                                            if ($staffNumRows > 0) {
+                                                for ($x = 0; $x < $staffNumRows; $x++) {
+                                                    $staffData = $staffResultSet->fetch_assoc();
+                                            ?>
+                                                    <div class="col-12 member-row">
                                                         <div class="col-4">
-                                                            <span class="descriptions"><?php echo ($staffData["first_name"] . " " . $staffData["last_name"]); ?></span>
+                                                            <span class="m-detail"><?php echo ($staffData["first_name"] . " " . $staffData["last_name"]); ?></span>
                                                         </div>
                                                         <div class="col-4">
-                                                            <span lass="descriptions"><?php echo ($staffData["role"]); ?></span>
+                                                            <span class="m-detail"><?php echo ($staffData["role"]); ?></span>
                                                         </div>
                                                         <div class="col-4">
-                                                            <button class="btn sbt-button" onclick="window.location = 'one-member.php?memberID=<?php echo $staffData['id']; ?>'">
+                                                            <button class="btn" onclick="window.location = 'one-member.php?memberID=<?php echo $staffData['id']; ?>'">
                                                                 View
                                                             </button>
                                                         </div>
                                                     </div>
-                                                </div>
-                                        <?php
+                                            <?php
+                                                }
                                             }
-                                        }
-                                        ?>
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

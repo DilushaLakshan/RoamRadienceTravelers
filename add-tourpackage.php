@@ -19,10 +19,10 @@ require 'connection.php';
     if (isset($_SESSION["user"])) {
         $uID = $_SESSION["user"]->id;
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
                 <?php include 'back-header.php'; ?>
-                <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-3">
+                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 mt-2 mb-3 package-form-container">
                     <div class="row">
                         <div class="col-12">
                             <center>
@@ -35,7 +35,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Name of the Package</label>
+                                    <label class="att-name">Name of the Package</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="text" class="w-100" id="name">
@@ -45,7 +45,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Price</label>
+                                    <label class="att-name">Price (per. 1 person)</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="number" class="w-100" id="price">
@@ -55,7 +55,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Header Text</label>
+                                    <label class="att-name">Header Text</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="text" class="w-100" id="h-text">
@@ -65,7 +65,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Description</label>
+                                    <label class="att-name">Description</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <textarea name="description" id="description" rows="15" class="w-100"></textarea>
@@ -75,7 +75,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Select the Destinations</label>
+                                    <label class="att-name">Select the Destinations</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <div class="row">
@@ -94,36 +94,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Number of Vehicles</label>
-                                </div>
-                                <div class="col-12 col-md-8 col-lg-8">
-                                    <input type="number" class="w-100" id="no-of-vehicles">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-3">
-                            <div class="row">
-                                <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Select the Vehicles</label>
-                                </div>
-                                <div class="col-12 col-md-8 col-lg-8">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <button type="button" class="btn sbt-button" data-bs-toggle="modal" data-bs-target="#vehicle-selection-model">
-                                                Click here to select vehicles
-                                            </button>
-                                        </div>
-                                        <div class="col-12">
-                                            <span id="v-id-list" class="descriptions"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-3">
-                            <div class="row">
-                                <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Select the Hotel</label>
+                                    <label class="att-name">Select the Hotel</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <button type="button" class="btn sbt-button" data-bs-toggle="modal" data-bs-target="#hotel-selection-model">
@@ -138,7 +109,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Duration</label>
+                                    <label class="att-name">Duration</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <div class="row">
@@ -150,7 +121,7 @@ require 'connection.php';
                                                 $durationData = $durationResultSet->fetch_assoc();
                                         ?>
                                                 <div class="col-6 col-md-4 col-lg-4">
-                                                    <input type="radio" name="duration" value="<?php echo $durationData['id']; ?>"> <?php echo $durationData["name"]; ?>
+                                                    <input type="radio" name="duration" value="<?php echo $durationData['id']; ?>" required> <?php echo $durationData["name"]; ?>
                                                 </div>
                                         <?php
                                             }
@@ -163,7 +134,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Activities Type</label>
+                                    <label class="att-name">Activities Type</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <div class="col-12 col-md-8 col-lg-8">
@@ -190,7 +161,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Included services</label>
+                                    <label class="att-name">Included services</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <div class="col-12 col-md-8 col-lg-8">
@@ -223,8 +194,8 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Highlights</label><br>
-                                    <span class="descriptions"><i>(Use ',' to seperate sentences)</i></span>
+                                    <label class="att-name">Highlights</label><br>
+                                    <span class="att-name"><i>(Use ',' to seperate sentences)</i></span>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <textarea name="" id="highlight" rows="10" class="w-100"></textarea>
@@ -234,7 +205,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Total Milage (KM)</label>
+                                    <label class="att-name">Total Milage (KM)</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="number" class="w-100" id="milage">
@@ -244,12 +215,12 @@ require 'connection.php';
                         <div class="col-12 mt-2">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <span class="descriptions">Main Image:</span>
+                                    <span class="att-name">Main Image:</span>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8 mt-2">
                                     <div class="row">
                                         <div class="col-12">
-                                            <input class="form-control w-100" type="file" id="main-image" accept=".png, .jpg, .jpeg" onclick="mainImagePreview();">
+                                            <input class="form-control w-100" type="file" id="main-image" accept=".png, .jpg, .jpeg, .webp" onclick="mainImagePreview();">
                                         </div>
                                         <div class="col-12 mt-2">
                                             <center><img alt="" id="m-image" style="width: 300px; height: 400px; object-fit: cover;" class="img-fluid rounded-2" src="resources/images/default -image.svg"></center>
@@ -258,10 +229,10 @@ require 'connection.php';
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 mt-2">
+                        <!-- <div class="col-12 mt-2">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <span class="descriptions">Other Images:</span>
+                                    <span class="att-name">Other Images:</span>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8 mt-2">
                                     <div class="row">
@@ -287,26 +258,25 @@ require 'connection.php';
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-12 mt-3 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                    <button class="btn sbt-button">Clear</button>
+                                    <button class="btn">Clear</button>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                    <button class="btn sbt-button" onclick="addTourPackage();">ADD</button>
+                                    <button class="btn" onclick="addTourPackage();">ADD</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- destination selecttion model -->
+                        <!-- destination selection model -->
                         <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2">
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title stf-sub-heading fs-5" id="exampleModalLabel">Select the list of destinations</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <div class="col-12">
@@ -318,7 +288,7 @@ require 'connection.php';
                                                         for ($x = 0; $x < $destinationNumRows; $x++) {
                                                             $destinationData = $destinationResultSet->fetch_assoc();
                                                     ?>
-                                                            <div class="col-12 col-md-4 col-lg-4">
+                                                            <div class="col-6 col-md-4 col-lg-4">
                                                                 <div class="card w-100 border-0">
                                                                     <?php
                                                                     $imageResultSet = Database::search("SELECT * FROM `destination_photo` WHERE `destination_id`='" . $destinationData['id'] . "' LIMIT 1");
@@ -357,77 +327,29 @@ require 'connection.php';
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn sbt-button" onclick="getDestinationIDs();">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- destination selecttion model -->
-
-                        <!-- vehicle selection model -->
-                        <div class="modal fade" id="vehicle-selection-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title stf-sub-heading fs-5" id="exampleModalLabel">Select Vehicles</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="col-12">
-                                            <div class="row">
-                                                <?php
-                                                $vehicleResultSet = Database::search("SELECT * FROM `vehicle`");
-                                                $vehicleNumRows = $vehicleResultSet->num_rows;
-                                                if ($vehicleNumRows > 0) {
-                                                    for ($a = 0; $a < $vehicleNumRows; $a++) {
-                                                        $vehicleData = $vehicleResultSet->fetch_assoc();
-                                                ?>
-                                                        <div class="col-12">
-                                                            <div class="row">
-                                                                <div class="col-2">
-                                                                    <input type="checkbox" name="v-id" value="<?php echo $vehicleData['id']; ?>">
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <span class="descriptions"><?php echo $vehicleData["number"]; ?></span>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <span class="descriptions"><?php echo $vehicleData["type"]; ?></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <div class="col-12">
-                                                        <center>
-                                                            <span class="descriptions"><i>No results found</i></span>
-                                                        </center>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-12 col-md-3 col-lg-3 offset-md-6 offset-lg-6">
+                                                        <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
                                                     </div>
-                                                <?php
-                                                }
-                                                ?>
+                                                    <div class="col-12 col-md-3 col-lg-3">
+                                                        <button type="button" class="btn sbt-button" onclick="getDestinationIDs();">Save changes</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn sbt-button" onclick="getVehicleIDs();">Save changes</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- vehicle selection model -->
+                        <!-- destination selection model -->
 
                         <!-- hotel selection model -->
-                        <div class="modal fade" id="hotel-selection-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+                        <div class="modal fade hotel-selection-model" id="hotel-selection-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
                             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title stf-sub-heading fs-5" id="exampleModalLabel">Modal title</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="col-12">
@@ -445,10 +367,10 @@ require 'connection.php';
                                                                     <input type="checkbox" name="hotel" value="<?php echo $hotelData['id']; ?>">
                                                                 </div>
                                                                 <div class="col-6">
-                                                                    <span class="descriptions"><?php echo $hotelData["name"]; ?></span>
+                                                                    <p class="descriptions"><?php echo $hotelData["name"]; ?></p>
                                                                 </div>
                                                                 <div class="col-4">
-                                                                    <span class="descriptions"><?php echo $hotelData["address"]; ?></span>
+                                                                    <p class="descriptions"><?php echo $hotelData["address"]; ?></p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -466,8 +388,16 @@ require 'connection.php';
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn sbt-button" onclick="getHotelIDs();">Save changes</button>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-12 col-md-3 col-lg-3 offset-md-6 offset-lg-6">
+                                                    <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                                <div class="col-12 col-md-3 col-lg-3">
+                                                    <button type="button" class="btn sbt-button" onclick="getHotelIDs();">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

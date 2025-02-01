@@ -18,15 +18,13 @@ require 'connection.php';
     if (isset($_SESSION["user"])) {
         $uID = $_SESSION["user"]->id;
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
                 <?php include 'back-header.php'; ?>
-                <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-3">
+                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 mt-2 mb-3 stf-reg">
                     <div class="row">
                         <div class="col-12">
-                            <center>
-                                <h4 class="stf-sub-heading">Sign Up - Staff</h4>
-                            </center>
+                            <h4 class="stf-sub-heading">Sign Up - Staff</h4>
                         </div>
                         <div class="col-12">
                             <hr>
@@ -34,7 +32,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">First Name</label>
+                                    <label>First Name</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="text" class="staff-registration-input" id="fName">
@@ -44,7 +42,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Last Name</label>
+                                    <label>Last Name</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="text" class="staff-registration-input" id="lName">
@@ -54,7 +52,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Email</label>
+                                    <label>Email</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="email" class="staff-registration-input" id="email">
@@ -64,7 +62,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Password</label>
+                                    <label>Password</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="password" class="staff-registration-input" id="password">
@@ -74,7 +72,7 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Role</label>
+                                    <label>Role</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <select name="role" id="role" class="staff-registration-input descriptions">
@@ -90,16 +88,16 @@ require 'connection.php';
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <label class="descriptions">Contact</label>
+                                    <label>Contact</label>
                                 </div>
                                 <div class="col-12 col-md-8 col-lg-8">
                                     <input type="mobile" class="staff-registration-input" id="contact">
                                     <div class="row mt-5">
                                         <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                            <button class="btn sbt-button">Clear</button>
+                                            <button class="btn">Clear</button>
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                            <button class="btn sbt-button" onclick="registerStaff();">Sign Up</button>
+                                            <button class="btn" onclick="registerStaff();">Sign Up</button>
                                         </div>
                                     </div>
                                 </div>

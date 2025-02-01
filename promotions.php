@@ -11,6 +11,7 @@ require 'connection.php';
     <title>Available Promotions</title>
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 </head>
 
 <body>
@@ -26,20 +27,11 @@ require 'connection.php';
             }
             ?>
             <!-- banner -->
-            <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 mt-3">
+            <div class="col-12 col-md-10 col-lg-10 offset-md-2 offset-lg-2 mt-3 mb-3">
                 <div class="row">
                     <div class="col-12">
-                        <div class="banner-image-contanier">
-                            <section class="home">
-                                <img src="resources/images/landing.png" class="video-slide banner-image" alt="hero-image">
-                                <div class="content">
-                                    <div class="col-12 col-md-6 col-lg-6">
-                                        <h1>Wonderful <br> <span>Island</span></h1>
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi eligendi harum iure culpa dignissimos quos vero atque laborum, alias assumenda possimus accusamus reprehenderit similique earum voluptatem molestias dolores voluptates delectus?</p>
-                                        <a href="#">Read more</a>
-                                    </div>
-                                </div>
-                            </section>
+                        <div class="promo-banner-image-contanier">
+                            <img src="resources/images/promo-c.png" alt="hero-image">
                         </div>
                     </div>
                 </div>
@@ -47,7 +39,7 @@ require 'connection.php';
             <!-- banner -->
 
             <!-- promotion cards -->
-            <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1">
+            <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 promo-list-container-front">
                 <div class="row">
                     <div class="col-12">
                         <h5 class="sub-heading">Available promotions</h5>
@@ -59,7 +51,8 @@ require 'connection.php';
                         for ($a = 0; $a < $promotionNumRows; $a++) {
                             $promotionData = $promotionResultSet->fetch_assoc();
                     ?>
-                            <div class="col-12 mt-2">
+                            <div class="col-12 mt-2" data-aos="fade-up"
+                                data-aos-delay="<?php echo $a * 300; ?>">
                                 <div class="card promotion-card">
                                     <div class="card-body">
                                         <div class="col-12">
@@ -83,11 +76,11 @@ require 'connection.php';
                                                             <h5 class="card-title"><?php echo $promotionData["header_text"]; ?></h5>
                                                         </div>
                                                         <div class="col-12">
-                                                            <span class="card-text"><b>Discount</b> - <?php echo $promotionData["discount"]; ?> off</span><br><br>
-                                                            <span class="card-text"><?php echo $promotionData["details"]; ?></span>
+                                                            <p class="card-text"><b>Discount</b> - <?php echo $promotionData["discount"]; ?>% off</p>
+                                                            <p class="card-text"><?php echo $promotionData["details"]; ?></p>
                                                         </div>
                                                         <div class="col-12 mt-3">
-                                                            <span class="card-text"><b>Available from </b> <?php echo $promotionData["starting_date"] ?> <b>to </b><?php echo $promotionData["end_date"]; ?></span>
+                                                            <p class="card-text"><b>Available from - </b> <?php echo $promotionData["starting_date"] ?> <b>to - </b><?php echo $promotionData["end_date"]; ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -115,6 +108,7 @@ require 'connection.php';
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
 </body>

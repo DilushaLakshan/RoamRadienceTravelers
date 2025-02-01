@@ -27,7 +27,7 @@ $validity = "true";
 if (isset($_FILES["mainImage"])) {
     $path = $_FILES["mainImage"];
     $extention = $path["type"];
-    $allowedImageExtention = array("image/jpg", "image/png", "image/jpeg");
+    $allowedImageExtention = array("image/jpg", "image/png", "image/jpeg", "image/webp");
     if (in_array($extention, $allowedImageExtention)) {
         $imageFile = $name . uniqid() . ".png";
         move_uploaded_file($path["tmp_name"], "resources/images/" . $imageFile);

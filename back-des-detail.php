@@ -98,7 +98,7 @@ require 'connection.php';
                     </div>
                 </div>
                 <!-- comments -->
-                 <?php include 'back-footer.php'; ?>
+                <?php include 'back-footer.php'; ?>
             </div>
         </div>
     <?php

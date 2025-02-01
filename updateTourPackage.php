@@ -15,8 +15,9 @@ require 'connection.php';
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid back-main-container">
         <div class="row">
+            <?php include 'back-header.php'; ?>
             <?php
             if (isset($_GET["pID"])) {
                 $packageID = $_GET["pID"];
@@ -26,7 +27,7 @@ require 'connection.php';
                 if ($packageNumRows == 1) {
                     $packageData = $packageResultSet->fetch_assoc();
             ?>
-                    <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2">
+                    <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 mt-3 mb-3 update-pkg-form-container">
                         <div class="row">
                             <div class="col-12">
                                 <center>
@@ -98,53 +99,6 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label class="descriptions">Number of Vehicles</label>
-                                    </div>
-                                    <div class="col-12 col-md-8 col-lg-8">
-                                        <input type="number" class="w-100" id="no-of-vehicles" value="<?php echo $packageData['no_of_vehicles']; ?>" disabled>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 mt-3">
-                                <div class="row">
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <label class="descriptions">Select the Vehicles</label>
-                                    </div>
-                                    <div class="col-12 col-md-8 col-lg-8">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <?php
-                                                // get vehicle IDs
-                                                $vehicleResultSet = Database::search("SELECT * FROM `vehicle_has_tour_package` WHERE `tour_package_id`='" . $packageID . "'");
-                                                $vehicleNumRows = $vehicleResultSet->num_rows;
-                                                if ($vehicleNumRows > 0) {
-                                                    for ($a = 0; $a < $vehicleNumRows; $a++) {
-                                                        $vehicleData = $vehicleResultSet->fetch_assoc();
-
-                                                        // get vehicle details from the vehicle relation
-                                                        $vDetailsResultSet = Database::search("SELECT * FROM `vehicle` WHERE `id`='" . $vehicleData['vehicle_id'] . "'");
-                                                        $vDetailsNumRows = $vDetailsResultSet->num_rows;
-                                                        if ($vDetailsNumRows == 1) {
-                                                            $vDetailsData = $vDetailsResultSet->fetch_assoc();
-                                                ?>
-                                                            <span class="descriptions"><?php echo $vDetailsData["number"] . " - " . $vDetailsData["type"] . " / "; ?></span>
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <span class="descriptions"><i>No vehicles...</i></span>
-                                                <?php
-                                                }
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 mt-3">
-                                <div class="row">
-                                    <div class="col-12 col-md-4 col-lg-4">
                                         <label class="descriptions">Selected Hotels</label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
@@ -163,13 +117,13 @@ require 'connection.php';
                                                     if ($hDetailsNumRows == 1) {
                                                         $hDetailsData = $hDetailsResultSet->fetch_assoc();
                                             ?>
-                                                        <span class="descriptions"><?php echo $hDetailsData["name"] . " - " . $hDetailsData["address"] . " <br/> <br/>"; ?></span>
+                                                        <p><?php echo $hDetailsData["name"] . " - " . $hDetailsData["address"] . " <br/> <br/>"; ?></p>
                                                 <?php
                                                     }
                                                 }
                                             } else {
                                                 ?>
-                                                <span class="descriptions"><i>No hotel data...</i></span>
+                                                <p><i>No hotel data...</i></p>
                                             <?php
                                             }
                                             ?>
@@ -314,7 +268,7 @@ require 'connection.php';
                                                 $mData = $mResultSet->fetch_assoc();
                                             ?>
                                                 <div class="col-12">
-                                                    <input class="form-control w-100" type="file" id="main-image" accept=".png, .jpg, .jpeg" onclick="mainImagePreview();">
+                                                    <input class="form-control w-100" type="file" id="main-image" accept=".png, .jpg, .jpeg, .webp" onclick="mainImagePreview();">
                                                 </div>
                                                 <div class="col-12 mt-2">
                                                     <center><img alt="" id="m-image" style="width: 300px; height: 400px; object-fit: cover;" class="img-fluid rounded-2" src="resources/images/<?php echo $mData['source']; ?>"></center>
@@ -404,8 +358,8 @@ require 'connection.php';
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn sbt-button" onclick="getDestinationIDs();">Save changes</button>
+                                                <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn" onclick="getDestinationIDs();">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -419,6 +373,7 @@ require 'connection.php';
                 ?>
             <?php
             }
+            include 'back-footer.php';
             ?>
         </div>
     </div>
@@ -428,6 +383,7 @@ require 'connection.php';
     <script>
         CKEDITOR.replace('description');
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>

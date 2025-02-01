@@ -12,6 +12,7 @@ require 'connection.php';
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 </head>
 
 <body>
@@ -29,7 +30,7 @@ require 'connection.php';
             if (isset($_GET["pID"])) {
                 $packageID = $_GET["pID"];
             ?>
-                <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1">
+                <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 main-container pack-detail-container">
                     <div class="row">
                         <?php
                         // get the tour package details
@@ -41,7 +42,7 @@ require 'connection.php';
                             <div class="col-12 mt-3">
                                 <h3 class="sub-heading"><?php echo $packageData["name"]; ?></h3>
                             </div>
-                            <div class="col-12 mt-2">
+                            <div class="col-12 mt-2 pack-details-front">
                                 <div class="row">
                                     <div class="col-6">
                                         <?php
@@ -99,6 +100,9 @@ require 'connection.php';
                                             <!-- carousel -->
                                             <div class="col-12">
                                                 <div id="carouselExampleSlidesOnly" class="carousel slide main-carousel-package" data-bs-ride="carousel">
+                                                    <div class="preview-icon">
+                                                        <i class="fas fa-expand" onclick="previewImage();"></i>
+                                                    </div>
                                                     <div class="carousel-inner">
                                                         <div class="carousel-item active">
                                                             <?php
@@ -107,7 +111,7 @@ require 'connection.php';
                                                             if ($imageNumRows == 1) {
                                                                 $imageData = $imageResultSet->fetch_assoc();
                                                             ?>
-                                                                <img src="resources/images/<?php echo $imageData['source']; ?>" class="d-block package-carousel-image">
+                                                                <img id="large-image" src="resources/images/<?php echo $imageData['source']; ?>" class="d-block package-carousel-image">
                                                             <?php
                                                             } else {
                                                             ?>
@@ -142,41 +146,35 @@ require 'connection.php';
                                                             <p class="p-description"><img src="resources/images/booking.svg" class="package-include-icon"><b>Book once </b>and share the cost with split payments</p>
                                                         </div>
                                                         <div class="col-12 mt-2">
-                                                            <span class="p-description"><b>Price - </b><?php echo ($packageData["price"] . ".00"); ?> LKR</span>
+                                                            <p class="p-description"><b>Price (per. person) - </b> $ <?php echo ($packageData["price"] . ".00"); ?></p>
                                                         </div>
                                                         <div class="col-12 mt-2">
-                                                            <span class="p-description"><b>Customization - </b><?php echo $packageData["customize"]; ?></span>
-                                                        </div>
-                                                        <div class="col-12 mt-2">
-                                                            <?php
-                                                            $vpResultSet = Database::search("SELECT * FROM `vehicle_has_tour_package` WHERE `tour_package_id`='" . $packageData['id'] . "'");
-                                                            $vpNumRows = $vpResultSet->num_rows;
-                                                            if ($vpNumRows > 0) {
-                                                                // get one record from the result set
-                                                                $vpData = $vpResultSet->fetch_assoc();
-
-                                                                // get vehicle datails
-                                                                $vehicleResultSet = Database::search("SELECT * FROM `vehicle` WHERE `id`='" . $vpData['vehicle_id'] . "'");
-                                                                $vehicleNumRows = $vehicleResultSet->num_rows;
-                                                                if ($vehicleNumRows == 1) {
-                                                                    $vehicleData = $vehicleResultSet->fetch_assoc();
-                                                            ?>
-                                                                    <span class="p-description"><b>Vehicle Type - </b><?php echo $vehicleData["type"]; ?></span>
-                                                            <?php
-                                                                }
-                                                            }
-                                                            ?>
+                                                            <p class="p-description"><b>Customization - </b><?php echo $packageData["customize"]; ?></p>
                                                         </div>
                                                         <div class="col-12 mt-3">
                                                             <div class="collapse" id="slot-availability">
                                                                 <div class="card card-body">
-                                                                    <input type="date" id="checking-date" onchange="checkPackageAvailability(<?php echo $packageID; ?>);">
-                                                                    <span class="p-description mt-3"><b>Availability : <span id="available-status"></span></b></span>
-                                                                    <button
-                                                                        class="btn mt-3"
-                                                                        data-bs-toggle="collapse" data-bs-target="#booking-data" aria-expanded="false" aria-controls="booking-data">
-                                                                        Proceed
-                                                                    </button>
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <span class="p-description">No. of Members</span>
+                                                                        </div>
+                                                                        <div class="col-12 mt-2">
+                                                                            <input type="number" id="booking-members">
+                                                                        </div>
+                                                                        <div class="col-12 mt-3">
+                                                                            <input type="date" id="checking-date" onchange="checkPackageAvailability();">
+                                                                        </div>
+                                                                        <div class="col-12 mt-2">
+                                                                            <p class="p-description mt-3"><b>Availability : <span id="available-status"></span></b></p>
+                                                                        </div>
+                                                                        <div class="col-12 mt-3">
+                                                                            <button
+                                                                                class="btn"
+                                                                                data-bs-toggle="collapse" data-bs-target="#booking-data" aria-expanded="false" aria-controls="booking-data">
+                                                                                Proceed
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -185,12 +183,6 @@ require 'connection.php';
                                                                 <div class="card card-body">
                                                                     <div class="col-12">
                                                                         <div class="row">
-                                                                            <div class="col-12">
-                                                                                <span class="p-description">No. of Members</span>
-                                                                            </div>
-                                                                            <div class="col-12 mt-2">
-                                                                                <input type="number" id="booking-members">
-                                                                            </div>
                                                                             <div class="col-12 mt-2">
                                                                                 <span class="p-description">Description</span>
                                                                             </div>
@@ -215,12 +207,51 @@ require 'connection.php';
                             <!-- left side -->
                             <div class="col-12 col-md-8 col-lg-8 p-details-left">
                                 <div class="row">
-                                    <div class="col-12 mt-4">
+                                    <!-- Description Section -->
+                                    <div class="col-12 mt-4" data-aos="fade-up" data-aos-duration="1000">
                                         <h5 class="sub-heading">Description</h5>
-                                        <span class="p-description"><?php echo $packageData["description"]; ?></span>
+                                        <p><?php echo $packageData["description"]; ?></p>
                                     </div>
 
+                                    <!-- destination list link -->
                                     <div class="col-12 mt-4">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h5 class="sub-heading">Destinations</h5>
+                                            </div>
+                                            <?php
+                                            // fetch destination Ids
+                                            $desIdResultSet = Database::search("SELECT * FROM `destination_has_tour_package` WHERE `tour_package_id`='" . $packageData['id'] . "'");
+                                            $desIdNumRows = $desIdResultSet->num_rows;
+                                            if ($desIdNumRows > 0) {
+                                                for ($b = 0; $b < $desIdNumRows; $b++) {
+                                                    $desIdData = $desIdResultSet->fetch_assoc();
+
+                                                    // fetch destination data
+                                                    $desResultSet = Database::search("SELECT * FROM `destination` WHERE `id`='" . $desIdData['destination_id'] . "'");
+                                                    $desNumRows = $desResultSet->num_rows;
+                                                    if ($desNumRows == 1) {
+                                                        $desData = $desResultSet->fetch_assoc();
+                                            ?>
+                                                        <div class="col-12 mt-2">
+                                                            <a href="destination-detail.php?desID=<?php echo $desIdData['destination_id']; ?>"><img src='resources/icons/location-icon.png' class='package-include-icon'><?php echo $desData["name"]; ?></a><br>
+
+                                                        </div>
+                                                <?php
+                                                    }
+                                                }
+                                            } else {
+                                                ?>
+                                                <p><i>No destinations included</i></p>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <!-- destination list link -->
+
+                                    <!-- Traveler Comments Section -->
+                                    <div class="col-12 mt-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                                         <div class="row">
                                             <div class="col-12">
                                                 <h5 class="sub-heading">From our travelers</h5>
@@ -242,19 +273,18 @@ require 'connection.php';
                                                                     for ($p = 0; $p < $commentNumRows; $p++) {
                                                                         $commentData = $commentResultSet->fetch_assoc();
                                                                 ?>
-                                                                        <span class="p-description"><?php echo $commentData["description"]; ?></span>
-                                                                        <br>
+                                                                        <p class="p-description"><?php echo $commentData["description"]; ?></p>
                                                                         <?php
                                                                         $tResultSet = Database::search("SELECT * FROM `traveler` WHERE `id`='" . $commentData['traveler_id'] . "'");
                                                                         $tNumRows = $tResultSet->num_rows;
                                                                         if ($tNumRows == 1) {
                                                                             $tData = $tResultSet->fetch_assoc();
                                                                         ?>
-                                                                            <span class="sub-heading"><i><b><?php echo $tData["first_name"] . " " . $tData["last_name"]; ?></b></i></span><br><br>
+                                                                            <p class="sub-heading"><i><b><?php echo $tData["first_name"] . " " . $tData["last_name"]; ?></b></i></p>
                                                                         <?php
                                                                         } else {
                                                                         ?>
-                                                                            <span>No name</span>
+                                                                            <p>No name</p>
                                                                         <?php
                                                                         }
                                                                         ?>
@@ -303,7 +333,8 @@ require 'connection.php';
                                         </div>
                                     </div>
 
-                                    <div class="col-12 mt-4">
+                                    <!-- Included Section -->
+                                    <div class="col-12 mt-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                         <h5 class="sub-heading">What's included</h5>
                                         <?php
                                         // get service ids
@@ -336,8 +367,8 @@ require 'connection.php';
                                         ?>
                                     </div>
 
-
-                                    <div class="col-12 mt-4">
+                                    <!-- Highlights Section -->
+                                    <div class="col-12 mt-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                                         <h5 class="sub-heading">Highlights</h5>
                                         <?php
                                         // get highlights
@@ -363,7 +394,112 @@ require 'connection.php';
                                     </div>
                                 </div>
                             </div>
+
                             <!-- left side -->
+
+                            <!-- steps animation -->
+                            <div class="col-12 step-animation" data-aos="fade-up">
+                                <div class="row">
+                                    <div class="col-12 mt-5" data-aos="fade-right">
+                                        <h5>How your booking is processed?</h5>
+                                    </div>
+                                    <div class="col-12" data-aos="fade-left">
+                                        <hr>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-6 col-md-2 col-lg-2 mt-3" data-aos="zoom-in" data-aos-delay="100">
+                                                <center><img class="icon" src="resources/icons/num-one.svg" alt=""><br></center>
+                                                <center>
+                                                    <img class="mt-2" src="resources/icons/booking.svg" alt=""><br>
+                                                </center>
+                                                <center>
+                                                    <span>Place your booking</span>
+                                                </center>
+                                            </div>
+                                            <div class="col-6 col-md-2 col-lg-2 mt-3" data-aos="zoom-in" data-aos-delay="200">
+                                                <center><img class="icon" src="resources/icons/num-two.svg" alt=""><br></center>
+                                                <center>
+                                                    <img class="mt-2" src="resources/icons/process.svg" alt=""><br>
+                                                </center>
+                                                <center>
+                                                    <span>Agency confirmation for processing</span>
+                                                </center>
+                                            </div>
+                                            <div class="col-6 col-md-2 col-lg-2 mt-3" data-aos="zoom-in" data-aos-delay="300">
+                                                <center><img class="icon" src="resources/icons/num-three.svg" alt=""><br></center>
+                                                <center>
+                                                    <img class="mt-2" src="resources/icons/payment.svg" alt=""><br>
+                                                </center>
+                                                <center>
+                                                    <span>Proceed to payment</span>
+                                                </center>
+                                            </div>
+                                            <div class="col-6 col-md-2 col-lg-2 mt-3" data-aos="zoom-in" data-aos-delay="400">
+                                                <center><img class="icon" src="resources/icons/num-four.svg" alt=""><br></center>
+                                                <center>
+                                                    <img class="mt-2" src="resources/icons/confirmation.svg" alt=""><br>
+                                                </center>
+                                                <center>
+                                                    <span>Agency confirmation</span>
+                                                </center>
+                                            </div>
+                                            <div class="col-6 col-md-2 col-lg-2 mt-3" data-aos="zoom-in" data-aos-delay="500">
+                                                <center><img class="icon" src="resources/icons/num-five.svg" alt=""><br></center>
+                                                <center>
+                                                    <img class="mt-2" src="resources/icons/reminder.svg" alt=""><br>
+                                                </center>
+                                                <center>
+                                                    <span>Reminder before 2 days</span>
+                                                </center>
+                                            </div>
+                                            <div class="col-6 col-md-2 col-lg-2 mt-3" data-aos="zoom-in" data-aos-delay="600">
+                                                <center><img class="icon" src="resources/icons/num-six.svg" alt=""><br></center>
+                                                <center>
+                                                    <img class="mt-2" src="resources/icons/map-navigation.svg" alt=""><br>
+                                                </center>
+                                                <center>
+                                                    <span>Enjoy tour</span>
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- steps animation -->
+
+                            <!-- gallery section -->
+                            <!-- <div class="col-12 mt-3 package-gallery">
+                                <div class="row">
+                                    <div class="col-12 mt-5">
+                                        <h5>Package Gallery</h5>
+                                    </div>
+                                    <div class="col-12">
+                                        <hr>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <div class="row">
+                                            <div class="col-6 col-md-3 col-lg-3 mt-2">
+                                                <img src="resources/images/Adams Peak67176e0c76025.jpg" alt="">
+                                                <span>Adams peak</span>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-3 mt-2">
+                                                <img src="resources/images/Adams Peak67176e0c76025.jpg" alt="">
+                                                <span>Adams peak</span>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-3 mt-2">
+                                                <img src="resources/images/Adams Peak67176e0c76025.jpg" alt="">
+                                                <span>Adams peak</span>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-3 mt-2">
+                                                <img src="resources/images/Adams Peak67176e0c76025.jpg" alt="">
+                                                <span>Adams peak</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- gallery section -->
                         <?php
                         }
                         ?>
@@ -373,13 +509,21 @@ require 'connection.php';
             }
             include 'footer.php';
             ?>
+            <!-- Modal -->
+            <div id="imagePreviewModal" class="image-preview-modal" style="display: none;">
+                <div class="preview-modal-content">
+                    <span class="close">&times;</span>
+                    <img id="previewImage" src="" alt="Preview" />
+                </div>
+            </div>
         </div>
     </div>
 
-    <script src="bootstrap.bundle.js"></script>
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="bootstrap.bundle.js"></script>
+    <script src="script.js"></script>
 
     <script>
         $(document).ready(function() {

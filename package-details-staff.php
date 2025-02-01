@@ -26,7 +26,7 @@ require 'connection.php';
             if (isset($_GET["pID"])) {
                 $packageID = $_GET["pID"];
             ?>
-                <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1">
+                <div class="col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 view-package-back-main">
                     <div class="row">
                         <?php
                         // get the tour package details
@@ -123,7 +123,7 @@ require 'connection.php';
 
                                     <!-- right side -->
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <div class="card package-details-card">
+                                        <div class="card">
                                             <div class="card-body">
                                                 <div class="col-12">
                                                     <div class="row">
@@ -253,7 +253,7 @@ require 'connection.php';
                                 <div class="row">
                                     <div class="col-12 mt-4">
                                         <h5 class="sub-heading">Description</h5>
-                                        <span class="p-description"><?php echo $packageData["description"]; ?></span>
+                                        <p class="p-description"><?php echo $packageData["description"]; ?></p>
                                     </div>
 
                                     <div class="col-12 mt-4">
@@ -380,7 +380,7 @@ require 'connection.php';
                 </div>
             <?php
             }
-            include 'footer.php';
+            include 'back-footer.php';
             ?>
         </div>
     </div>

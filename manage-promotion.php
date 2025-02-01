@@ -14,9 +14,12 @@ require 'connection.php';
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid back-main-container">
         <div class="row">
-            <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-5 p-3">
+            <?php
+            include 'back-header.php';
+            ?>
+            <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 mt-2 mb-5 p-3 promotion-list-container">
                 <div class="row">
                     <div class="col-12">
                         <center>
@@ -56,25 +59,25 @@ require 'connection.php';
                                                         <div class="col-12 col-md-8 col-lg-8">
                                                             <div class="row">
                                                                 <div class="col-12">
-                                                                    <h5 class="card-title"><?php echo $promotionData["header_text"]; ?></h5>
+                                                                    <h5><?php echo $promotionData["header_text"]; ?></h5>
                                                                 </div>
                                                                 <div class="col-12">
-                                                                    <span class="card-text"><b>Discount</b> - <?php echo $promotionData["discount"]; ?> off</span><br><br>
-                                                                    <span class="card-text"><?php echo $promotionData["details"]; ?></span>
+                                                                    <p class="card-text"><b>Discount</b> - <?php echo $promotionData["discount"]; ?>% off</p>
+                                                                    <p class="card-text"><?php echo $promotionData["details"]; ?></p>
                                                                 </div>
                                                                 <div class="col-12 mt-3">
-                                                                    <span class="card-text"><b>Available from </b> <?php echo $promotionData["starting_date"]; ?> <b>to </b> <?php echo $promotionData["end_date"]; ?></span>
+                                                                    <p class="card-text"><b>Available from - </b> <?php echo $promotionData["starting_date"]; ?> <b>to - </b> <?php echo $promotionData["end_date"]; ?></p>
                                                                 </div>
                                                                 <div class="col-12 mt-3">
-                                                                    <span class="card-text"><b>Valid Status </b> <?php if ($promotionData["status"] == "yes") {
+                                                                    <p class="card-text"><b>Valid Status - </b> <?php if ($promotionData["status"] == "yes") {
                                                                                                                         echo "Enabled";
                                                                                                                     } else {
                                                                                                                         echo "Disabled";
-                                                                                                                    } ?></span>
+                                                                                                                    } ?></p>
                                                                 </div>
                                                                 <div class="col-12 mt-3">
-                                                                    <span class="card-text">
-                                                                        <b>Assign Status </b>
+                                                                    <p class="card-text">
+                                                                        <b>Assign Status - </b>
                                                                         <?php
                                                                         $assignResultSet = Database::search("SELECT * FROM `tour_package_has_promotion` WHERE `promotion_id`='" . $promotionData['id'] . "'");
                                                                         $assignNumRows = $assignResultSet->num_rows;
@@ -84,31 +87,36 @@ require 'connection.php';
                                                                             echo "No";
                                                                         }
                                                                         ?>
-                                                                    </span>
+                                                                    </p>
                                                                 </div>
                                                                 <div class="col-12 mt-3">
-                                                                    <span id="selectedIdList"></span>
+                                                                    <p id="selectedIdList-<?php echo $promotionData['id']; ?>"></p>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="row">
                                                                         <div class="col-12 col-md-6 col-lg-4 mt-3">
-                                                                            <button class="btn sbt-button" onclick="window.location='update-promotion.php?proID=<?php echo $promotionData['id']; ?>'">
+                                                                            <button class="btn" onclick="window.location='update-promotion.php?proID=<?php echo $promotionData['id']; ?>'">
                                                                                 Update
                                                                             </button>
                                                                         </div>
                                                                         <div class="col-12 col-md-6 col-lg-4 mt-3">
-                                                                            <button class="btn sbt-button" onclick="upadtePromotionStatus(<?php echo $promotionData['id']; ?>, 'yes');">
+                                                                            <button class="btn" onclick="upadtePromotionStatus(<?php echo $promotionData['id']; ?>, 'yes');">
                                                                                 Enable
                                                                             </button>
                                                                         </div>
                                                                         <div class="col-12 col-md-6 col-lg-4 mt-3">
-                                                                            <button class="btn sbt-button" onclick="upadtePromotionStatus(<?php echo $promotionData['id']; ?>, 'no');">
+                                                                            <button class="btn" onclick="upadtePromotionStatus(<?php echo $promotionData['id']; ?>, 'no');">
                                                                                 Disable
                                                                             </button>
                                                                         </div>
-                                                                        <div class="col-12 col-md-6 col-lg-4 mt-3">
-                                                                            <button class="btn sbt-button" type="button" data-bs-toggle="modal" data-bs-target="#selection-model" onclick="document.getElementById('promo-id').innerHTML = <?php echo $promotionData['id']; ?>">
+                                                                        <div class="col-12 col-md-6 col-lg-4 offset-lg-4 mt-3">
+                                                                            <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#selection-model" onclick="document.getElementById('promo-id').innerHTML = <?php echo $promotionData['id']; ?>">
                                                                                 Assign
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-6 col-lg-4 mt-3">
+                                                                            <button class="btn" onclick="assignPackagePromo(<?php echo $promotionData['id']; ?>);">
+                                                                                Save Changes
                                                                             </button>
                                                                         </div>
                                                                     </div>
@@ -137,7 +145,7 @@ require 'connection.php';
                 </div>
             </div>
             <!-- package selection model -->
-            <div class="col-12">
+            <div class="col-12 package-selection-form">
                 <div class="modal fade" id="selection-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
                         <div class="modal-content">
@@ -181,22 +189,6 @@ require 'connection.php';
                                                                             <div class="row">
                                                                                 <div class="col-12 col-md-8 col-lg-10">
                                                                                     <h5 class="card-title"><?php echo $tourPackageData["name"]; ?></h5>
-                                                                                </div>
-                                                                                <div class="col-12 col-md-4 col-lg-2">
-                                                                                    <?php
-                                                                                    $feedbackResultSet = Database::search("SELECT AVG(`rate_status`) AS `rating` FROM `package_comment` WHERE `tour_package_id` = {$tourPackageData['id']} AND `rate_status` IS NOT NULL");
-                                                                                    $feedbackNumRows = $feedbackResultSet->num_rows;
-                                                                                    if ($feedbackNumRows == 1) {
-                                                                                        $feedbackData = $feedbackResultSet->fetch_assoc();
-                                                                                        $rating = round($feedbackData['rating'], 1);
-                                                                                    } else {
-                                                                                        $rating = 0;
-                                                                                    }
-                                                                                    ?>
-                                                                                    <span class="p-description">
-                                                                                        <b><?php echo $rating; ?></b>
-                                                                                        <i class="fa-solid fa-star star-filled"></i>
-                                                                                    </span>
                                                                                 </div>
                                                                             </div> <?php
                                                                                     // get the destination id list of the perticular tour package
@@ -265,7 +257,7 @@ require 'connection.php';
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-12 mt-3 d-flex align-items-center">
-                                                                            <input type="checkbox" name="selection" id="selection">
+                                                                            <input type="checkbox" name="selection" id="selection" value="<?php echo $tourPackageData['id']; ?>">
                                                                             <label for="selection" class="ms-2">Select</label>
                                                                         </div>
                                                                     </div>
@@ -290,14 +282,23 @@ require 'connection.php';
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn sbt-button" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn sbt-button" onclick="getPackageList();">Apply</button>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-4 col-lg-4 mt-2">
+                                            <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                        <div class="col-12 col-md-4 col-lg-4 mt-2">
+                                            <button type="button" class="btn" onclick="getPackageList();">Apply</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- package selection model -->
+             <?php include 'back-footer.php'; ?>
         </div>
     </div>
     <script src="bootstrap.bundle.js"></script>

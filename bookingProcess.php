@@ -13,6 +13,7 @@ if (isset($_SESSION["user"])) {
         $date = $dataObject->date;
         $description = $dataObject->description;
         $statusID = 1;
+        $vehicleId = 7;
 
         if (empty($noOfMembers)) {
             echo "Enter the number of members for joining the tour";
@@ -21,8 +22,8 @@ if (isset($_SESSION["user"])) {
         } else if (strlen($description) > 1000) {
             echo "Description is too long";
         } else {
-            Database::insertUpdateDelete("INSERT INTO `booking` (`date`, `no_of_members`, `description`, `tour_package_id`, `traveler_id`, `status_id`)
-            VALUES ('" . $date . "', '" . $noOfMembers . "', '" . $description . "', '" . $pID . "', '" . $uID . "', '" . $statusID . "')");
+            Database::insertUpdateDelete("INSERT INTO `booking` (`date`, `no_of_members`, `description`, `tour_package_id`, `traveler_id`, `status_id`, `vehicle_id`)
+            VALUES ('" . $date . "', '" . $noOfMembers . "', '" . $description . "', '" . $pID . "', '" . $uID . "', '" . $statusID . "', '".$vehicleId."')");
 
             echo "success";
         }

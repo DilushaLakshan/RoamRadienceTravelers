@@ -6,7 +6,7 @@ if (isset($_POST["memberID"]) && isset($_POST["vehicleID"])) {
         $memberID = $_POST["memberID"];
         $vehicleID = $_POST["vehicleID"];
 
-        if ($vehicleID == "selection") {
+        if ($vehicleID == 0) {
             echo "Select the vehicle to be assigned";
         } else if ($vehicleID == -1) {
             echo "No vehicles are available";

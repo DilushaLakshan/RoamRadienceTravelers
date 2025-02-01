@@ -19,10 +19,10 @@ require 'connection.php';
     ?>
         <div class="container-fluid">
             <div class="row">
-                <div class="container-fluid">
+                <div class="container-fluid back-main-container">
                     <div class="row">
                         <?php include 'back-header.php'; ?>
-                        <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-5">
+                        <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2 mt-2 mb-5 new-promotion-form-container">
                             <div class="row">
                                 <div class="col-12">
                                     <center>
@@ -123,10 +123,10 @@ require 'connection.php';
                                 <div class="col-12 mt-3">
                                     <div class="row">
                                         <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                            <button class="btn sbt-button">Clear</button>
+                                            <button class="btn">Clear</button>
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                            <button class="btn sbt-button" onclick="newPromotion();">ADD</button>
+                                            <button class="btn" onclick="newPromotion();">ADD</button>
                                         </div>
                                     </div>
                                 </div>

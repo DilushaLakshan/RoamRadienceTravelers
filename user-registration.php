@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid sign-up-main">
         <div class="row">
-            <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2">
+            <div class="col-12 col-md-8 col-lg-8 offset-md-4 offset-lg-4 user-reg-form-container mt-4 mb-4">
                 <div class="row">
                     <div class="col-12">
                         <center>
@@ -101,10 +101,10 @@
                                 <input type="mobile" class="registration-input" id="contact">
                                 <div class="row mt-5">
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                        <button class="btn registration-button">Clear</button>
+                                        <button class="btn">Clear</button>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 mt-2">
-                                        <button class="btn registration-button" onclick="registerUser();">Sign Up</button>
+                                        <button class="btn" onclick="registerUser();">Sign Up</button>
                                     </div>
                                 </div>
                             </div>

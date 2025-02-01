@@ -19,33 +19,33 @@ require 'connection.php';
     if (isset($_SESSION["user"])) {
         $uID = $_SESSION["user"]->id;
     ?>
-        <div class="container-fluid">
+        <div class="container-fluid back-main-container">
             <div class="row">
                 <?php include 'back-header.php'; ?>
-                <div class="col-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2">
+                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 add-des-content">
                     <div class="row">
                         <div class="col-12 mt-3">
                             <center>
-                                <h4>Add New Place</h4>
+                                <h4 class="stf-sub-heading">Add New Destination</h4>
                                 <hr>
                             </center>
                         </div>
                         <div class="col-12 mt-3">
                             <div class="row">
-                                <div class="col-6">
-                                    <span>Name of the Destination:</span>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <span class="stf-sub-heading">Name of the Destination:</span>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-lg-6">
                                     <input type="text" class="input w-100" id="des-name">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 mt-2">
                             <div class="row">
-                                <div class="col-6">
-                                    <span>Destination Categories: <br> (Select)</span>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <span class="stf-sub-heading">Destination Categories: <br> (Select)</span>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-lg-6">
                                     <div class="row">
                                         <?php
                                         $categoryResultSet = Database::search("SELECT * FROM `destination_category`");
@@ -74,65 +74,56 @@ require 'connection.php';
                                                         <input type="checkbox" name="packingList[]" value="<?php echo $categoryData['id']; ?>">
                                                     </div>
                                                     <div class="col-10">
-                                                        <label for=""><i>No categories available</i></label>
+                                                        <label for="" class="stf-sub-heading"><i>No categories available</i></label>
                                                     </div>
                                                 </div>
                                             </div>
                                         <?php
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <div class="row">
-                                <div class="col-6">
-                                    <span>Packing Items: <br> (Select)</span>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <?php
-                                        $itemResultSet = Database::search("SELECT * FROM `packing_list`");
-                                        $itemNumRows = $itemResultSet->num_rows;
-                                        if ($itemNumRows > 0) {
-                                            for ($x = 0; $x < $itemNumRows; $x++) {
-                                                $itemData = $itemResultSet->fetch_assoc();
-                                        ?>
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <input type="checkbox" name="packingList[]" value="<?php echo $itemData['id']; ?>">
-                                                    <label for=""><?php echo $itemData["list_item"]; ?></label>
+                                        } ?>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a data-bs-toggle="collapse" href="#catg-collapse" role="button" aria-expanded="false" aria-controls="catg-collapse">New category</a>
                                                 </div>
-                                            <?php
-                                            }
-                                        } else {
-                                            ?>
-                                            <div class="col-12 col-md-6 col-lg-6">
-                                                <p><i>No items...</i></p>
+                                                <div class="col-12 mt-2">
+                                                    <div class="collapse" id="catg-collapse">
+                                                        <div class="card card-body">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <input class="w-100" type="text" id="new-catg">
+                                                                </div>
+                                                                <div class="col-6 offset-6 mt-2">
+                                                                    <button class="btn" onclick="addCategory();">Add Category</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </div>
                                         <?php
-                                        }
                                         ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- packing list and items - place the relevant code in the notepad -->
                         <div class="col-12 mt-2">
                             <div class="row">
-                                <div class="col-6">
-                                    <span>About:</span>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <span class="stf-sub-heading">About:</span>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-lg-6">
                                     <textarea name="desDetails" id="desDetails" rows="10" class="w-100"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 mt-2">
                             <div class="row">
-                                <div class="col-6">
-                                    <span>Thumbnail:</span>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <span class="stf-sub-heading">Thumbnail:</span>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-lg-6">
                                     <div class="row">
                                         <div class="col-12">
                                             <input class="form-control w-100" type="file" id="formFile" accept=".png, .jpg, .jpeg" onclick="imagePreview();">
@@ -146,14 +137,14 @@ require 'connection.php';
                         </div>
                         <div class="col-12 mt-4 mb-4">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-lg-6 mt-2">
                                     <center>
-                                        <button class="sbt-button">Clear</button>
+                                        <button class="btn">Clear</button>
                                     </center>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-lg-6 mt-2">
                                     <center>
-                                        <button class="sbt-button" onclick="sendDestinationDetails();">Add</button>
+                                        <button class="btn" onclick="sendDestinationDetails();">Add</button>
                                     </center>
                                 </div>
                             </div>
